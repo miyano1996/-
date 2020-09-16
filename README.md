@@ -6,3 +6,4 @@
 
 4.node运行npm i；react运行yarn下载依赖 
 5.node app.js运行后端; yarn start运行前端
+
