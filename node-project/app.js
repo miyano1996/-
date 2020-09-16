@@ -8,7 +8,7 @@ var logger = require('morgan');
 require('./dao/database/database');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var adminRouter = require('./routes/admin');
 
 var app = express();
 
@@ -22,13 +22,24 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(function(req,res,next){
+  res.setHeader("Access-Control-Allow-Origin","*");
+  res.setHeader("Access-Control-Allow-Headers","content-type,token,x-requested-with");
+  // res.setHeader('Access-Control-Allow-Methods',"DELETE")
+  next();
+});
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/admin', adminRouter);
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
+
 
 // error handler
 app.use(function(err, req, res, next) {
@@ -42,4 +53,4 @@ app.use(function(err, req, res, next) {
 });
 
 // module.exports = app;
-app.listen(3000, () => console.log('3000 端口启动成功！'));
+app.listen(4000, () => console.log('4000 端口启动成功！'));
