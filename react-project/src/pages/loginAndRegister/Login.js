@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Form, Input, Button } from 'antd';
-// import api from '../apis/api';
+import api from '../../apis/api';
 
 const layout = {
     labelCol: {
@@ -20,7 +20,8 @@ const tailLayout = {
 export default class Login extends Component {
     onFinish = async (values) => {
     
-      console.log(values)
+      const res = await api.gym.login(values);
+      console.log(res)
     };
     render() {
         return (
@@ -62,8 +63,8 @@ export default class Login extends Component {
 
                         <Form.Item {...tailLayout}>
                             <div className="form-bottom-item">
-                                <Button type="primary" htmlType="submit">注册</Button>
-                                <label>已有账号？去登录</label>
+                                <Button type="primary" htmlType="submit">登录</Button>
+                                <label>没有账号？去<a href="#/register">注册</a></label>
                             </div>
                         </Form.Item>
                     </Form>
