@@ -9,10 +9,6 @@ const Complaint = Loadable({
     loader: () => import('./manage/Complaint'),
     loading: () => <div>加载中...</div>
 })
-const Login = Loadable({
-    loader: () => import('./Login'),
-    loading: () => <div>加载中...</div>
-})
 const OneGym = Loadable({
     loader: () => import('./OneGym.js'),
     loading: () => <div>加载中...</div>
@@ -59,8 +55,7 @@ export default class Home extends Component {
                         >
                             <HashRouter>
                                 <Switch>
-                                    <Redirect exact path="/" to="/home/oneGym"></Redirect>
-                                    <Route path="/home/login" component={Login}></Route>
+                                    <Redirect exact path="/home" to="/home/oneGym"></Redirect>
                                     <Route path="/home/oneGym" component={OneGym}></Route>
                                     <Route path="/home/Complaint" component={Complaint}></Route>
                                     <Route path="/home/Studentslist" component={Studentslist}></Route>
