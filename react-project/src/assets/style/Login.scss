@@ -10,5 +10,10 @@
         label{
             color: antiquewhite;
         }
+        .form-bottom-item{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
     }
 }
