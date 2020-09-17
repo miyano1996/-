@@ -21,7 +21,7 @@ export default class Sdetails extends Component {
         const {name,account,headImage,telephone,loginAdress}=this.state.list;
         console.log(headImage)
         return (
-            <div>
+            <div className="sDetails">
                 <div className="box">
                     <div className="headimg">
                         <Image  src={headImage} alt=""/>

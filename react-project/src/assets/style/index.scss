@@ -1,8 +1,23 @@
 @import './reset.css';
-
-.box{
+@import './complaint.scss';
+@import './Login.scss';
+@import './sDetails.scss';
+.box {
     width: 100;
-    .box2{
+    .box2 {
         background-color: aqua;
     }
+}
+
+body {
+    width: 100vh;
+    height: 100vh;
+}
+
+#root {
+    height: 100%;
+}
+
+.ant-layout {
+    height: 100%;
 }
