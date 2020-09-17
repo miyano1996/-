@@ -9,7 +9,7 @@ require('./dao/database/database');
 
 var indexRouter = require('./routes/index');
 var adminRouter = require('./routes/admin');
-
+var imagesRouter = require('./routes/images');//图片上传一级路径
 var app = express();
 
 // view engine setup
@@ -30,6 +30,7 @@ app.use(function(req,res,next){
 });
 app.use('/', indexRouter);
 app.use('/admin', adminRouter);
+app.use('/images',imagesRouter);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

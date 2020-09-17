@@ -10,6 +10,12 @@ const Login = Loadable({
     loading: () => <div>加载中...</div>
 })
 
+//申请场馆
+const AddGyms = Loadable({
+    loader: () => import('./AddGyms'),
+    loading: () => <div>加载中...</div>
+})
+
 const { Header, Content } = Layout;
 
 export default class Home extends Component {
@@ -44,6 +50,7 @@ export default class Home extends Component {
                                     <Switch>
                                         <Redirect exact path="/" to="/home/login"></Redirect>
                                         <Route path="/home/login" component={Login}></Route>
+                                        <Route path="/home/addGyms" component={AddGyms}></Route>
                                     </Switch>
                                 </HashRouter>
                             </Content>
