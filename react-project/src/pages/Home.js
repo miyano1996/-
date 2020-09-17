@@ -9,6 +9,10 @@ const Login = Loadable({
     loader: () => import('./admin/Login.js'),
     loading: () => <div>加载中...</div>
 })
+const OneGym = Loadable({
+    loader:() =>import('./OneGym.js'),
+    loading:()=><div>加载中...</div>
+})
 
 const { Header, Content } = Layout;
 
@@ -42,8 +46,9 @@ export default class Home extends Component {
                             >
                                 <HashRouter>
                                     <Switch>
-                                        <Redirect exact path="/" to="/home/login"></Redirect>
+                                        <Redirect exact path="/" to="/home/oneGym"></Redirect>
                                         <Route path="/home/login" component={Login}></Route>
+                                        <Route path="/home/oneGym" component={OneGym}></Route>
                                     </Switch>
                                 </HashRouter>
                             </Content>
