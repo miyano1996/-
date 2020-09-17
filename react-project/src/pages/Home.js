@@ -10,8 +10,12 @@ const Login = Loadable({
     loading: () => <div>加载中...</div>
 })
 const OneGym = Loadable({
-    loader:() =>import('./OneGym.js'),
-    loading:()=><div>加载中...</div>
+    loader: () => import('./OneGym.js'),
+    loading: () => <div>加载中...</div>
+})
+const Complaint = Loadable({
+    loader: () => import('./manage/Complaint'),
+    loading: () => <div>加载中...</div>
 })
 
 const { Header, Content } = Layout;
@@ -19,6 +23,15 @@ const { Header, Content } = Layout;
 export default class Home extends Component {
     render() {
         return (
+            <Layout>
+                <Header className="header">
+                    <div className="logo" />
+                    <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
+                        <Menu.Item key="1">nav 1</Menu.Item>
+                        <Menu.Item key="2">nav 2</Menu.Item>
+                        <Menu.Item key="3">nav 3</Menu.Item>
+                    </Menu>
+                </Header>
                 <Layout>
                     <Header className="header">
                         <div className="logo" />
@@ -49,10 +62,11 @@ export default class Home extends Component {
                                         <Redirect exact path="/" to="/home/oneGym"></Redirect>
                                         <Route path="/home/login" component={Login}></Route>
                                         <Route path="/home/oneGym" component={OneGym}></Route>
+                                        <Route path="/home/Complaint" component={Complaint}></Route>
                                     </Switch>
                                 </HashRouter>
                             </Content>
-
+                            </Layout>
                         </Layout>
                     </Layout>
                 </Layout>
