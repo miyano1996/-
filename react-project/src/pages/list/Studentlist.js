@@ -1,26 +1,13 @@
 import React, { Component } from 'react'
-
+import { Table, Space, Button } from 'antd';
 export default class Studentlist extends Component {
     state = {
-        dataSource: [
-            {
-                key: '1',
-                name: '胡彦斌',
-                age: 32,
-                address: '西湖区湖底公园1号',
-            },
-            {
-                key: '2',
-                name: '胡彦祖',
-                age: 42,
-                address: '西湖区湖底公园1号',
-            },
-        ],
         columns: [
             {
                 title: '姓名',
                 dataIndex: 'name',
                 key: 'name',
+                render: text => <span>{text}</span>,
             },
             {
                 title: '年龄',
@@ -28,16 +15,54 @@ export default class Studentlist extends Component {
                 key: 'age',
             },
             {
-                title: '住址',
-                dataIndex: 'address',
-                key: 'address',
+                title: '联系电话',
+                dataIndex: 'telephone',
+                key: 'telephone',
+            },
+            {
+                title: '已购课程',
+                dataIndex: 'course',
+                key: 'course',
+            },
+            {
+                title: '操作',
+                key: 'action',
+                render: (text, record) => (
+                    <Space size="middle">
+                        <Button onClick={() => this.updatedStudent(text)}>修改</Button>
+                        <Button type="danger">删除</Button>
+                    </Space>
+                ),
+            },
+        ],
+        data: [
+            {
+                key: '1',
+                name: '落落',
+                age: 32,
+                address: '不详',
+            },
+            {
+                key: '2',
+                name: '轰轰',
+                age: 42,
+                address: '不详',
+            },
+            {
+                key: '3',
+                name: '尼蜜',
+                age: 32,
+                address: '不详',
             },
         ]
     }
+    updatedStudent = (text) => {
+        console.log(text);
+    }
     render() {
         return (
-            <div>
-                <Table dataSource={this.state.dataSource} columns={this.state.columns} />
+            <div className="List">
+                <Table columns={this.state.columns} dataSource={this.state.data} className="table" />
             </div>
         )
     }

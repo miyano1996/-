@@ -12,6 +12,11 @@ const Complaint = Loadable({
     loader: () => import('./manage/Complaint'),
     loading: () => <div>加载中...</div>
 })
+const Studentslist = Loadable({
+    loader: () => import('./list/Studentlist'),
+    loading: () => <div>加载中...</div>
+})
+
 
 const { Header, Content } = Layout;
 
@@ -45,9 +50,10 @@ export default class Home extends Component {
                         >
                             <HashRouter>
                                 <Switch>
-                                    <Redirect exact path="/" to="/home/Complaint"></Redirect>
+                                    <Redirect exact path="/" to="/home/Studentslist"></Redirect>
                                     <Route path="/home/login" component={Login}></Route>
                                     <Route path="/home/Complaint" component={Complaint}></Route>
+                                    <Route path="/home/Studentslist" component={Studentslist}></Route>
                                 </Switch>
                             </HashRouter>
                         </Content>
