@@ -7,8 +7,13 @@ var logger = require('morgan');
 //连接数据库
 require('./dao/database/database');
 
-var indexRouter = require('./routes/index');
+
 var adminRouter = require('./routes/admin');
+var gymRouter = require('./routes/gym');
+var studentsRouter = require('./routes/students');
+var coachesRouter = require('./routes/coaches');
+var ordersRouter = require('./routes/orders');
+var carouselRouter = require('./routes/carousel');
 
 var app = express();
 
@@ -22,14 +27,22 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//跨域中间件
 app.use(function(req,res,next){
   res.setHeader("Access-Control-Allow-Origin","*");
   res.setHeader("Access-Control-Allow-Headers","content-type,token,x-requested-with");
   // res.setHeader('Access-Control-Allow-Methods',"DELETE")
   next();
 });
-app.use('/', indexRouter);
+
+//路由地址
+
 app.use('/admin', adminRouter);
+app.use('/gym', gymRouter);
+app.use('/students', studentsRouter);
+app.use('/coaches', coachesRouter);
+app.use('/orders', ordersRouter);
+app.use('/carousel', carouselRouter);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

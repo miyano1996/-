@@ -3,14 +3,18 @@ import { Layout, Menu, Breadcrumb } from 'antd';
 import SideBar from '../components/SideBar';
 import { HashRouter, Switch, Route, Redirect } from 'react-router-dom'
 import Loadable from 'react-loadable'
-import '../assets/style/home.css'
 //懒加载
-const Login = Loadable({
-    loader: () => import('./admin/Login.js'),
-    loading: () => <div>加载中...</div>
-})
+
 const Complaint = Loadable({
     loader: () => import('./manage/Complaint'),
+    loading: () => <div>加载中...</div>
+})
+const Login = Loadable({
+    loader: () => import('./Login'),
+    loading: () => <div>加载中...</div>
+})
+const Orders = Loadable({
+    loader: () => import('./orders/Orders'),
     loading: () => <div>加载中...</div>
 })
 const Studentslist = Loadable({
@@ -55,6 +59,7 @@ export default class Home extends Component {
                                     <Route path="/home/login" component={Login}></Route>
                                     <Route path="/home/Complaint" component={Complaint}></Route>
                                     <Route path="/home/Studentslist" component={Studentslist}></Route>
+                                    <Route path="/home/Orders" component={Orders}></Route>
                                 </Switch>
                             </HashRouter>
                         </Content>

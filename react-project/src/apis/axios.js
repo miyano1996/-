@@ -15,7 +15,11 @@ instance.interceptors.request.use(
 //设置响应拦截器
 instance.interceptors.response.use(
     (res) => {
-        return res
+        if(res.status === 200){
+            return res.data
+        }else{
+            return res
+        }
     },
     (err) => {
         //此处可以获取状态码，然后根据状态码做出对应行为
