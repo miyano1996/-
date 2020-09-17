@@ -17,6 +17,6 @@ module.exports.login = async (data)=>{
 		// 后端返回处理结果给前端
 		return { success: true, msg: "登录成功" ,rows:{name,role,token}};
 	} else {
-		return { success: false,msg: '登录失败'};
+		return { success: false,msg: '账号或密码错误'};
 	}
 }

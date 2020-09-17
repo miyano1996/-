@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button,message } from 'antd';
 import api from '../../apis/api';
 
 const layout = {
@@ -19,9 +19,17 @@ const tailLayout = {
 
 export default class Login extends Component {
     onFinish = async (values) => {
-    
-      const res = await api.gym.login(values);
-      console.log(res)
+        try {
+            const res = await api.gym.login(values);
+            const {token,name,role} = res.rows;
+            localStorage.setItem('token',token);
+            localStorage.setItem('name',name);
+            localStorage.setItem('role',role);
+            message.success(res.msg)
+        } catch (error) {
+            message.error(error.msg)
+        }
+
     };
     render() {
         return (
@@ -58,7 +66,7 @@ export default class Login extends Component {
                                 },
                             ]}
                         >
-                        <Input.Password />
+                            <Input.Password />
                         </Form.Item>
 
                         <Form.Item {...tailLayout}>
