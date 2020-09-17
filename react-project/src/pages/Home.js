@@ -3,10 +3,14 @@ import { Layout, Menu, Breadcrumb } from 'antd';
 import SideBar from '../components/SideBar';
 import { HashRouter, Switch, Route, Redirect } from 'react-router-dom'
 import Loadable from 'react-loadable'
-import '../styleSheets/home.css'
 //懒加载
+
+const Complaint = Loadable({
+    loader: () => import('./manage/Complaint'),
+    loading: () => <div>加载中...</div>
+})
 const Login = Loadable({
-    loader: () => import('./admin/Login.js'),
+    loader: () => import('./Login'),
     loading: () => <div>加载中...</div>
 })
 const OneGym = Loadable({
@@ -15,10 +19,18 @@ const OneGym = Loadable({
 })
 const Complaint = Loadable({
     loader: () => import('./manage/Complaint'),
+})
+const Orders = Loadable({
+    loader: () => import('./orders/Orders'),
+    loading: () => <div>加载中...</div>
+})
+const Studentslist = Loadable({
+    loader: () => import('./list/Studentlist'),
     loading: () => <div>加载中...</div>
 })
 
-const { Header, Content } = Layout;
+
+const { Header, Content } = Layout
 
 export default class Home extends Component {
     render() {
@@ -63,6 +75,8 @@ export default class Home extends Component {
                                         <Route path="/home/login" component={Login}></Route>
                                         <Route path="/home/oneGym" component={OneGym}></Route>
                                         <Route path="/home/Complaint" component={Complaint}></Route>
+                                    <Route path="/home/Studentslist" component={Studentslist}></Route>
+                                    <Route path="/home/Orders" component={Orders}></Route>
                                     </Switch>
                                 </HashRouter>
                             </Content>
