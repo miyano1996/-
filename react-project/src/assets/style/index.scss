@@ -1,13 +1,6 @@
 @import './reset.css';
 @import './complaint.scss';
 @import './Login.scss';
-.box {
-    width: 100;
-    .box2 {
-        background-color: aqua;
-    }
-}
-
 body {
     width: 100vh;
     height: 100vh;
@@ -18,5 +11,6 @@ body {
 }
 
 .ant-layout {
+    min-width: 1200px;
     height: 100%;
 }
