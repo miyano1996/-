@@ -9,6 +9,10 @@ const Login = Loadable({
     loader: () => import('./admin/Login.js'),
     loading: () => <div>加载中...</div>
 })
+const Sdetails = Loadable({
+    loader: () => import('./system/Sdetails'),
+    loading: () => <div>加载中...</div>
+})
 
 const { Header, Content } = Layout;
 
@@ -25,13 +29,16 @@ export default class Home extends Component {
                         </Menu>
                     </Header>
                     <Layout>
+                        {/* 侧边栏 */}
                         <SideBar />
                         <Layout style={{ padding: '0 24px 24px' }}>
+                            {/* 面包屑 */}
                             <Breadcrumb style={{ margin: '16px 0' }}>
                                 <Breadcrumb.Item>Home</Breadcrumb.Item>
                                 <Breadcrumb.Item>List</Breadcrumb.Item>
                                 <Breadcrumb.Item>App</Breadcrumb.Item>
                             </Breadcrumb>
+                            {/* 侧边栏内容区域 */}
                             <Content
                                 className="site-layout-background"
                                 style={{
@@ -43,7 +50,7 @@ export default class Home extends Component {
                                 <HashRouter>
                                     <Switch>
                                         <Redirect exact path="/" to="/home/login"></Redirect>
-                                        <Route path="/home/login" component={Login}></Route>
+                                        <Route path="/home/login" component={Sdetails}></Route>
                                     </Switch>
                                 </HashRouter>
                             </Content>

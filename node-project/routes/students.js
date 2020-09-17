@@ -1,10 +1,11 @@
 var express = require('express');
 var router = express.Router();
 
-const { login } = require('../service/studentsService')
+const { getOne } = require('../service/studentsService')
 
-router.post('/login',async (req,res,next)=>{
-  const data =await login(req.body)
+router.post('/details',async (req,res,next)=>{
+  const data =await getOne(req.body)
+  console.log(data,'ss')
   res.send(data)
 })
 
