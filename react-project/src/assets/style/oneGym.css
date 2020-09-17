@@ -1,3 +1,10 @@
-.uu{
-    color: red;
+.title{
+    background-color: #FAFAFA;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 20px 0;
+}
+.ant-descriptions-item-container{
+    margin-right: 20px;
 }
