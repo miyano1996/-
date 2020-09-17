@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const gymSchema = new mongoose.Schema({
     account:String,
     password:String,
+    role:String,//权限
     grade:String,//场馆等级
     telephone:String,
     coaches:Array,//保存所有教练数据
