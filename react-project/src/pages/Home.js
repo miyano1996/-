@@ -5,10 +5,7 @@ import { HashRouter, Switch, Route, Redirect } from 'react-router-dom'
 import Loadable from 'react-loadable'
 import '../assets/style/home.css'
 //懒加载
-const Login = Loadable({
-    loader: () => import('./admin/Login.js'),
-    loading: () => <div>加载中...</div>
-})
+
 const Complaint = Loadable({
     loader: () => import('./manage/Complaint'),
     loading: () => <div>加载中...</div>
@@ -46,8 +43,7 @@ export default class Home extends Component {
                         >
                             <HashRouter>
                                 <Switch>
-                                    <Redirect exact path="/" to="/home/Complaint"></Redirect>
-                                    <Route path="/home/login" component={Login}></Route>
+                                    <Redirect exact path="/home" to="/home/Complaint"></Redirect>
                                     <Route path="/home/Complaint" component={Complaint}></Route>
                                 </Switch>
                             </HashRouter>
