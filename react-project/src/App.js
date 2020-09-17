@@ -10,16 +10,20 @@ const Home = Loadable({
   loader: () => import('./pages/Home.js'),
   loading: () => <div>加载中...</div>
 })
-
+const Register = Loadable({
+  loader:()=>import('./pages/Register.js'),
+  loading:()=><div>加载中...</div>
+})
 
 function App() {
   return (
     <>
      <HashRouter>
 <Switch>
-    <Redirect exact path="/" to="/Home"></Redirect>
+    <Redirect exact path="/" to="/Register"></Redirect>
     <Route path="/home" component={Home}></Route>
     <Route path="/Login" component={Login}></Route>
+    <Route path="/Register" component={Register}></Route>
 </Switch>
 </HashRouter>
     </>
