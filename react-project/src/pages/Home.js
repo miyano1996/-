@@ -60,9 +60,6 @@ export default class Home extends Component {
                     </Layout>
                 </Layout>
             </Layout>
-          </Layout>
-        </Layout>
-      </Layout>
     );
   }
 }
