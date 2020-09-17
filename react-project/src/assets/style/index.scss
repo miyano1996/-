@@ -1,9 +1,25 @@
 @import './reset.css';
 @import './oneGym.css';
-
-.box{
+@import './complaint.scss';
+@import "./List.scss";
+@import './Login.scss';
+.box {
     width: 100;
-    .box2{
+    .box2 {
         background-color: aqua;
     }
+}
+
+body {
+    width: 100vh;
+    height: 100vh;
+}
+
+#root {
+    height: 100%;
+}
+
+.ant-layout {
+    min-width: 1200px;
+    height: 100%;
 }

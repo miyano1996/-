@@ -231,9 +231,10 @@ export default class OneGym extends Component {
                         <Card title='新增活动'
                             style={{ width: 300 }}>
                             <p style={{
-                                fontSize: 350, lineHeight: .7, fontWeight: 100, color: '#f2f2f2', cursor: 'pointer',
-                                border: '3px solid #f2f2f2'
-                            }}>+</p>
+                                fontSize: 200, lineHeight: 1.2, fontWeight: 100, color: '#f2f2f2', cursor: 'pointer',
+                                border: '3px solid #f2f2f2',margin:0,padding:0,textAlign:'center'
+                            }}>+
+                            </p>
                         </Card>
                     </div>
                 </div>
