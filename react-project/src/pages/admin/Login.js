@@ -6,7 +6,6 @@ export default class Login extends Component {
             account:this.account.value,
             password:this.password.value
         }
-        console.log(data,api.admin.login)
         const res = await api.admin.login(data)
         console.log(res)
     }
