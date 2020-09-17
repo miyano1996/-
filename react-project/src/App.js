@@ -20,7 +20,7 @@ function App() {
     <>
      <HashRouter>
 <Switch>
-    <Redirect exact path="/" to="/Register"></Redirect>
+    <Redirect exact path="/" to="/home"></Redirect>
     <Route path="/home" component={Home}></Route>
     <Route path="/Login" component={Login}></Route>
     <Route path="/Register" component={Register}></Route>
