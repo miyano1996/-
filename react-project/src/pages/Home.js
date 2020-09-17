@@ -3,7 +3,6 @@ import { Layout, Menu, Breadcrumb } from 'antd';
 import SideBar from '../components/SideBar';
 import { HashRouter, Switch, Route, Redirect } from 'react-router-dom'
 import Loadable from 'react-loadable'
-import '../styleSheets/home.css'
 //懒加载
 const Login = Loadable({
     loader: () => import('./admin/Login.js'),
