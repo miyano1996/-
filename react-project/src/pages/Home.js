@@ -29,9 +29,6 @@ const AddGyms = Loadable({
 })
 
 const { Header, Content } = Layout;
-
-const { Header, Content } = Layout
-
 export default class Home extends Component {
     render() {
         return (
@@ -62,36 +59,12 @@ export default class Home extends Component {
                         >
                             <HashRouter>
                                 <Switch>
-                                    <Redirect exact path="/" to="/home/login"></Redirect>
-                                    <Route path="/home/login" component={Login}></Route>
-                                    <Route path="/home/addGyms" component={AddGyms}></Route>
-                                </Switch>
-                            </HashRouter>
-                        </Content>
-
-                    </Layout>
-                    <SideBar />
-                    <Layout style={{ padding: '0 24px 24px' }}>
-                        <Breadcrumb style={{ margin: '16px 0' }}>
-                            <Breadcrumb.Item>Home</Breadcrumb.Item>
-                            <Breadcrumb.Item>List</Breadcrumb.Item>
-                            <Breadcrumb.Item>App</Breadcrumb.Item>
-                        </Breadcrumb>
-                        <Content
-                            className="site-layout-background"
-                            style={{
-                                padding: 24,
-                                margin: 0,
-                                minHeight: 280,
-                            }}
-                        >
-                            <HashRouter>
-                                <Switch>
                                     <Redirect exact path="/home" to="/home/oneGym"></Redirect>
                                     <Route path="/home/oneGym" component={OneGym}></Route>
                                     <Route path="/home/Complaint" component={Complaint}></Route>
                                     <Route path="/home/Studentslist" component={Studentslist}></Route>
                                     <Route path="/home/Orders" component={Orders}></Route>
+                                    <Route path="/home/addGyms" component={AddGyms}></Route>
                                 </Switch>
                             </HashRouter>
                         </Content>
