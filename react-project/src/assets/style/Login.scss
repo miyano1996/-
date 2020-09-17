@@ -1,0 +1,27 @@
+.login-box-container{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #3b818c;
+    .login-box{
+        width: 450px;
+        height: 300px;
+        label{
+            color: antiquewhite;
+            a{
+                color: #ccc;
+                margin-left: 3px;
+                &:hover{
+                    color: #fff;
+                    text-decoration: underline;
+                }
+            }
+        }
+        .form-bottom-item{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+}
