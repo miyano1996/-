@@ -19,6 +19,7 @@ const gymSchema = new mongoose.Schema({
     activeContent:Array,//活动详情，对应活动图片
     activeTitle:Array,//活动标题
     announcement:String,//公告
+    status:String//状态值：0表示正在申请，1表示申请成功，2表示申请失败
 }, {versionKey:false});
 
 module.exports.gymModel = mongoose.model('gymModel', gymSchema, 'gym');

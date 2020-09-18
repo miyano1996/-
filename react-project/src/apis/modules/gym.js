@@ -14,6 +14,13 @@ const gym = {
             method:"POST",
             data
         })
+    },
+    addGym(data){
+        return axios({
+            url:'/gym/addGym',
+            method:'post',
+            data
+        })
     }
 }
 
