@@ -9,8 +9,8 @@ const Complaint = Loadable({
     loader: () => import('./manage/Complaint'),
     loading: () => <div>加载中...</div>
 })
-const Login = Loadable({
-    loader: () => import('./Login'),
+const OneGym = Loadable({
+    loader: () => import('./OneGym.js'),
     loading: () => <div>加载中...</div>
 })
 const Orders = Loadable({
@@ -26,7 +26,18 @@ const Cdetails = Loadable({
     loading: () => <div>加载中...</div>
 })
 const { Header, Content } = Layout;
+const Studentslist = Loadable({
+    loader: () => import('./list/Studentlist'),
+    loading: () => <div>加载中...</div>
+})
 
+//申请场馆
+const AddGyms = Loadable({
+    loader: () => import('./AddGyms'),
+    loading: () => <div>加载中...</div>
+})
+
+const { Header, Content } = Layout;
 export default class Home extends Component {
     render() {
         return (
@@ -57,16 +68,17 @@ export default class Home extends Component {
                         >
                             <HashRouter>
                                 <Switch>
-                                    <Redirect exact path="/" to="/home/Orders"></Redirect>
-                                    <Route path="/home/login" component={Login}></Route>
+                                    <Redirect exact path="/home" to="/home/oneGym"></Redirect>
+                                    <Route path="/home/oneGym" component={OneGym}></Route>
                                     <Route path="/home/Complaint" component={Complaint}></Route>
+                                    <Route path="/home/Studentslist" component={Studentslist}></Route>
                                     <Route path="/home/Orders" component={Orders}></Route>
                                     <Route path="/home/Sdetails" component={Sdetails}></Route>
                                     <Route path="/home/Cdetails" component={Cdetails}></Route>
+                                    <Route path="/home/addGyms" component={AddGyms}></Route>
                                 </Switch>
                             </HashRouter>
                         </Content>
-
                     </Layout>
                 </Layout>
             </Layout>

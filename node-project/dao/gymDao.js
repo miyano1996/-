@@ -4,5 +4,12 @@ const { gymModel } = require('./modules/gymModel');
 module.exports.register= async data => await gymModel.create(data);
 
 //验证重名
-module.exports.isReuse= async ({account})=> await gymModel.find(account);
+module.exports.isReuse= async ({account}) => await gymModel.find({account});
+
+//登录
+module.exports.login= async ({account,password}) => await gymModel.find({account,password});
+
+//新增场馆
+module.exports.addGym = async ({_id,telephone,name,images,address,status})=>await gymModel.updateOne({_id},{telephone,name,images,address,status});
+
 

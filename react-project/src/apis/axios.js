@@ -15,10 +15,11 @@ instance.interceptors.request.use(
 //设置响应拦截器
 instance.interceptors.response.use(
     (res) => {
-        if(res.status === 200){
+        //后端返回的状态码是200且success字段为true才返回res.data，否则返回Promise的reject，前端用catch接收。
+        if(res.status === 200 && res.data.success){
             return res.data
         }else{
-            return res
+            return Promise.reject(res.data)
         }
     },
     (err) => {

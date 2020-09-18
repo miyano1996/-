@@ -1,7 +1,15 @@
 @import './reset.css';
+@import './oneGym.css';
 @import './complaint.scss';
+@import "./List.scss";
 @import './Login.scss';
-@import './sDetails.scss';
+.box {
+    width: 100;
+    .box2 {
+        background-color: aqua;
+    }
+}
+
 body {
     width: 100vh;
     height: 100vh;
