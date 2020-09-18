@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, message } from 'antd';
 import api from '../../apis/api';
 
 const layout = {
@@ -19,8 +19,17 @@ const tailLayout = {
 
 export default class AdminLogin extends Component {
     onFinish = async (values) => {
-        const res = await api.admin.login(values);
-        console.log(res)
+        try {
+            const res = await api.admin.login(values);
+            const { token, name,role } = res.rows;
+            localStorage.setItem('token', token);
+            localStorage.setItem('name', name);
+            localStorage.setItem('role', role);
+            message.success(res.msg)
+        } catch (error) {
+            message.error(error.msg)
+        }
+
     };
     render() {
         return (
