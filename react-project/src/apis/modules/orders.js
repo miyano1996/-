@@ -1,7 +1,13 @@
-// import axios from '../axios'
+import axios from '../axios'
 
 const orders = {
-    ///axios
+    getAllOrders(data) {
+        return axios({
+            url: '/orders/getAllOrders',
+            method: 'GET',
+            data
+        })
+    }
 }
 
 export default orders

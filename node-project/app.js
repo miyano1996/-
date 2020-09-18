@@ -10,12 +10,16 @@ require('./dao/database/database');
 
 
 var adminRouter = require('./routes/admin');
+<<<<<<< HEAD
 var imagesRouter = require('./routes/images');//图片上传一级路径
 var gymRouter = require('./routes/gym');
 var studentsRouter = require('./routes/students');
 var coachesRouter = require('./routes/coaches');
 var ordersRouter = require('./routes/orders');
 var carouselRouter = require('./routes/carousel');
+=======
+var ordersRouter = require('./routes/orders')
+>>>>>>> xueyanbo
 
 var app = express();
 
@@ -29,10 +33,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+<<<<<<< HEAD
 //跨域中间件
 app.use(function(req,res,next){
   res.setHeader("Access-Control-Allow-Origin","*");
   res.setHeader("Access-Control-Allow-Headers","content-type,token,x-requested-with");
+=======
+app.use(function (req, res, next) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Headers", "content-type,token,x-requested-with");
+>>>>>>> xueyanbo
   // res.setHeader('Access-Control-Allow-Methods',"DELETE")
   next();
 });
@@ -43,25 +53,29 @@ app.use(function(req,res,next){
 //路由地址
 
 app.use('/admin', adminRouter);
+<<<<<<< HEAD
 app.use('/images',imagesRouter);
 app.use('/gym', gymRouter);
 app.use('/students', studentsRouter);
 app.use('/coaches', coachesRouter);
 app.use('/orders', ordersRouter);
 app.use('/carousel', carouselRouter);
+=======
+app.use('/orders', ordersRouter)
+>>>>>>> xueyanbo
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
