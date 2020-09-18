@@ -11,11 +11,11 @@ class Bmap extends Component {
         this.state = {
             lng:'',
             lat:'',
-            province:'默认',
-            city:'默认',
-            district:'默认',
-            street:'默认',
-            streetNumber:'默认'
+            province:'尚未选择',
+            city:'',
+            district:'',
+            street:'',
+            streetNumber:''
         };
     }
     componentDidMount() {
@@ -67,7 +67,7 @@ class Bmap extends Component {
                 lat:this.state.lat
             }))
         }
-        map.addEventListener("click", function (e) {
+        map.addEventListener("click", function (e) {//经纬度逆解析
             var pt = e.point;
             geoc.getLocation(pt, function (rs) {
                 var addComp = rs.addressComponents;
@@ -76,7 +76,6 @@ class Bmap extends Component {
         });
     }
     render() {
-        console.log(this.props);
         const {province,city,district,street,streetNumber} = this.state;
         return (
             <div>

@@ -12,7 +12,8 @@ const gymSchema = new mongoose.Schema({
     images:Array,
     address:String,
     JD:String,//招聘信息
-    isDelete:Boolean//是否被管理员删除
+    isDelete:Boolean,//是否被管理员删除
+    status:String//状态值：0表示正在申请，1表示申请成功，2表示申请失败
 }, {versionKey:false});
 
 module.exports.gymModel = mongoose.model('gymModel', gymSchema, 'gym');
