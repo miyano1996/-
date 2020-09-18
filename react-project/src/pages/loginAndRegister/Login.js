@@ -19,9 +19,9 @@ const tailLayout = {
 
 export default class Login extends Component {
     onFinish = async (values) => {
-    
       const res = await api.gym.login(values);
       console.log(res)
+      localStorage.setItem('userInfo',JSON.stringify(res.rows))
     };
     render() {
         return (

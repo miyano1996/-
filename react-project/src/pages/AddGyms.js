@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { Steps, Form, Button, Upload, Input } from 'antd';
+import { Steps, Form, Button, Upload, Input,message } from 'antd';
 import { UserOutlined, SolutionOutlined, ClockCircleOutlined, SmileOutlined, UploadOutlined } from '@ant-design/icons';
 import BaiDu from '../components/BMap';
+import api from '../apis/api';
+import {connect} from 'react-redux';
 const { Step } = Steps;
 const formItemLayout = {
     labelCol: {
@@ -13,7 +15,7 @@ const formItemLayout = {
 };
 
 const normFile = (e) => {
-    console.log('Upload event:', e);
+    // console.log('Upload event:', e);
 
     if (Array.isArray(e)) {
         return e;
@@ -22,9 +24,29 @@ const normFile = (e) => {
     return e && e.fileList;
 };
 
-export default class addGyms extends Component {
-    onFinish = (values) => {
-        console.log('Received values of form: ', values);
+class addGyms extends Component {
+    state = {
+        isSubmit:false
+    }
+    onFinish =async (values) => {
+        let {_id} = JSON.parse(localStorage.getItem('userInfo'));
+        let {select,phone,upload} = values;
+        upload = upload.map(ele=>{return ele.name});
+        let {city,district,lat,lng,province,street,streetNumber} = this.props;
+        // console.log(_id,upload,city,district,lat,lng,province,street,streetNumber);
+        let address = `省份：${province}，城市：${city}，区：${district}，街道：${street}${streetNumber},经度：${lng}，纬度：${lat}`
+        const data =await api.gym.addGym({
+            _id,name:select,telephone:phone,images:upload,address,status:'0'
+        });
+        // console.log(data);
+        if(data.nModified == '1'){
+            message.success('申请提交成功，请耐心等待审核');
+            this.setState({
+                isSubmit:true
+            })
+        }else{
+            message.error('申请提交失败，请核对信息是否正确');
+        }
     }
 
     render() {
@@ -93,7 +115,7 @@ export default class addGyms extends Component {
                             offset: 6,
                         }}
                     >
-                        <Button type="primary" htmlType="submit">
+                        <Button type="primary" htmlType="submit" disabled={this.state.isSubmit}>
                             提交申请
         </Button>
                     </Form.Item>
@@ -102,4 +124,13 @@ export default class addGyms extends Component {
         )
     }
 }
+
+const mapStateToProps = (state)=>{
+    const {city,district,lat,lng,province,street,streetNumber} = state.addrs;
+    return{
+        city,district,lat,lng,province,street,streetNumber
+    }
+}
+
+export default connect(mapStateToProps)(addGyms)
 
