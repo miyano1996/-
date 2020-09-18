@@ -1,9 +1,13 @@
 import React from 'react';
+import './assets/style/index.scss';
+import { Provider } from 'react-redux';
+import store from '../src/store/index';
 import { HashRouter, Switch, Route, Redirect } from 'react-router-dom';
 import Loadable from 'react-loadable';
 // 懒加载
-const Login = Loadable({
-  loader: () => import('./pages/Login.js'),
+//管理员登录页面
+const AdminLogin = Loadable({
+  loader: () => import('./pages/loginAndRegister/AdminLogin.js'),
   loading: () => <div>加载中...</div>
 })
 const Home = Loadable({
@@ -11,21 +15,28 @@ const Home = Loadable({
   loading: () => <div>加载中...</div>
 })
 const Register = Loadable({
-  loader:()=>import('./pages/Register.js'),
-  loading:()=><div>加载中...</div>
+  loader: () => import('./pages/loginAndRegister/Register.js'),
+  loading: () => <div>加载中...</div>
+})
+const Login = Loadable({
+  loader: () => import('./pages/loginAndRegister/Login.js'),
+  loading: () => <div>加载中...</div>
 })
 
 function App() {
   return (
     <>
-     <HashRouter>
-<Switch>
-    <Redirect exact path="/" to="/home"></Redirect>
-    <Route path="/home" component={Home}></Route>
-    <Route path="/Login" component={Login}></Route>
-    <Route path="/Register" component={Register}></Route>
-</Switch>
-</HashRouter>
+      <Provider store={store}>
+        <HashRouter>
+          <Switch>
+            <Redirect exact path="/" to="/Home"></Redirect>
+            <Route path="/home" component={Home}></Route>
+            <Route path="/adminLogin" component={AdminLogin}></Route>
+            <Route path="/Register" component={Register}></Route>
+            <Route path="/Login" component={Login}></Route>
+          </Switch>
+        </HashRouter>
+      </Provider>
     </>
   );
 }
