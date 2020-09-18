@@ -21,6 +21,10 @@ const Studentslist = Loadable({
     loader: () => import('./list/Studentlist'),
     loading: () => <div>加载中...</div>
 })
+const Coacheslist = Loadable({
+    loader: () => import('./list/Coacheslist'),
+    loading: () => <div>加载中...</div>
+})
 
 
 const { Header, Content } = Layout;
@@ -55,10 +59,11 @@ export default class Home extends Component {
                         >
                             <HashRouter>
                                 <Switch>
-                                    <Redirect exact path="/" to="/home/Studentslist"></Redirect>
+                                    <Redirect exact path="/home" to="/home/Coacheslist"></Redirect>
                                     <Route path="/home/login" component={Login}></Route>
                                     <Route path="/home/Complaint" component={Complaint}></Route>
                                     <Route path="/home/Studentslist" component={Studentslist}></Route>
+                                    <Route path="/home/Coacheslist" component={Coacheslist}></Route>
                                     <Route path="/home/Orders" component={Orders}></Route>
                                 </Switch>
                             </HashRouter>

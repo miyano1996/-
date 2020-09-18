@@ -6,7 +6,7 @@ import students from './modules/students'
 import carousel from './modules/carousel'
 
 const api = {
-    admin,coaches,gym,orders,students,carousel
+    admin, coaches, gym, orders, students, carousel
 }
 
 export default api
