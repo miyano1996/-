@@ -25,7 +25,6 @@ const Cdetails = Loadable({
     loader: () => import('./list/Cdetails'),
     loading: () => <div>加载中...</div>
 })
-const { Header, Content } = Layout;
 const Studentslist = Loadable({
     loader: () => import('./list/Studentlist'),
     loading: () => <div>加载中...</div>

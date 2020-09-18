@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import api from '../../apis/api';
 import { Image,Avatar,Button,Divider} from 'antd';
-import {UserDeleteOutlined,WhatsAppOutlined,EnvironmentOutlined,DollarOutlined} from '@ant-design/icons';
+import {UserOutlined,WhatsAppOutlined,EnvironmentOutlined,DollarOutlined} from '@ant-design/icons';
 
 export default class Sdetails extends Component {
     state={
-      id:'5f6307fb157f00009e001398',
+      id:'5f6421a044100000830041b3',
       list:{}
     }
     getData=async (id)=>{
@@ -27,7 +27,7 @@ export default class Sdetails extends Component {
                     </div>
                     <div className="list">
                     <Divider orientation="left">账号</Divider>
-                        <p><UserDeleteOutlined />____{account}</p>
+                        <p><UserOutlined />____{account}</p>
                     </div>
                     <div className="list">
                     <Divider orientation="left">积分</Divider>
