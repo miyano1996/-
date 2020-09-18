@@ -38,7 +38,7 @@ class addGyms extends Component {
         const data =await api.gym.addGym({
             _id,name:select,telephone:phone,images:upload,address,status:'0'
         });
-        // console.log(data);
+        console.log(data);
         if(data.nModified == '1'){
             message.success('申请提交成功，请耐心等待审核');
             this.setState({
