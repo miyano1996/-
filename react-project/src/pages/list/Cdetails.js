@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import api from '../../apis/api'
-import { Image,Avatar,Button,Divider} from 'antd';
+import { Avatar,Button} from 'antd';
 import {TrademarkOutlined,EnvironmentOutlined,WhatsAppOutlined,FireOutlined,ContactsOutlined,ReadOutlined} from '@ant-design/icons';
 
 export default class Cdetails extends Component {
