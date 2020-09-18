@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Input, Button,message } from 'antd';
 import api from '../../apis/api';
-
+import {withRouter} from 'react-router-dom'
 const layout = {
     labelCol: {
         span: 8,
@@ -17,7 +17,7 @@ const tailLayout = {
     },
 };
 
-export default class Login extends Component {
+class Login extends Component {
     onFinish = async (values) => {
         try {
             const res = await api.gym.login(values);
@@ -25,6 +25,7 @@ export default class Login extends Component {
             localStorage.setItem('token',token);
             localStorage.setItem('userInfo',JSON.stringify(userInfo));
             message.success(res.msg)
+            this.props.history.push('/home')
         } catch (error) {
             message.error(error.msg)
         }
@@ -71,7 +72,7 @@ export default class Login extends Component {
                         <Form.Item {...tailLayout}>
                             <div className="form-bottom-item">
                                 <Button type="primary" htmlType="submit">登录</Button>
-                                <label>没有账号？去<a href="#/register">注册</a></label>
+                                <label>忘记密码？</label>
                             </div>
                         </Form.Item>
                     </Form>
@@ -81,3 +82,4 @@ export default class Login extends Component {
         )
     }
 }
+export default withRouter(Login)
