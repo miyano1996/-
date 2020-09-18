@@ -14,3 +14,6 @@ module.exports.addGym = async ({_id,telephone,name,images,address,status})=>awai
 
 //获取场馆信息
 module.exports.getGym = async (data) =>await gymModel.find(data)
+
+//更改场馆信息
+module.exports.updateGym = async (data) =>await gymModel.updateOne({_id:data._id,...data})

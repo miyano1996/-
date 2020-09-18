@@ -28,6 +28,13 @@ const gym = {
             method:'get',
             params:{_id}
         })
+    },
+    updateGym(data){
+        return axios({
+            url:'/gym/updateGym',
+            method:'post',
+            data
+        })
     }
 }
 
