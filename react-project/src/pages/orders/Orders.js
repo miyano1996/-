@@ -4,15 +4,15 @@ import '../../assets/style/orders.scss'
 import api from '../../apis/api'
 
 
-const rowSelection = {
-    onChange: (selectedRowKeys, selectedRows) => {
-        console.log(`被选中的ID: ${selectedRowKeys}`, '选中的行: ', selectedRows);
-    },
-    getCheckboxProps: record => ({
-        disabled: record.name === 'Disabled User', // Column configuration not to be checked
-        name: record.name,
-    }),
-};
+// const rowSelection = {
+//     onChange: (selectedRowKeys, selectedRows) => {
+//         console.log(`被选中的ID: ${selectedRowKeys}`, '选中的行: ', selectedRows);
+//     },
+//     getCheckboxProps: record => ({
+//         disabled: record.name === 'Disabled User', // Column configuration not to be checked
+//         name: record.name,
+//     }),
+// };
 export default class Orders extends Component {
     componentDidMount() {
         this.getAllOrders();
@@ -52,28 +52,44 @@ export default class Orders extends Component {
             },
             {
                 title: '操作',
-                render: () => (
+                render: (text) => (
                     <Space size="middle">
-                        <Button>删除</Button>
+                        <Button type="primary" danger onClick={() => this.deleteit(text._id)}>删除</Button>
                     </Space>
                 ),
             },
         ]
     }
+    async deleteit(id) {
+        try {
+            await api.orders.deleteOrder({ _id: id, success: true });
+            await this.getAllOrders()
+        } catch (error) {
+            console.log('报错' + error);
+        }
+
+    }
     async getAllOrders() {
-        const data = await api.orders.getAllOrders();
-        await this.setState({
-            dataSource: data.rows
-        })
+        try {
+            const { _id } = JSON.parse(localStorage.userInfo);
+            const data = await api.orders.getAllOrders(_id);
+            await this.setState({
+                dataSource: data.rows
+            })
+
+        } catch (error) {
+            console.log(error);
+        }
+
     }
     render() {
         return (
             <div className="orders-box">
                 <Table
-                    rowSelection={{
-                        type: "checkbox",
-                        ...rowSelection,
-                    }}
+                    // rowSelection={{
+                    //     type: "checkbox",
+                    //     ...rowSelection,
+                    // }}
                     columns={this.state.columns}
                     rowKey="_id"
                     dataSource={this.state.dataSource}

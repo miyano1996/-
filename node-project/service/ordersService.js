@@ -1,4 +1,4 @@
-const { getAllOrders, addOrder } = require('../dao/ordersDao');
+const { getAllOrders, addOrder, delOrder, getOrder } = require('../dao/ordersDao');
 
 //添加订单
 module.exports.addOrder = async function (data) {
@@ -16,7 +16,14 @@ module.exports.getAllOrders = async function (data) {
     } else {
         return data = {
             rows: null,
-            success: false
+            success: true
         }
     }
+};
+
+//删除订单
+module.exports.delOrder = async function (data) {
+    await delOrder(data);
+    const msg = await getOrder(data.id);
+    return msg
 };
