@@ -160,7 +160,7 @@ export default class OneGym extends Component {
     render() {
         const { disabled, changeinformation, announcement, name, active, grade } = this.state
         return (
-            <div style={{ padding: '0px 10px' }}>
+            <div style={{ padding: '20px 10px',backgroundColor:'white',marginBottom:40 }}>
                 <div className='title'>
                     基础信息
                     </div>
@@ -231,7 +231,7 @@ export default class OneGym extends Component {
                         <Card title='新增活动'
                             style={{ width: 300 }}>
                             <p style={{
-                                fontSize: 200, lineHeight: 1.2, fontWeight: 100, color: '#f2f2f2', cursor: 'pointer',
+                                fontSize: 200, lineHeight: 1.3, fontWeight: 100, color: '#f2f2f2', cursor: 'pointer',
                                 border: '3px solid #f2f2f2',margin:0,padding:0,textAlign:'center'
                             }}>+
                             </p>
