@@ -1,10 +1,10 @@
 import axios from '../axios'
 
 const admin = {
-    login(data){
+    login(data) {
         return axios({
-            url:'/admin/login',
-            method:'POST',
+            url: '/admin/login',
+            method: 'POST',
             data
         })
     }

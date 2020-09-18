@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { Table, Space, Button } from 'antd';
+
+
 export default class Studentlist extends Component {
     state = {
         columns: [
@@ -7,7 +9,6 @@ export default class Studentlist extends Component {
                 title: '姓名',
                 dataIndex: 'name',
                 key: 'name',
-                render: text => <span>{text}</span>,
             },
             {
                 title: '年龄',
@@ -30,7 +31,7 @@ export default class Studentlist extends Component {
                 render: (text, record) => (
                     <Space size="middle">
                         <Button onClick={() => this.updatedStudent(text)}>修改</Button>
-                        <Button type="danger">删除</Button>
+                        <Button type="danger" onClick={() => this.deleteStudent()} >删除</Button>
                     </Space>
                 ),
             },
@@ -58,6 +59,10 @@ export default class Studentlist extends Component {
     }
     updatedStudent = (text) => {
         console.log(text);
+    }
+
+    deleteStudent = () => {
+
     }
     render() {
         return (

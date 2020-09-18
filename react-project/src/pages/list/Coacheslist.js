@@ -1,5 +1,7 @@
-import React, { Component } from 'react'
-import { Table, Space } from 'antd';
+import React, { Component } from 'react';
+import { Table, Space, Button } from 'antd';
+import api from '../../apis/api'
+
 export default class Studentlist extends Component {
     state = {
         columns: [
@@ -7,7 +9,6 @@ export default class Studentlist extends Component {
                 title: '姓名',
                 dataIndex: 'name',
                 key: 'name',
-                render: text => <a href="https://www.baidu.com">{text}</a>,
             },
             {
                 title: '年龄',
@@ -15,22 +16,22 @@ export default class Studentlist extends Component {
                 key: 'age',
             },
             {
-                title: '家庭地址',
-                dataIndex: 'address',
-                key: 'address',
-            },
-            {
                 title: '联系电话',
                 dataIndex: 'telephone',
                 key: 'telephone',
             },
             {
-                title: 'Action',
+                title: '已购课程',
+                dataIndex: 'course',
+                key: 'course',
+            },
+            {
+                title: '操作',
                 key: 'action',
                 render: (text, record) => (
                     <Space size="middle">
-                        <a href="https://www.baidu.com">Invite {record.name}</a>
-                        <a href="https://www.baidu.com">Delete</a>
+                        <Button onClick={() => this.updatedStudent(text)}>修改</Button>
+                        <Button type="danger" onClick={() => this.deleteStudent()} >删除</Button>
                     </Space>
                 ),
             },
@@ -38,31 +39,42 @@ export default class Studentlist extends Component {
         data: [
             {
                 key: '1',
-                name: 'John Brown',
+                name: '落落',
                 age: 32,
-                address: 'New York No. 1 Lake Park',
-                tags: ['nice', 'developer'],
+                address: '不详',
             },
             {
                 key: '2',
-                name: 'Jim Green',
+                name: '轰轰',
                 age: 42,
-                address: 'London No. 1 Lake Park',
-                tags: ['loser'],
+                address: '不详',
             },
             {
                 key: '3',
-                name: 'Joe Black',
+                name: '尼蜜',
                 age: 32,
-                address: 'Sidney No. 1 Lake Park',
-                tags: ['cool', 'teacher'],
+                address: '不详',
             },
         ]
     }
+    componentDidMount() {
+        this.getallCoaches();
+    }
+    async getallCoaches() {
+        let data = await api.coaches.getCoaches();
+        console.log(data)
+    }
+    updatedStudent = (text) => {
+        console.log(text);
+    }
+
+    deleteStudent = () => {
+
+    }
     render() {
         return (
-            <div className="Studentslist">
-                <Table columns={this.state.columns} dataSource={this.state.data} />
+            <div className="List">
+                <Table columns={this.state.columns} dataSource={this.state.data} className="table" />
             </div>
         )
     }

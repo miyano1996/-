@@ -16,15 +16,15 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
     (res) => {
         //后端返回的状态码是200且success字段为true才返回res.data，否则返回Promise的reject，前端用catch接收。
-        if(res.status === 200 && res.data.success){
+        if (res.status === 200 && res.data.success) {
             return res.data
-        }else{
+        } else {
             return Promise.reject(res.data)
         }
     },
     (err) => {
         //此处可以获取状态码，然后根据状态码做出对应行为
         return err
-     }
+    }
 )
 export default instance
