@@ -1,7 +1,13 @@
-// import axios from '../axios'
+import axios from "../axios"
 
 const coaches = {
-    ///axios
+    getone(data){
+        return axios({
+            url:`/coaches/details`,
+            method:'POST',
+            data
+        })
+    }
 }
 
 export default coaches

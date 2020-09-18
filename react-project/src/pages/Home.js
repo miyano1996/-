@@ -17,6 +17,14 @@ const Orders = Loadable({
     loader: () => import('./orders/Orders'),
     loading: () => <div>加载中...</div>
 })
+const Sdetails = Loadable({
+    loader: () => import('./list/Sdetails'),
+    loading: () => <div>加载中...</div>
+})
+const Cdetails = Loadable({
+    loader: () => import('./list/Cdetails'),
+    loading: () => <div>加载中...</div>
+})
 const { Header, Content } = Layout;
 
 export default class Home extends Component {
@@ -53,6 +61,8 @@ export default class Home extends Component {
                                     <Route path="/home/login" component={Login}></Route>
                                     <Route path="/home/Complaint" component={Complaint}></Route>
                                     <Route path="/home/Orders" component={Orders}></Route>
+                                    <Route path="/home/Sdetails" component={Sdetails}></Route>
+                                    <Route path="/home/Cdetails" component={Cdetails}></Route>
                                 </Switch>
                             </HashRouter>
                         </Content>
