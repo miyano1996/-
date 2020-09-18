@@ -62,9 +62,8 @@ export default class Orders extends Component {
     }
     async getAllOrders() {
         const data = await api.orders.getAllOrders();
-        console.log(data);
         await this.setState({
-            dataSource: data.data.rows
+            dataSource: data.rows
         })
     }
     render() {
