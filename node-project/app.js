@@ -3,12 +3,14 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+// 引入的token文件=========================================================================
+var jwtAuth = require('./utils/jwt');
 //连接数据库
 require('./dao/database/database');
 
 
 var adminRouter = require('./routes/admin');
+var imagesRouter = require('./routes/images');//图片上传一级路径
 var gymRouter = require('./routes/gym');
 var studentsRouter = require('./routes/students');
 var coachesRouter = require('./routes/coaches');
@@ -35,9 +37,13 @@ app.use(function(req,res,next){
   next();
 });
 
+//在所有一级路径前启用token拦截===============================================
+// app.use(jwtAuth);
+
 //路由地址
 
 app.use('/admin', adminRouter);
+app.use('/images',imagesRouter);
 app.use('/gym', gymRouter);
 app.use('/students', studentsRouter);
 app.use('/coaches', coachesRouter);
