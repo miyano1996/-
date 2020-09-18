@@ -5,7 +5,6 @@ const { getOne } = require('../service/studentsService')
 
 router.post('/details',async (req,res,next)=>{
   const data =await getOne(req.body)
-  console.log(data,'ss')
   res.send(data)
 })
 
