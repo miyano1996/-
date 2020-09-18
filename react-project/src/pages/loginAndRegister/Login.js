@@ -19,15 +19,11 @@ const tailLayout = {
 
 export default class Login extends Component {
     onFinish = async (values) => {
-      const res = await api.gym.login(values);
-      console.log(res)
-      localStorage.setItem('userInfo',JSON.stringify(res.rows))
         try {
             const res = await api.gym.login(values);
-            const {token,name,role} = res.rows;
+            const {token,userInfo} = res.rows;
             localStorage.setItem('token',token);
-            localStorage.setItem('name',name);
-            localStorage.setItem('role',role);
+            localStorage.setItem('userInfo',JSON.stringify(userInfo));
             message.success(res.msg)
         } catch (error) {
             message.error(error.msg)
