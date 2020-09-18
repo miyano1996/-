@@ -24,7 +24,7 @@ module.exports.login = async data =>{
 			KEY,//密钥， 任意字符串
 			{ expiresIn: 60 * 60 }//设置token的有效期，单位秒
             )
-        return { success: true, msg: "登录成功" ,rows:{name,role,token}};
+        return { success: true, msg: "登录成功" ,rows:{name,role,token,_id}};
     }else{
         return { success: false,msg: '账号或密码错误'};
     }

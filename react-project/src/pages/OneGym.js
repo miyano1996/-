@@ -232,7 +232,7 @@ export default class OneGym extends Component {
                             style={{ width: 300 }}>
                             <p style={{
                                 fontSize: 200, lineHeight: 1.3, fontWeight: 100, color: '#f2f2f2', cursor: 'pointer',
-                                border: '3px solid #f2f2f2',margin:0,padding:0,textAlign:'center'
+                                border: '2px solid #f2f2f2',margin:0,padding:0,textAlign:'center'
                             }}>+
                             </p>
                         </Card>
