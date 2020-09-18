@@ -9,6 +9,7 @@ require('./dao/database/database');
 
 var indexRouter = require('./routes/index');
 var adminRouter = require('./routes/admin');
+var ordersRouter = require('./routes/orders')
 
 var app = express();
 
@@ -22,27 +23,28 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(function(req,res,next){
-  res.setHeader("Access-Control-Allow-Origin","*");
-  res.setHeader("Access-Control-Allow-Headers","content-type,token,x-requested-with");
+app.use(function (req, res, next) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Headers", "content-type,token,x-requested-with");
   // res.setHeader('Access-Control-Allow-Methods',"DELETE")
   next();
 });
 app.use('/', indexRouter);
 app.use('/admin', adminRouter);
+app.use('/orders', ordersRouter)
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

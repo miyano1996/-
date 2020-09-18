@@ -1,7 +1,8 @@
 import admin from './modules/admin'
+import orders from './modules/orders'
 
 const api = {
-    admin,
+    admin, orders
 }
 
 export default api
