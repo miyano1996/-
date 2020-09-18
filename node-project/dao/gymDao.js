@@ -12,4 +12,5 @@ module.exports.login= async ({account,password}) => await gymModel.find({account
 //新增场馆
 module.exports.addGym = async ({_id,telephone,name,images,address,status})=>await gymModel.updateOne({_id},{telephone,name,images,address,status});
 
-
+//获取场馆信息
+module.exports.getGym = async (data) =>await gymModel.find(data)

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Button, Descriptions, Input, Card, Table, Tag, Space } from 'antd';
-
+import api from '../apis/api';
 
 const columns = [
     {
@@ -125,6 +125,13 @@ export default class OneGym extends Component {
             },
         ]
     }
+    componentDidMount(){
+        this.getGymsAsync()
+    }
+    getGymsAsync=async ()=>{
+        const data =await api.gym.getGym('5f640fdfb1e3154af8f9fc59');
+        console.log(data);
+    }
     changeInformation = () => {
         if (this.state.disabled) {
             this.setState({ changeinformation: '确定' })
@@ -179,12 +186,12 @@ export default class OneGym extends Component {
                             <Input disabled={disabled} value='四川省成都市高新区孵化园' size='small' onChange />
                         </Descriptions.Item>
                         <Descriptions.Item label="创建时间">
-                            <Input disabled={disabled} value='2017-10-10' size='small' onChange />
+                            <Input disabled value='2017-10-10' size='small' onChange />
                         </Descriptions.Item>
                         <Descriptions.Item label="营业时间">
                             <Input disabled={disabled} value='全年无休' size='small' onChange />
                         </Descriptions.Item>
-                        <Descriptions.Item label="会馆说明">
+                        <Descriptions.Item label="会馆理念">
                             <Input disabled={disabled} value='自律给我自由！' size='small' onChange />
                         </Descriptions.Item>
                         <Descriptions.Item label="会馆星级">

@@ -1,4 +1,4 @@
-const { register,isReuse,login,addGym} = require('../dao/gymDao');
+const { register,isReuse,login,addGym,getGym} = require('../dao/gymDao');
 
 const jwt = require('jsonwebtoken'); //token
 const { KEY } = require('../utils/consts.js'); //封装的密钥串
@@ -38,4 +38,16 @@ module.exports.addGym = async data =>{
         return {success:true,msg:'新增成功',rows:res}
     }
     return {success:false,msg:'新增失败',rows:res}
+}
+
+//获取场馆信息
+module.exports.getGym = async data  =>{
+    const res = await getGym(data);
+    if(res.length){
+        return {
+            success:true,msg:'获取成功',rows:res
+        }
+    }else{
+        return {success:false,msg:'获取失败'}
+    }
 }
