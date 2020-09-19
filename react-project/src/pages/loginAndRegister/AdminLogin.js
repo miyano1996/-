@@ -33,7 +33,7 @@ export default class AdminLogin extends Component {
     };
     render() {
         return (
-            <div className="login-box-container">
+            <div className="adminLogin-box-container">
                 <div className="login-box">
                     <Form
                         {...layout}

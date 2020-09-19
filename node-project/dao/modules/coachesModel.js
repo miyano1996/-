@@ -10,9 +10,9 @@ const coachesSchema = new mongoose.Schema({
     workingTime: String,//工作时间
     price: String,//（课时费）
     telephone: String,
-    gym:{
+    gym:{//关联查询健身馆
         type: mongoose.Schema.Types.ObjectId,
-		ref: 'gymModel'
+        ref: 'gymModel'
     },
     isRest: Boolean,//（是否休息中）
     course: Array,//(所教授课程)，
