@@ -14,12 +14,9 @@ const Home = Loadable({
   loader: () => import('./pages/Home.js'),
   loading: () => <div>加载中...</div>
 })
-const Register = Loadable({
-  loader: () => import('./pages/loginAndRegister/Register.js'),
-  loading: () => <div>加载中...</div>
-})
-const Login = Loadable({
-  loader: () => import('./pages/loginAndRegister/Login.js'),
+
+const FirstPage = Loadable({
+  loader: () => import('./pages/FirstPage.js'),
   loading: () => <div>加载中...</div>
 })
 
@@ -29,11 +26,10 @@ function App() {
       <Provider store={store}>
         <HashRouter>
           <Switch>
-            <Redirect exact path="/" to="/Home"></Redirect>
+            <Redirect exact path="/" to="/home"></Redirect>
+            <Route path="/firstPage" component={FirstPage}></Route>
             <Route path="/home" component={Home}></Route>
             <Route path="/adminLogin" component={AdminLogin}></Route>
-            <Route path="/Register" component={Register}></Route>
-            <Route path="/Login" component={Login}></Route>
           </Switch>
         </HashRouter>
       </Provider>

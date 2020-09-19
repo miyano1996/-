@@ -3,12 +3,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #3b818c;
+    margin-top: 25px;
+    padding: 0;
     .login-box{
-        width: 450px;
-        height: 300px;
+        width: 400px;
         label{
-            color: antiquewhite;
             a{
                 color: #ccc;
                 margin-left: 3px;
@@ -22,6 +21,20 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+        }
+    }
+}
+
+.adminLogin-box-container{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #3b818c;
+    .login-box{
+        width: 450px;
+        label{
+            color: antiquewhite;
         }
     }
 }

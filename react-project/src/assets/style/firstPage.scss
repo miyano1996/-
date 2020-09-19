@@ -1,0 +1,105 @@
+.first-page{
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    header{
+        span{
+            color: #fff;
+        }
+        .wrapper-container{
+            width: 1440px;
+            height: 850px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            .wrapper{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                .brand{
+                    .brand-title{
+                        font-size: 28px;
+                        font-weight: 900;
+                        margin-left: 10px;
+                    }
+                }
+                .right-item{
+                    width: 200px;
+                    display: flex;
+                    justify-content: space-between;
+                }
+            }        
+            .tagline{
+                font-style: oblique;
+                font-size: 60px;
+                text-align: center;
+            }
+            .chooseBtn-container{
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+                .chooseBtn{
+                    width: 45%;
+                    margin: 5px;
+                    height: 40px;
+                    border-radius: 20px;
+                    color: #ffffff;
+                    font-size: 13px;
+                    box-sizing: border-box;
+                    text-align: center;
+                    line-height: 40px;
+                    position: relative;
+                    &:hover{
+                        cursor: pointer;
+                    }
+                    .icon{
+                        position: absolute;
+                        top: -1px;
+                        left: 30px;
+                        
+                    }
+                    &:nth-child(1){
+                        background-color: #1877f2;
+                        &:hover{
+                            background-color:#5da0f6;
+                        }
+                    }
+                    &:nth-child(2){
+                        background-color: #ffffff;
+                        border: 1px solid #bcbcbc;
+                        color: #000;
+                        span{
+                            color: #000;
+                        }
+                        &:hover{
+                            span{
+                                color:#888888;
+                            }
+                        }
+                    }
+                    &:nth-child(3){
+                        background-color: #1da1f2;
+                        &:hover{
+                            background-color:#5da0f6;
+                        }
+                    }
+                    &:nth-child(4){
+                        background-color: #000000;
+                        &:hover{
+                            background-color: #4c4c4c;
+                        }
+                    }
+                }
+            }
+        }
+        .video-container{
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+    }
+}

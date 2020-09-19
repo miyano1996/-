@@ -79,7 +79,6 @@ export default class Login extends Component {
                         <Form.Item {...tailLayout}>
                             <div className="form-bottom-item">
                                 <Button type="primary" htmlType="submit">注册</Button>
-                                <label>已有账号？去<a href="#/login">登录</a></label>
                             </div>
                         </Form.Item>
                     </Form>

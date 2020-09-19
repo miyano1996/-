@@ -1,7 +1,7 @@
 // 连接数据库
 const mongoose = require('mongoose');
 // 设置需要连接的数据库地址  数据库名称
-const dbURI = 'mongodb://111.231.189.144:27017/fitness';
+const dbURI = 'mongodb://gmc:Gao916582220@111.231.189.144:27017/fitness';
 //若需连接本地可以把路径设置:可选路径
 //111.231.189.144:27017
 //localhost

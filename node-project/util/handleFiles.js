@@ -31,7 +31,7 @@ function uploadFiles(options = {}) {
         },
         // 2.2 确定图片存储时的名字。（注意：如果使用原名，可能会造成再次上传同一张图片的时候的冲突）
         filename: function (req, file, cb) {
-            var changedName = new Date().getTime() + '-' + file.originalname;
+            var changedName = file.originalname;
             cb(null, changedName);
         }
     });
