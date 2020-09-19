@@ -33,6 +33,7 @@ module.exports.login = async data =>{
 
 //新增场馆
 module.exports.addGym = async data =>{
+    console.log(data);
     const res = await addGym(data);
     if(res.nModified == '1'){
         return {success:true,msg:'新增成功',rows:res}
