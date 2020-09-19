@@ -185,14 +185,14 @@ export default class OneGym extends Component {
         this.setState({ rows })
     }
     addActive = ()=>{
-        
+        this.props.history.push('/home/addActive')
     }
     //删除活动
     delActive = (index)=>{
         const rows = this.state.rows
         rows.activeContent.splice(index,1)
         rows.activeTitle.splice(index,1)
-        rows.images.splice(index,1)
+        rows.activeImage.splice(index,1)
         this.setState({ rows: rows })
         this.updateGymAsync({_id:this.state._id,...this.state.rows})
     }
@@ -249,7 +249,7 @@ export default class OneGym extends Component {
                     </div>
                 {
                     announcement.map((item, index) => {
-                        return <div style={{ paddingLeft: 20, marginBottom: 10 }} key={item.id}>
+                        return <div style={{ paddingLeft: 20, marginBottom: 10 }} key={index}>
                             <Input
                                 value={item.content}
                                 disabled={item.statu}

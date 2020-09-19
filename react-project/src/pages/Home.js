@@ -27,6 +27,10 @@ const AddGyms = Loadable({
     loader: () => import('./AddGyms'),
     loading: () => <div>加载中...</div>
 })
+const addActive = Loadable({
+    loader: () => import('./addActive'),
+    loading: () => <div>加载中...</div>
+})
 
 //管理员审核
 // const AdminReview = Loadable({
@@ -71,6 +75,7 @@ export default class Home extends Component {
                                     <Route path="/home/Studentslist" component={Studentslist}></Route>
                                     <Route path="/home/Orders" component={Orders}></Route>
                                     <Route path="/home/addGyms" component={AddGyms}></Route>
+                                    <Route path="/home/addActive" component={addActive}></Route>
                                     {/* <Route path="/home/adminReview" component={AdminReview}></Route> */}
                                 </Switch>
                             </HashRouter>
