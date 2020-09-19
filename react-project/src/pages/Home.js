@@ -80,6 +80,8 @@ export default class Home extends Component {
                                     <Route path="/home/Sdetails" component={Sdetails}></Route>
                                     <Route path="/home/Cdetails" component={Cdetails}></Route>
                                     <Route path="/home/addGyms" component={AddGyms}></Route>
+                                    <Route path="/home/adminReview" component={AdminReview}></Route>
+                                    <Route path="/home/adminPropaganda" component={AdminPropaganda}></Route>
                                     <Route path="/home/oneGym" component={OneGym}></Route>
                                 </Switch>
                             </HashRouter>
