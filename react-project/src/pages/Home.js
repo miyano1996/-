@@ -28,6 +28,18 @@ const AddGyms = Loadable({
     loading: () => <div>加载中...</div>
 })
 
+//管理员审核
+const AdminReview = Loadable({
+    loader: () => import('./AdminReview'),
+    loading: () => <div>加载中...</div>
+})
+
+//轮播图上传
+const AdminPropaganda = Loadable({
+    loader: () =>import('./AdminPropaganda'),
+    loading: () =><div>加载中...</div>
+})
+
 const { Header, Content } = Layout;
 export default class Home extends Component {
     render() {
@@ -65,6 +77,8 @@ export default class Home extends Component {
                                     <Route path="/home/Studentslist" component={Studentslist}></Route>
                                     <Route path="/home/Orders" component={Orders}></Route>
                                     <Route path="/home/addGyms" component={AddGyms}></Route>
+                                    <Route path="/home/adminReview" component={AdminReview}></Route>
+                                    <Route path="/home/adminPropaganda" component={AdminPropaganda}></Route>
                                 </Switch>
                             </HashRouter>
                         </Content>
