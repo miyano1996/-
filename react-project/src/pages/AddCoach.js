@@ -41,7 +41,7 @@ export default class AddCoach extends Component {
     }
     addUsername = (e) => {
         const newCoach = this.state.newCoach
-        newCoach.username = (e.target.value)
+        newCoach.account = (e.target.value)
         this.setState({ newCoach })
     }
     addPassword = (e) => {

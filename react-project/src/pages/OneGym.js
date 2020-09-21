@@ -1,89 +1,8 @@
 import React, { Component } from 'react'
-import { Button, Descriptions, Input, Card, Table, Tag, Space } from 'antd';
+import { Button, Descriptions, Input, Card, Table, Space, Popconfirm, Modal } from 'antd';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
 import api from '../apis/api';
 
-const columns = [
-    {
-        title: '教练',
-        dataIndex: 'name',
-        key: 'name',
-        render: text => <span>{text}</span>,
-    },
-    {
-        title: '课时',
-        dataIndex: 'age',
-        key: 'age',
-    },
-    {
-        title: '费用',
-        dataIndex: 'address',
-        key: 'address',
-    },
-    {
-        title: '学员',
-        key: 'tags',
-        dataIndex: 'tags',
-        render: tags => (
-            <>
-                {tags.map(tag => {
-                    let color = tag.length > 5 ? 'geekblue' : 'green';
-                    if (tag === 'loser') {
-                        color = 'volcano';
-                    }
-                    return (
-                        <Tag color={color} key={tag}>
-                            {tag.toUpperCase()}
-                        </Tag>
-                    );
-                })}
-            </>
-        ),
-    },
-    {
-        title: '时间',
-        key: 'action',
-        render: (text, record) => (
-            <Space size="middle">
-                <span>Invite {record.name}</span>
-                <span>Delete</span>
-            </Space>
-        ),
-    },
-    {
-        title: '订单状态',
-        key: 'action',
-        render: (text, record) => (
-            <Space size="middle">
-                <span>Invite {record.name}</span>
-                <span>Delete</span>
-            </Space>
-        ),
-    },
-];
-
-const data = [
-    {
-        key: '1',
-        name: 'John Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        tags: ['nice', 'developer'],
-    },
-    {
-        key: '2',
-        name: 'Jim Green',
-        age: 42,
-        address: 'London No. 1 Lake Park',
-        tags: ['loser'],
-    },
-    {
-        key: '3',
-        name: 'Joe Black',
-        age: 32,
-        address: 'Sidney No. 1 Lake Park',
-        tags: ['cool', 'teacher'],
-    },
-];
 export default class OneGym extends Component {
     state = {
         disabled: true,
@@ -91,24 +10,30 @@ export default class OneGym extends Component {
         announcementType: '新增',
         rows: { announcement: [], activeContent: [], activeTitle: [], activeImage: [], address: '{}' },
         _id: '',
-        orders:[]
+        orders: [],
+        totalCount: 0,
+        list: [],
+        current:1,
+        loading:false
     }
     async componentDidMount() {
         await this.setState({ _id: JSON.parse(localStorage.userInfo)._id })
         // this.setState({_id:'5f65a8ffbb2219492cc67b9f'})
-        this.getGymsAsync()
-this.getOrdersAsync()
+        await this.getGymsAsync()
+        this.getOrdersAsync()
     }
     //获取订单
-    getOrdersAsync = async ()=>{
-        const orders = await api.orders.getOrders({_id:JSON.parse(localStorage.userInfo)._id});
-        this.setState({orders:orders.rows})
-        console.log(orders);
+    getOrdersAsync = async () => {
+        // console.log(JSON.parse(localStorage.userInfo)._id);
+        let orders = await api.orders.getAllOrders(JSON.parse(localStorage.userInfo)._id);
+        // console.log(orders);
+        this.setState({ orders: orders.rows })
+        // console.log(this.state.orders);
     }
     //获取场馆
     getGymsAsync = async () => {
-        const data =await api.gym.getGym(JSON.parse(localStorage.userInfo)._id);
-        this.setState({rows:data.rows});
+        const data = await api.gym.getGym(JSON.parse(localStorage.userInfo)._id);
+        this.setState({ rows: data.rows });
         // console.log(data);
     }
     //更改场馆
@@ -199,8 +124,7 @@ this.getOrdersAsync()
     addActive = () => {
         this.props.history.push('/home/addActive')
     }
-    //删除活动
-    delActive = (index) => {
+    hideModal = (index) => {
         const rows = this.state.rows
         rows.activeContent.splice(index, 1)
         rows.activeTitle.splice(index, 1)
@@ -208,15 +132,28 @@ this.getOrdersAsync()
         this.setState({ rows: rows })
         this.updateGymAsync({ _id: this.state._id, ...this.state.rows })
     }
+    //删除活动
+    delActive = (index) => {
+        Modal.confirm({
+            title: '警告',
+            icon: <ExclamationCircleOutlined />,
+            content: '确定要删除此项活动吗？',
+            okText: '确认',
+            cancelText: '取消',
+            onOk: () => this.hideModal(index),
+            // onCancel:this.hideModal
+        });
+
+    }
     //去教练团
-    toCoaches = ()=>{
+    toCoaches = () => {
         this.props.history.push('/home/coacheslist')
     }
-    toStudents=()=>{
+    toStudents = () => {
         this.props.history.push('/home/studentslist')
     }
     render() {
-        const { disabled, changeinformation, rows, } = this.state
+        const { orderlist, totalCount, loading, current,disabled, changeinformation, rows, orders } = this.state
         const person = JSON.parse(localStorage.userInfo).role
         // console.log(123);
         const { name, grade, telephone, address, businessTime, idea, time, activeContent, activeTitle, announcement, activeImage } = rows
@@ -227,6 +164,64 @@ this.getOrdersAsync()
             addArr.push(newAdd[a])
         }
         var answer = `${addArr[0]}${addArr[1]}${addArr[2]}`
+        const pagination = {
+            total: totalCount,
+            defaultPageSize: 3,
+            onChange: (pageNumber, pageSize)=>{
+                console.log(pageNumber, pageSize);
+                try {
+                    this.getOrdersAsync({ pageNumber, pageSize })
+                    this.setState({loading:false})
+                } catch (error) {
+                }
+            },
+            current
+        }
+        const columns = [
+            {
+                title: '教练',
+                render: (item) => (
+                    // <Popconfirm
+                    //     title={`确认删除${item.account}用户吗`}
+                    //     onConfirm={() => this.confirm(item._id)}
+                    //     okText="确定"
+                    //     cancelText="取消"
+                    // >
+                        <Button type='primary' size='small'>{item.coaches.name}</Button>
+                    // </Popconfirm>
+
+                ),
+            },
+            {
+                title: '费用',
+                dataIndex: 'orderPrice',
+                key: 'address',
+            },
+            {
+                title: '学员',
+                render: (item) => (
+                    // <Popconfirm
+                    //     title={`确认删除${item.account}用户吗`}
+                    //     onConfirm={() => this.confirm(item._id)}
+                    //     okText="确定"
+                    //     cancelText="取消"
+                    // >
+                        <Button type='danger' size='small'>{item.students.name}</Button>
+                    // </Popconfirm>
+
+                ),
+            },
+            {
+                title: '下单时间',
+                dataIndex: 'time',
+                key: 'time',
+            },
+            {
+                title: '订单状态',
+                dataIndex: 'status',
+                key: 'status',
+            },
+        ];
         return (
             <div style={{ padding: '20px 10px', backgroundColor: 'white', marginBottom: 40 }}>
                 <div className='title'>
@@ -291,7 +286,7 @@ this.getOrdersAsync()
                                 <Card title={item} extra={<Button type="primary" onClick={() => this.delActive(index)} danger>删除</Button>}
                                     style={{ width: 300 }}>
                                     <p style={{ height: 90 }}>惊喜：{activeContent[index]}</p>
-                                    <img style={{ width: 250, height: 140, marginTop: 20 }} src={activeImage[index] ? require(`../assets/images/${activeImage[index]}`) : require(`../assets/images/jianshenActive-1.jpg`)} alt="" />
+                                    <img style={{ width: 250, height: 140, marginTop: 20 }} src={activeImage[index] ? `http://localhost:4000/temp/${activeImage[index]}` : require(`../assets/images/jianshenActive-1.jpg`)} alt="" />
                                 </Card>
                             </div>
                         })
@@ -311,14 +306,15 @@ this.getOrdersAsync()
                     课程安排
                     </div>
                 <div>
-                    <Table columns={columns} dataSource={data} />
+                    <Table rowKey='_id' loading={loading} columns={columns} dataSource={orders} pagination={pagination}/>
+
                 </div>
                 <div className='title'>
                     馆内人员
                 </div>
                 <div style={{ marginLeft: 20, marginBottom: 100 }}>
                     <Button type="primary" onClick={this.toCoaches}>荣誉教练团</Button>
-                    <Button type="primary" onClick={this.toStudents} style={{ marginLeft: 20 }}>全部学员</Button>
+                    <Button type="danger" onClick={this.toStudents} style={{ marginLeft: 20 }}>全部学员</Button>
                 </div>
             </div>
         )
