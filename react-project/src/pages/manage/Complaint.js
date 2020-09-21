@@ -34,7 +34,7 @@ export default class Complaint extends Component {
                             </span>
                         </span>
                         <span>订单编号:
-                        <span className="orderid">{item.ordersId}</span>
+                        <span className="orderid">{item.ordersId._id}</span>
                         </span>
                         <span>教练:
                                 <span className="orderid">{item.coacheId.name}</span>
