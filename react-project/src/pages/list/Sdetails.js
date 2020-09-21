@@ -5,7 +5,7 @@ import {UserOutlined,WhatsAppOutlined,EnvironmentOutlined,DollarOutlined} from '
 
 export default class Sdetails extends Component {
     state={
-      id:'5f6421a044100000830041b3',
+      id:'5f62e339157f00009e001397',
       list:{}
     }
     getData=async (id)=>{

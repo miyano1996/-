@@ -16,6 +16,7 @@ var studentsRouter = require('./routes/students');
 var coachesRouter = require('./routes/coaches');
 var ordersRouter = require('./routes/orders');
 var carouselRouter = require('./routes/carousel');
+var complaintRouter = require('./routes/complaint');
 
 var app = express();
 
@@ -49,6 +50,7 @@ app.use('/students', studentsRouter);
 app.use('/coaches', coachesRouter);
 app.use('/orders', ordersRouter);
 app.use('/carousel', carouselRouter);
+app.use('/complaint', complaintRouter);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

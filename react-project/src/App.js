@@ -19,7 +19,7 @@ const Login = Loadable({
   loading: ()=><div>加载中...</div>
 })
 
-const Reg = Loadable({
+const Register = Loadable({
   loader: () => import('./pages/loginAndRegister/Register.js'),
   loading: () => <div>加载中...</div>
 })
@@ -40,7 +40,7 @@ function App() {
             <Route path="/home" component={Home}></Route>
             <Route path="/adminLogin" component={AdminLogin}></Route>
             <Route path="/login" component={Login}></Route>
-            <Route path="/reg" component={Reg}></Route>
+            <Route path="/register" component={Register}></Route>
           </Switch>
         </HashRouter>
       </Provider>

@@ -1,45 +1,60 @@
 import axios from '../axios'
 
 const gym = {
-    register(data){
+    register(data) {
         return axios({
-            url:'/gym/register',
-            method:"POST",
+            url: '/gym/register',
+            method: "POST",
             data
         })
     },
-    login(data){
+    login(data) {
         return axios({
-            url:"/gym/login",
-            method:"POST",
+            url: "/gym/login",
+            method: "POST",
             data
         })
     },
-    addGym(data){
+    addGym(data) {
         return axios({
-            url:'/gym/addGym',
-            method:'post',
+            url: '/gym/addGym',
+            method: 'post',
             data
         })
     },
-    getGymByStatus(params){
+    getGym(_id) {
         return axios({
-            url:'/gym/getGymByStatus',
-            method:'get',
+            url: '/gym/getGym',
+            method: 'get',
+            params: { _id }
+        })
+    },
+    updateGym(data) {
+        return axios({
+            url: '/gym/updateGym',
+            method: 'post',
+            data
+        })
+    },
+
+    getGymByStatus(params) {
+        return axios({
+            url: '/gym/getGymByStatus',
+            method: 'get',
             params
         })
     },
-    changeGymStatus(data){
+    changeGymStatus(data) {
         return axios({
-            url:'/gym/changeGymStatus',
-            method:'post',
+            url: '/gym/changeGymStatus',
+            method: 'post',
             data
         })
     },
-    getGymByText(params){
+    getGymByText(params) {
         return axios({
-            url:'/gym/getGymByText',
-            method:'get',
+            url: '/gym/getGymByText',
+            method: 'get',
             params
         })
     }
