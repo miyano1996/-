@@ -13,3 +13,7 @@ module.exports.delCoaches = async function ({ _id, isDelete }) {
 module.exports.getOne = async (data) => {
     return await coachesModel.find({ _id: data.id }).populate('gym');
 }
+module.exports.updateCoaches = async function ({ _id, isDelete }) {
+    const msg = await coachesModel.update({ _id }, { isDelete });
+    return msg
+}

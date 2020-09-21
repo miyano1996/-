@@ -18,6 +18,9 @@ const coaches = {
       data
     })
   },
+  updateCoaches(data) {
+
+  },
   getone(data) {
     return axios({
       url: `/coaches/details`,

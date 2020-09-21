@@ -24,7 +24,7 @@ export default class FirstPage extends Component {
                         <div className="wrapper">
                             <div className="brand">
                                 <img src={require('../assets/images/icon-logo.svg')} width="100" alt="" />
-                                <span className="brand-title">一起摔♂跤</span>
+                                <span className="brand-title">一起健♂身</span>
                             </div>
                             <div className="right-item">
                                 <a href="#/login">登录</a>
@@ -74,7 +74,7 @@ export default class FirstPage extends Component {
                         width={800}
                         mask={false}
                         bodyStyle={{
-                            height: '400px',                  
+                            height: '400px',
                         }}
                     >
                         <div className="card-container">

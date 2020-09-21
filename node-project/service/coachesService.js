@@ -1,5 +1,5 @@
 
-const { getCoaches, delCoaches, getOne } = require("../dao/coachesDao");
+const { getCoaches, delCoaches, getOne, updateCoaches } = require("../dao/coachesDao");
 
 //获取教练
 module.exports.getCoaches = async function (data) {
@@ -22,6 +22,14 @@ module.exports.delCoaches = async function (data) {
         return { success: true, msg: "删除成功" }
     }
 };
+//修改教练信息
+module.exports.updateCoaches = async function (data) {
+    let msg = await updateCoaches(data);
+    if (msg.ok === 1) {
+        return { success: true, msg: "删除成功" }
+    }
+}
+
 //详细信息
 module.exports.getOne = async (data) => {
     const getdata = await getOne(data);
