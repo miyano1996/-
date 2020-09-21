@@ -83,8 +83,7 @@ export default class Home extends Component {
                         >
                             <HashRouter>
                                 <Switch>
-                                    <Redirect exact path="/home" to="/home/Coacheslist"></Redirect>
-                                    {/* <Route path="/home/login" component={Login}></Route> */}
+                                    <Redirect exact path="/home" to="/home/oneGym"></Redirect>
                                     <Route path="/home/Complaint" component={Complaint}></Route>
                                     <Route path="/home/Studentslist" component={Studentslist}></Route>
                                     <Route path="/home/Coacheslist" component={Coacheslist}></Route>
