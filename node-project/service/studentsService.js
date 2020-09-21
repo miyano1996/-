@@ -1,4 +1,4 @@
-const { getOne, reg, isExist,login } = require('../dao/studentsDao');
+const { getOne, reg, isExist,login,getStudent } = require('../dao/studentsDao');
 
 const jwt = require('jsonwebtoken'); //token
 const { KEY } = require('../utils/consts.js'); //封装的密钥串
@@ -20,7 +20,7 @@ module.exports.reg = async data => {
 		return { success: false, msg: "该用户名已被注册" };
 	} else {
 		const obj = await reg(data);
-		console.log(obj);
+		// console.log(obj);
 		if (obj._id) {
 			return { success: true, msg: "注册成功", obj };
 		}
@@ -43,3 +43,4 @@ module.exports.login = async data =>{
         return { success: false,msg: '账号或密码错误'};
     }
 }
+

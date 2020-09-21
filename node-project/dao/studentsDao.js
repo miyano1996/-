@@ -16,3 +16,4 @@ module.exports.reg = async data =>{
 
 //登录
 module.exports.login= async ({account,password}) => await studentsModel.find({account,password});
+
