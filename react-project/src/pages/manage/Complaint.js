@@ -1,66 +1,60 @@
 import React, { Component } from 'react';
 import '../../assets/style/complaint.scss';
+import api from '../../apis/api'
+
 
 export default class Complaint extends Component {
+    state = {
+        list: []
+    }
+    componentDidMount() {
+        this.getAllcomplaint();
+    }
+    async getAllcomplaint() {
+        try {
+            const { _id } = JSON.parse(localStorage.userInfo);
+            const data = await api.complaint.getAllComplaint(_id);
+            await this.setState({
+                list: data.rows
+            })
+            console.log(this.state.list);
+        } catch (error) {
+            console.log(error);
+        }
+    }
     render() {
         return (
             <div className="complaint-box">
-                <div className="complaint-item">
+
+                {this.state.list.map((item) => <div className="complaint-item" key="_id">
                     <div className="item-top">
                         <span>用户名:
                             <span className="username">
-                                张三
+                                {item.studentId.name}
                             </span>
                         </span>
                         <span>订单编号:
-                            <span className="orderid">65161655161</span>
+                        <span className="orderid">{item.ordersId}</span>
                         </span>
                         <span>教练:
-                            <span className="orderid">李四</span>
+                                <span className="orderid">{item.coacheId.name}</span>
                         </span>
                         <span>日期:
-                            <span className="orderid">2020-9-18</span>
+                            <span className="orderid">{item.time}</span>
                         </span>
                     </div>
                     <div className="item-body">
                         <span>投诉内容:</span>
                         <div className="complaint-text">
-                            老骗子了!
+                            {item.text}
                         </div>
                     </div>
                     <div className="complaint-footer">
-                        <span className="active">有异议?点击申诉</span>
-                        <span >立即处理</span>
+                        {item.status ? <span className="active">有异议?点击申诉</span> : <span >立即处理</span>}
+
+
                     </div>
-                </div>
-                <div className="complaint-item">
-                    <div className="item-top">
-                        <span>用户名:
-                            <span className="username">
-                                张三
-                            </span>
-                        </span>
-                        <span>订单编号:
-                            <span className="orderid">65161655161</span>
-                        </span>
-                        <span>教练:
-                            <span className="orderid">李四</span>
-                        </span>
-                        <span>日期:
-                            <span className="orderid">2020-9-18</span>
-                        </span>
-                    </div>
-                    <div className="item-body">
-                        <span>投诉内容:</span>
-                        <div className="complaint-text">
-                            老骗子了!
-                        </div>
-                    </div>
-                    <div className="complaint-footer">
-                        <span className="active">有异议?点击申诉</span>
-                        <span >立即处理</span>
-                    </div>
-                </div>
+                </div>)}
 
             </div>
         )

@@ -58,7 +58,9 @@ export default class Orders extends Component {
                     </Space>
                 ),
             },
-        ]
+        ],
+        pagenum: 1,
+        datanum: 10
     }
     async deleteit(id) {
         try {
@@ -93,6 +95,9 @@ export default class Orders extends Component {
                     columns={this.state.columns}
                     rowKey="_id"
                     dataSource={this.state.dataSource}
+                    pagination={{ position: ['bottomCenter'] }}
+                    onChange={() => console.log('afawfaf')}
+
                 />
             </div>
         )
