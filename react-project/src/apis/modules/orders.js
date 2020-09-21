@@ -7,7 +7,13 @@ const orders = {
             method: 'GET',
             data
         })
+    },
+    getOrders(data){
+        return axios({
+            url: '/orders/getOrders',
+            method: 'GET',
+            params:data
+        })
     }
 }
-
 export default orders

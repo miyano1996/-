@@ -1,15 +1,14 @@
 import React, { Component } from 'react'
-import { Button, Input, Upload, message,Modal } from 'antd';
-import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
+import { Button, Input, Modal } from 'antd';
 import api from '../apis/api'
-export default class AddCoach extends Component {
+export default class addStudents extends Component {
     constructor() {
         super()
         this.state = {
             loading: false,
             _id: '',
             rows: { activeTitle: [], activeContent: [] },
-            newCoach: {},
+            newStudents: {},
             visible: false
         };
         this.getGym()
@@ -25,29 +24,24 @@ export default class AddCoach extends Component {
         this.getId()
     }
     addName = (e) => {
-        const newCoach = this.state.newCoach
-        newCoach.name = (e.target.value)
-        this.setState({ newCoach })
+        const newStudents = this.state.newStudents
+        newStudents.name = (e.target.value)
+        this.setState({ newStudents })
     }
     addTelep = (e) => {
-        const newCoach = this.state.newCoach
-        newCoach.telephone = (e.target.value)
-        this.setState({ newCoach })
-    }
-    addClass = (e) => {
-        const newCoach = this.state.newCoach
-        newCoach.course = (e.target.value)
-        this.setState({ newCoach })
+        const newStudents = this.state.newStudents
+        newStudents.telephone = (e.target.value)
+        this.setState({ newStudents })
     }
     addUsername = (e) => {
         const newStudents = this.state.newStudents
         newStudents.username = (e.target.value)
-        this.setState({ newCoach })
+        this.setState({ newStudents })
     }
     addPassword = (e) => {
         const newStudents = this.state.newStudents
         newStudents.password = (e.target.value)
-        this.setState({ newCoach })
+        this.setState({ newStudents })
     }
     showModal = () => {
         this.setState({
@@ -71,20 +65,11 @@ export default class AddCoach extends Component {
         });
     }
     render() {
-        const { loading, imageUrl } = this.state;
-        const uploadButton = (
-            <div>
-                {loading ? <LoadingOutlined /> : <PlusOutlined />}
-                <div style={{ marginTop: 8 }}>Upload</div>
-            </div>
-        );
-        const { rows } = this.state
         return (
             <div className='addActive' style={{ backgroundColor: 'white', padding: 20 }}>
-                <h1 style={{ backgroundColor: '#f2f2f2', padding: '5px', fontWeight: 'bold', fontSize: '18px' }}>添加教练</h1>
+                <h1 style={{ backgroundColor: '#f2f2f2', padding: '5px', fontWeight: 'bold', fontSize: '18px' }}>添加学生</h1>
                 <div><p><span style={{ color: 'red' }}>*</span>姓名：</p> <Input onChange={this.addName}></Input></div>
                 <div><p><span style={{ color: 'red' }}>*</span>电话号码：</p> <Input onChange={this.addTelep}></Input></div>
-                <div><p><span style={{ color: 'red' }}>*</span>教授课程:</p> <Input onChange={this.addClass}></Input></div>
                 <div><p><span style={{ color: 'red' }}>*</span>登陆帐号：</p> <Input onChange={this.addUsername}></Input></div>
                 <div><p><span style={{ color: 'red' }}>*</span>登陆密码：</p> <Input onChange={this.addPassword}></Input></div>
                 <Button type="primary" onClick={this.showModal} >确定</Button>
@@ -96,7 +81,7 @@ export default class AddCoach extends Component {
                     okText="确认"
                     cancelText="取消"
                 >
-                    <p>确定新增此教练吗？</p>
+                    <p>确定新增此学员吗？</p>
                 </Modal>
             </div>
         )

@@ -89,23 +89,31 @@ export default class OneGym extends Component {
         disabled: true,
         changeinformation: '修改信息',
         announcementType: '新增',
-        rows:{announcement:[],activeContent:[],activeTitle:[],activeImage:[],address:'{}'},
+        rows: { announcement: [], activeContent: [], activeTitle: [], activeImage: [], address: '{}' },
+        _id: '',
+        orders:[]
     }
-    componentDidMount(){
-        this.setState({_id:JSON.parse(localStorage.userInfo)._id})
+    async componentDidMount() {
+        await this.setState({ _id: JSON.parse(localStorage.userInfo)._id })
         // this.setState({_id:'5f65a8ffbb2219492cc67b9f'})
         this.getGymsAsync()
+this.getOrdersAsync()
+    }
+    //获取订单
+    getOrdersAsync = async ()=>{
+        const orders = await api.orders.getOrders({_id:JSON.parse(localStorage.userInfo)._id});
+        this.setState({orders:orders.rows})
+        console.log(orders);
     }
     //获取场馆
-    getGymsAsync=async ()=>{
+    getGymsAsync = async () => {
         const data =await api.gym.getGym(JSON.parse(localStorage.userInfo)._id);
-        // const data =await api.gym.getGym('5f65a8ffbb2219492cc67b9f');
-        this.setState({rows:data.rows})
+        this.setState({rows:data.rows});
         // console.log(data);
     }
     //更改场馆
-    updateGymAsync = async (obj)=>{
-        const data  = await api.gym.updateGym(obj)
+    updateGymAsync = async (obj) => {
+        const data = await api.gym.updateGym(obj)
         // this.getGymsAsync()
     }
     //更改基础信息
@@ -114,7 +122,7 @@ export default class OneGym extends Component {
             this.setState({ changeinformation: '确定' })
         } else {
             this.setState({ changeinformation: '修改信息' });
-            this.updateGymAsync({_id:this.state._id,...this.state.rows})
+            this.updateGymAsync({ _id: this.state._id, ...this.state.rows })
         }
         this.setState({ disabled: !this.state.disabled })
     }
@@ -129,29 +137,29 @@ export default class OneGym extends Component {
         }
         this.setState({ rows: rows })
         // console.log({_id:this.state._id,...this.state.rows});
-        this.updateGymAsync({_id:this.state._id,...this.state.rows})
+        this.updateGymAsync({ _id: this.state._id, ...this.state.rows })
     }
     //更改公告状态
     newAnnouncement = (index, e) => {
-        const rows  = this.state.rows
+        const rows = this.state.rows
         rows.announcement[index].content = e.target.value
         this.setState({ rows: rows })
-        this.updateGymAsync({_id:this.state._id,...this.state.rows})
+        this.updateGymAsync({ _id: this.state._id, ...this.state.rows })
     }
     //新增公告
-    addAnnouncement =async () => {
+    addAnnouncement = async () => {
         const rows = this.state.rows
         rows.announcement.push({ content: '', statu: false, id: rows.announcement.length, btn: '确定' })
         await this.setState({ rows: rows })
-        this.updateGymAsync({_id:this.state._id,...this.state.rows})
-        console.log(this.state.rows);
+        this.updateGymAsync({ _id: this.state._id, ...this.state.rows })
+        // console.log(this.state.rows);
         this.setState({ announcementType: '确定' })
     }
-    deleteAnnouncement = async(index)=>{
+    deleteAnnouncement = async (index) => {
         const rows = this.state.rows
-        rows.announcement.splice(index,1)
+        rows.announcement.splice(index, 1)
         await this.setState({ rows: rows })
-        this.updateGymAsync({_id:this.state._id,...this.state.rows})
+        this.updateGymAsync({ _id: this.state._id, ...this.state.rows })
     }
     //新名字
     newName = (e) => {
@@ -188,32 +196,32 @@ export default class OneGym extends Component {
         rows.name = e.target.value
         this.setState({ rows })
     }
-    addActive = ()=>{
+    addActive = () => {
         this.props.history.push('/home/addActive')
     }
     //删除活动
-    delActive = (index)=>{
+    delActive = (index) => {
         const rows = this.state.rows
-        rows.activeContent.splice(index,1)
-        rows.activeTitle.splice(index,1)
-        rows.activeImage.splice(index,1)
+        rows.activeContent.splice(index, 1)
+        rows.activeTitle.splice(index, 1)
+        rows.activeImage.splice(index, 1)
         this.setState({ rows: rows })
-        this.updateGymAsync({_id:this.state._id,...this.state.rows})
+        this.updateGymAsync({ _id: this.state._id, ...this.state.rows })
     }
     render() {
-        const { disabled, changeinformation,rows, } = this.state
+        const { disabled, changeinformation, rows, } = this.state
         const person = JSON.parse(localStorage.userInfo).role
-        // console.log(rows);
-        const {name,grade,telephone,address, businessTime,idea,time,activeContent,activeTitle,announcement,activeImage} = rows
+        // console.log(123);
+        const { name, grade, telephone, address, businessTime, idea, time, activeContent, activeTitle, announcement, activeImage } = rows
         var newAdd = JSON.parse(address)
         var addArr = []
         // console.log(rows);
-        for(let a in newAdd){
+        for (let a in newAdd) {
             addArr.push(newAdd[a])
         }
         var answer = `${addArr[0]}${addArr[1]}${addArr[2]}`
         return (
-            <div style={{ padding: '20px 10px',backgroundColor:'white',marginBottom:40 }}>
+            <div style={{ padding: '20px 10px', backgroundColor: 'white', marginBottom: 40 }}>
                 <div className='title'>
                     基础信息
                     </div>
@@ -271,12 +279,12 @@ export default class OneGym extends Component {
                     </div>
                 <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around' }}>
                     {
-                        activeTitle.map((item,index) => {
+                        activeTitle.map((item, index) => {
                             return <div style={{ marginRight: 10, marginBottom: 30 }} key={index}>
-                                <Card title={item} extra={<Button type="primary" onClick={()=>this.delActive(index)}  danger>删除</Button>}
+                                <Card title={item} extra={<Button type="primary" onClick={() => this.delActive(index)} danger>删除</Button>}
                                     style={{ width: 300 }}>
-                                    <p style={{height:90}}>惊喜：{activeContent[index]}</p>
-                                    <img style={{ width: 250, height: 140, marginTop: 20 }} src={require(`../assets/images/${activeImage[index]}`)} alt="" />
+                                    <p style={{ height: 90 }}>惊喜：{activeContent[index]}</p>
+                                    <img style={{ width: 250, height: 140, marginTop: 20 }} src={activeImage[index] ? require(`../assets/images/${activeImage[index]}`) : require(`../assets/images/jianshenActive-1.jpg`)} alt="" />
                                 </Card>
                             </div>
                         })
@@ -286,7 +294,7 @@ export default class OneGym extends Component {
                             style={{ width: 300 }}>
                             <p onClick={this.addActive} style={{
                                 fontSize: 200, lineHeight: 1.3, fontWeight: 100, color: '#f2f2f2', cursor: 'pointer',
-                                border: '2px solid #f2f2f2',margin:0,padding:0,textAlign:'center'
+                                border: '2px solid #f2f2f2', margin: 0, padding: 0, textAlign: 'center'
                             }}>+
                             </p>
                         </Card>
@@ -301,9 +309,9 @@ export default class OneGym extends Component {
                 <div className='title'>
                     馆内人员
                 </div>
-                <div style={{marginLeft:20,marginBottom:100}}>
+                <div style={{ marginLeft: 20, marginBottom: 100 }}>
                     <Button type="primary">荣誉教练团</Button>
-                    <Button type="primary" style={{marginLeft:20}}>全部学员</Button>
+                    <Button type="primary" style={{ marginLeft: 20 }}>全部学员</Button>
                 </div>
             </div>
         )

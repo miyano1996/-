@@ -21,6 +21,14 @@ const Studentslist = Loadable({
     loader: () => import('./list/Studentlist'),
     loading: () => <div>加载中...</div>
 })
+const AddCoach = Loadable({
+    loader: () => import('./AddCoach'),
+    loading: () => <div>加载中...</div>
+})
+const AddStudents = Loadable({
+    loader: () => import('./AddStudents'),
+    loading: () => <div>加载中...</div>
+})
 
 //申请场馆
 const AddGyms = Loadable({
@@ -91,6 +99,8 @@ export default class Home extends Component {
                                     <Route path="/home/adminReview" component={AdminReview}></Route>
                                     <Route path="/home/adminPropaganda" component={AdminPropaganda}></Route>
                                     <Route path="/home/oneGym" component={OneGym}></Route>
+                                    <Route path="/home/addCoach" component={AddCoach}></Route>
+                                    <Route path="/home/addStudents" component={AddStudents}></Route>
                                 </Switch>
                             </HashRouter>
                         </Content>
