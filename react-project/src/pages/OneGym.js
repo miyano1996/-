@@ -98,6 +98,7 @@ export default class OneGym extends Component {
     //获取场馆
     getGymsAsync=async ()=>{
         const data =await api.gym.getGym(JSON.parse(localStorage.userInfo)._id);
+        // const data =await api.gym.getGym('5f65a8ffbb2219492cc67b9f');
         this.setState({rows:data.rows})
         // console.log(data);
     }

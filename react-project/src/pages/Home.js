@@ -46,8 +46,8 @@ const AdminReview = Loadable({
 
 //轮播图上传
 const AdminPropaganda = Loadable({
-    loader: () =>import('./AdminPropaganda'),
-    loading: () =><div>加载中...</div>
+    loader: () => import('./AdminPropaganda'),
+    loading: () => <div>加载中...</div>
 })
 
 const { Header, Content } = Layout;
@@ -82,7 +82,6 @@ export default class Home extends Component {
                             <HashRouter>
                                 <Switch>
                                     <Redirect exact path="/home" to="/home/oneGym"></Redirect>
-                                    <Route path="/home/oneGym" component={OneGym}></Route>
                                     <Route path="/home/Complaint" component={Complaint}></Route>
                                     <Route path="/home/Studentslist" component={Studentslist}></Route>
                                     <Route path="/home/Orders" component={Orders}></Route>
