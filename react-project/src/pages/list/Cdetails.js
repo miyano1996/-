@@ -10,7 +10,7 @@ export default class Cdetails extends Component {
         workingTime:[],
         course:[],
         students:[],
-        id:'5f641f9344100000830041b2'
+        id:'5f61fb0f71190000aa004ec4'
     }
     componentDidMount(){
         this.getData(this.state.id)
@@ -60,7 +60,7 @@ export default class Cdetails extends Component {
                          </div>
                          <div className="left-box">
                              <p><EnvironmentOutlined /></p>
-                           <span>{loginAddress}</span>
+                           <span className="live-id">{loginAddress}</span>
                          </div>
                     </div>
                     <div className="right">

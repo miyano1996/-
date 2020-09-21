@@ -57,6 +57,16 @@ const AdminPropaganda = Loadable({
     loader: () => import('./AdminPropaganda'),
     loading: () => <div>加载中...</div>
 })
+//学员详细信息
+const Sdetails = Loadable({
+    loader: () => import('./list/Sdetails'),
+    loading: () => <div>加载中...</div>
+})
+//教练详细信息
+const Cdetails = Loadable({
+    loader: () => import('./list/Cdetails'),
+    loading: () => <div>加载中...</div>
+})
 
 const { Header, Content } = Layout;
 export default class Home extends Component {
@@ -101,6 +111,8 @@ export default class Home extends Component {
                                     <Route path="/home/oneGym" component={OneGym}></Route>
                                     <Route path="/home/addCoach" component={AddCoach}></Route>
                                     <Route path="/home/addStudents" component={AddStudents}></Route>
+                                    <Route path="/home/Sdetails" component={Sdetails}></Route>
+                                    <Route path="/home/Cdetails" component={Cdetails}></Route>
                                 </Switch>
                             </HashRouter>
                         </Content>
