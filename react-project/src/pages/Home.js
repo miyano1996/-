@@ -25,6 +25,10 @@ const Coacheslist = Loadable({
     loader: () => import('./list/Coacheslist'),
     loading: () => <div>加载中...</div>
 })
+const Login = Loadable({
+    loader: () => import('./loginAndRegister/Login'),
+    loading: () => <div>加载中...</div>
+})
 
 //申请场馆
 const AddGyms = Loadable({

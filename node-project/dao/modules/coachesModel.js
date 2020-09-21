@@ -4,6 +4,8 @@ const coachesSchema = new mongoose.Schema({
     account: String,
     password: String,
     students: Array,
+    age: String,
+    gender: String,
     headImage: String,//头像
     name: String,
     loginAdress: String,//登录时所在地址
