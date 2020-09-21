@@ -7,3 +7,14 @@ module.exports.getCoaches = async function (data) {
 module.exports.getOne = async (data) => {
 	return await coachesModel.find({_id:data.id}).populate('gym');
 }
+//验证是否重名
+module.exports.isExist = async data =>{
+	return await coachesModel.find({account:data.account});
+}
+//注册
+module.exports.reg = async data =>{
+	return await coachesModel.create(data);
+}
+
+//登录
+module.exports.login= async ({account,password}) => await coachesModel.find({account,password});
