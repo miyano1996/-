@@ -21,6 +21,10 @@ const Studentslist = Loadable({
     loader: () => import('./list/Studentlist'),
     loading: () => <div>加载中...</div>
 })
+const Coacheslist = Loadable({
+    loader: () => import('./list/Coacheslist'),
+    loading: () => <div>加载中...</div>
+})
 const AddCoach = Loadable({
     loader: () => import('./AddCoach'),
     loading: () => <div>加载中...</div>
@@ -102,6 +106,7 @@ export default class Home extends Component {
                                     <Redirect exact path="/home" to="/home/oneGym"></Redirect>
                                     <Route path="/home/Complaint" component={Complaint}></Route>
                                     <Route path="/home/Studentslist" component={Studentslist}></Route>
+                                    <Route path="/home/Coacheslist" component={Coacheslist}></Route>
                                     <Route path="/home/Orders" component={Orders}></Route>
                                     <Route path="/home/addGyms" component={AddGyms}></Route>
                                     <Route path="/home/addActive" component={addActive}></Route>

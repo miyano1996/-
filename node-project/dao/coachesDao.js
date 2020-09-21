@@ -9,3 +9,6 @@ module.exports.getOne = async (data) => {
 	return await coachesModel.find({_id:data.id}).populate('gym');
 	// return await coachesModel.find({_id:data.id});
 }
+module.exports.addCoach = async (data) => {
+	return await coachesModel.create(data);
+}

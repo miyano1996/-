@@ -40,12 +40,13 @@ export default class AddCoach extends Component {
         this.setState({ newCoach })
     }
     addUsername = (e) => {
-        const newCoach = this.state.newStudents
+        const newCoach = this.state.newCoach
         newCoach.username = (e.target.value)
         this.setState({ newCoach })
     }
     addPassword = (e) => {
-        const newCoach = this.state.newStudents
+
+        const newCoach = this.state.newCoach
         newCoach.password = (e.target.value)
         this.setState({ newCoach })
     }
@@ -62,10 +63,13 @@ export default class AddCoach extends Component {
         });
         // console.log(345);
     };
-    onOk = (e) => {
+    onOk =async (e) => {
+        // console.log(this.state.newCoach);
+        await api.coaches.addCoach(this.state.newCoach)
         this.setState({
             visible: false,
         });
+
         Modal.success({
             content: '添加成功!',
         });
