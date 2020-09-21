@@ -1,4 +1,4 @@
-const { register, isReuse, login, addGym, getGymByStatus, changeGymStatus, getGymByText,getGym } = require('../dao/gymDao');
+const { register, isReuse, login, addGym, getGymByStatus, changeGymStatus, getGymByText,getGym,updateGym } = require('../dao/gymDao');
 
 const jwt = require('jsonwebtoken'); //token
 const { KEY } = require('../utils/consts.js'); //封装的密钥串

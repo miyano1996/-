@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-const { register,login,addGym,getGymByStatus,changeGymStatus,getGymByText,getGym } = require('../service/gymService');
+const { register,login,addGym,getGymByStatus,changeGymStatus,getGymByText,getGym,updateGym } = require('../service/gymService');
 
 //注册
 router.post('/register',async (req,res,next)=>{
