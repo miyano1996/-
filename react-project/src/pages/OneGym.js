@@ -93,12 +93,13 @@ export default class OneGym extends Component {
     }
     componentDidMount(){
         this.setState({_id:JSON.parse(localStorage.userInfo)._id})
+        // this.setState({_id:'5f65a8ffbb2219492cc67b9f'})
         this.getGymsAsync()
     }
     //获取场馆
     getGymsAsync=async ()=>{
-        const data =await api.gym.getGym(JSON.parse(localStorage.userInfo)._id);
-        // const data =await api.gym.getGym('5f65a8ffbb2219492cc67b9f');
+        // const data =await api.gym.getGym(JSON.parse(localStorage.userInfo)._id);
+        const data =await api.gym.getGym('5f65a8ffbb2219492cc67b9f');
         this.setState({rows:data.rows})
         // console.log(data);
     }
@@ -174,6 +175,7 @@ export default class OneGym extends Component {
         const rows = this.state.rows
         rows.idea = e.target.value
         this.setState({ rows })
+        // console.log(rows.idea);
     }
     newName = (e) => {
         const rows = this.state.rows
@@ -204,7 +206,7 @@ export default class OneGym extends Component {
         const {name,grade,telephone,address, businessTime,idea,time,activeContent,activeTitle,announcement,activeImage} = rows
         var newAdd = JSON.parse(address)
         var addArr = []
-        console.log(rows);
+        // console.log(rows);
         for(let a in newAdd){
             addArr.push(newAdd[a])
         }
