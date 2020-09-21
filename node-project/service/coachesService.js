@@ -1,5 +1,7 @@
 
 const { getCoaches,getOne,reg,isExist,login,addCoach } = require("../dao/coachesDao");
+const jwt = require('jsonwebtoken'); //token
+const { KEY } = require('../utils/consts.js'); //封装的密钥串
 
 module.exports.getCoaches = async function (data) {
     let arr = await getCoaches(data);

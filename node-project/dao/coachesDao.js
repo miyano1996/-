@@ -20,6 +20,7 @@ module.exports.reg = async data =>{
 
 //登录
 module.exports.login= async ({account,password}) => await coachesModel.find({account,password});
+
 module.exports.addCoach = async (data) => {
 	return await coachesModel.create(data);
 }

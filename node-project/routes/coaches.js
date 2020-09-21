@@ -18,6 +18,7 @@ router.post('/reg',async (req,res)=>{
   const data = await reg(req.body);
   res.send(data);
 })
+//login
 router.post('/login',async (req,res)=>{
   const data = await login(req.body);
   res.send(data)
@@ -25,7 +26,6 @@ router.post('/login',async (req,res)=>{
 //新增教练
 router.get('/addCoach',async (req,res,next)=>{
   const rows =await addCoach(req.query)
-  console.log(req.query);
   res.send(rows)
 })
 module.exports = router;
