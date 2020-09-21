@@ -1,4 +1,4 @@
-const { getOne, reg, isExist } = require('../dao/studentsDao');
+const { getOne, reg, isExist, getStudent } = require('../dao/studentsDao');
 
 module.exports.getOne = async (data) => {
 	const getdata = await getOne(data);
@@ -13,11 +13,12 @@ module.exports.getOne = async (data) => {
 
 module.exports.reg = async data => {
 	const isReg = await isExist(data);
-	if (isReg.length > 1) {
+	// console.log(isReg);
+	if (isReg.length>0 ) {
 		return { success: false, msg: "该用户名已被注册" };
 	} else {
 		const obj = await reg(data);
-		console.log(obj);
+		// console.log(obj);
 		if (obj._id) {
 			return { success: true, msg: "注册成功", obj };
 		}

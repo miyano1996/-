@@ -208,6 +208,13 @@ this.getOrdersAsync()
         this.setState({ rows: rows })
         this.updateGymAsync({ _id: this.state._id, ...this.state.rows })
     }
+    //去教练团
+    toCoaches = ()=>{
+        this.props.history.push('/home/coacheslist')
+    }
+    toStudents=()=>{
+        this.props.history.push('/home/studentslist')
+    }
     render() {
         const { disabled, changeinformation, rows, } = this.state
         const person = JSON.parse(localStorage.userInfo).role
@@ -310,8 +317,8 @@ this.getOrdersAsync()
                     馆内人员
                 </div>
                 <div style={{ marginLeft: 20, marginBottom: 100 }}>
-                    <Button type="primary">荣誉教练团</Button>
-                    <Button type="primary" style={{ marginLeft: 20 }}>全部学员</Button>
+                    <Button type="primary" onClick={this.toCoaches}>荣誉教练团</Button>
+                    <Button type="primary" onClick={this.toStudents} style={{ marginLeft: 20 }}>全部学员</Button>
                 </div>
             </div>
         )
