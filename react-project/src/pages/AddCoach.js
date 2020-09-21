@@ -40,13 +40,13 @@ export default class AddCoach extends Component {
         this.setState({ newCoach })
     }
     addUsername = (e) => {
-        const newStudents = this.state.newStudents
-        newStudents.username = (e.target.value)
+        const newCoach = this.state.newStudents
+        newCoach.username = (e.target.value)
         this.setState({ newCoach })
     }
     addPassword = (e) => {
-        const newStudents = this.state.newStudents
-        newStudents.password = (e.target.value)
+        const newCoach = this.state.newStudents
+        newCoach.password = (e.target.value)
         this.setState({ newCoach })
     }
     showModal = () => {
