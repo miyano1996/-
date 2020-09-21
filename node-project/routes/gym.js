@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-const { register,login,addGym,getGymByStatus,changeGymStatus,getGymByText } = require('../service/gymService');
+const { register,login,addGym,getGymByStatus,changeGymStatus,getGymByText,getGym,updateGym } = require('../service/gymService');
 
 //注册
 router.post('/register',async (req,res,next)=>{
@@ -32,6 +32,18 @@ router.post('/changeGymStatus',async (req,res)=>{
 router.get('/getGymByText',async (req,res)=>{
   const data = await getGymByText(req.query);
   res.send(data);
+})
+
+//获取场馆信息
+router.get('/getGym',async (req,res)=>{
+  const data = await getGym(req.query);
+  res.send(data)
+});
+
+//更改场馆信息
+router.post('/updateGym',async (req,res)=>{
+  const data = await updateGym(req.body)
+  res.send(data)
 })
 
 module.exports = router;

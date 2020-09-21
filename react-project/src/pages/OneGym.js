@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Button, Descriptions, Input, Card, Table, Tag, Space } from 'antd';
-
+import api from '../apis/api';
 
 const columns = [
     {
@@ -88,79 +88,132 @@ export default class OneGym extends Component {
     state = {
         disabled: true,
         changeinformation: '修改信息',
-        announcement: [{
-            content: '会馆会为所有学员免费购买保险！',
-            statu: true,
-            btn: '修改',
-            id: 0
-        }, {
-            content: '教练在挂牌工作时不得拒绝学生的邀约。',
-            statu: true,
-            btn: '修改',
-            id: 1
-        }],
         announcementType: '新增',
-        name: '球球健身馆',
-        grade: '3',
-        active: [
-            {
-                id: 0, title: '感恩大回馈！成为会员满一年即送五节课！', imgPath: require("../assets/images/jianshenActive-1.jpg"),
-                content: '自2020年10月17日起，凡在本会馆成为会员满一年时间的学员，可在前台小姐姐出进行登记！登记成功即可获得五次免费上课机会！快来参与吧！'
-            },
-            {
-                id: 1, title: '感恩大回馈！成为会员满一年即送五节课！', imgPath: require("../assets/images/jianshenActive-1.jpg"),
-                content: '自2020年10月17日起，凡在本会馆成为会员满一年时间的学员，可在前台小姐姐出进行登记！登记成功即可获得五次免费上课机会！快来参与吧！'
-            },
-            {
-                id: 2, title: '感恩大回馈！成为会员满一年即送五节课！', imgPath: require("../assets/images/jianshenActive-1.jpg"),
-                content: '自2020年10月17日起，凡在本会馆成为会员满一年时间的学员，可在前台小姐姐出进行登记！登记成功即可获得五次免费上课机会！快来参与吧！'
-            },
-            {
-                id: 3, title: '感恩大回馈！成为会员满一年即送五节课！', imgPath: require("../assets/images/jianshenActive-1.jpg"),
-                content: '自2020年10月17日起，凡在本会馆成为会员满一年时间的学员，可在前台小姐姐出进行登记！登记成功即可获得五次免费上课机会！快来参与吧！'
-            },
-            {
-                id: 4, title: '感恩大回馈！成为会员满一年即送五节课！', imgPath: require("../assets/images/jianshenActive-1.jpg"),
-                content: '自2020年10月17日起，凡在本会馆成为会员满一年时间的学员，可在前台小姐姐出进行登记！登记成功即可获得五次免费上课机会！快来参与吧！'
-            },
-        ]
+        rows:{announcement:[],activeContent:[],activeTitle:[],activeImage:[],address:'{}'},
     }
+    componentDidMount(){
+        this.setState({_id:JSON.parse(localStorage.userInfo)._id})
+        // this.setState({_id:'5f65a8ffbb2219492cc67b9f'})
+        this.getGymsAsync()
+    }
+    //获取场馆
+    getGymsAsync=async ()=>{
+        const data =await api.gym.getGym(JSON.parse(localStorage.userInfo)._id);
+        // const data =await api.gym.getGym('5f65a8ffbb2219492cc67b9f');
+        this.setState({rows:data.rows})
+        // console.log(data);
+    }
+    //更改场馆
+    updateGymAsync = async (obj)=>{
+        const data  = await api.gym.updateGym(obj)
+        // this.getGymsAsync()
+    }
+    //更改基础信息
     changeInformation = () => {
         if (this.state.disabled) {
             this.setState({ changeinformation: '确定' })
         } else {
-            this.setState({ changeinformation: '修改信息' })
+            this.setState({ changeinformation: '修改信息' });
+            this.updateGymAsync({_id:this.state._id,...this.state.rows})
         }
         this.setState({ disabled: !this.state.disabled })
     }
+    //更改公告
     updateAnnouncement = (index) => {
-        const announcement = this.state.announcement
-        announcement[index].statu = !announcement[index].statu
-        if (announcement[index].btn === '修改') {
-            announcement[index].btn = '确认'
-        } else if (announcement[index].btn === '确认') {
-            announcement[index].btn = '修改'
+        const rows = this.state.rows
+        rows.announcement[index].statu = !rows.announcement[index].statu
+        if (rows.announcement[index].btn === '修改') {
+            rows.announcement[index].btn = '确认'
+        } else if (rows.announcement[index].btn === '确认') {
+            rows.announcement[index].btn = '修改'
         }
-        this.setState({ announcement: announcement })
+        this.setState({ rows: rows })
+        // console.log({_id:this.state._id,...this.state.rows});
+        this.updateGymAsync({_id:this.state._id,...this.state.rows})
     }
+    //更改公告状态
     newAnnouncement = (index, e) => {
-        const announcement = this.state.announcement
-        announcement[index].content = e.target.value
-        this.setState({ announcement: announcement })
+        const rows  = this.state.rows
+        rows.announcement[index].content = e.target.value
+        this.setState({ rows: rows })
+        this.updateGymAsync({_id:this.state._id,...this.state.rows})
     }
-    addAnnouncement = () => {
-        const announcement = this.state.announcement
-        announcement.push({ content: '', statu: false, id: announcement.length, btn: '确定' })
-        this.setState({ announcement: announcement })
+    //新增公告
+    addAnnouncement =async () => {
+        const rows = this.state.rows
+        rows.announcement.push({ content: '', statu: false, id: rows.announcement.length, btn: '确定' })
+        await this.setState({ rows: rows })
+        this.updateGymAsync({_id:this.state._id,...this.state.rows})
+        console.log(this.state.rows);
         this.setState({ announcementType: '确定' })
     }
+    deleteAnnouncement = async(index)=>{
+        const rows = this.state.rows
+        rows.announcement.splice(index,1)
+        await this.setState({ rows: rows })
+        this.updateGymAsync({_id:this.state._id,...this.state.rows})
+    }
+    //新名字
     newName = (e) => {
-        this.setState({ name: e.target.value })
+        const rows = this.state.rows
+        rows.name = e.target.value
+        this.setState({ rows })
+    }
+    //新电话
+    newTelephone = (e) => {
+        const rows = this.state.rows
+        rows.telephone = e.target.value
+        this.setState({ rows })
+    }
+    //新营业时间
+    newBusinessTime = (e) => {
+        const rows = this.state.rows
+        rows.businessTime = e.target.value
+        this.setState({ rows })
+    }
+    //新理念
+    newIdea = (e) => {
+        const rows = this.state.rows
+        rows.idea = e.target.value
+        this.setState({ rows })
+        // console.log(rows.idea);
+    }
+    newName = (e) => {
+        const rows = this.state.rows
+        rows.name = e.target.value
+        this.setState({ rows })
+    }
+    newName = (e) => {
+        const rows = this.state.rows
+        rows.name = e.target.value
+        this.setState({ rows })
+    }
+    addActive = ()=>{
+        this.props.history.push('/home/addActive')
+    }
+    //删除活动
+    delActive = (index)=>{
+        const rows = this.state.rows
+        rows.activeContent.splice(index,1)
+        rows.activeTitle.splice(index,1)
+        rows.activeImage.splice(index,1)
+        this.setState({ rows: rows })
+        this.updateGymAsync({_id:this.state._id,...this.state.rows})
     }
     render() {
-        const { disabled, changeinformation, announcement, name, active, grade } = this.state
+        const { disabled, changeinformation,rows, } = this.state
+        const person = JSON.parse(localStorage.userInfo).role
+        // console.log(rows);
+        const {name,grade,telephone,address, businessTime,idea,time,activeContent,activeTitle,announcement,activeImage} = rows
+        var newAdd = JSON.parse(address)
+        var addArr = []
+        // console.log(rows);
+        for(let a in newAdd){
+            addArr.push(newAdd[a])
+        }
+        var answer = `${addArr[0]}${addArr[1]}${addArr[2]}`
         return (
-            <div style={{ padding: '0px 10px' }}>
+            <div style={{ padding: '20px 10px',backgroundColor:'white',marginBottom:40 }}>
                 <div className='title'>
                     基础信息
                     </div>
@@ -170,22 +223,22 @@ export default class OneGym extends Component {
                             <Input disabled={disabled} value={name} size='small' onChange={this.newName} />
                         </Descriptions.Item>
                         <Descriptions.Item label="咨询热线">
-                            <Input disabled={disabled} value='13838388838' size='small' onChange />
+                            <Input disabled={disabled} value={telephone} size='small' onChange={this.newTelephone} />
                         </Descriptions.Item>
                         <Descriptions.Item label="创始人">
-                            <Input disabled={disabled} value='张大炮' size='small' onChange />
+                            <Input disabled value={person} size='small' onChange />
                         </Descriptions.Item>
                         <Descriptions.Item label="会馆地址">
-                            <Input disabled={disabled} value='四川省成都市高新区孵化园' size='small' onChange />
+                            <Input disabled value={answer} size='small' onChange />
                         </Descriptions.Item>
                         <Descriptions.Item label="创建时间">
-                            <Input disabled={disabled} value='2017-10-10' size='small' onChange />
+                            <Input disabled value={time} size='small' onChange />
                         </Descriptions.Item>
                         <Descriptions.Item label="营业时间">
-                            <Input disabled={disabled} value='全年无休' size='small' onChange />
+                            <Input disabled={disabled} value={businessTime} size='small' onChange={this.newBusinessTime} />
                         </Descriptions.Item>
-                        <Descriptions.Item label="会馆说明">
-                            <Input disabled={disabled} value='自律给我自由！' size='small' onChange />
+                        <Descriptions.Item label="会馆理念">
+                            <Input disabled={disabled} value={idea} size='small' onChange={this.newIdea} />
                         </Descriptions.Item>
                         <Descriptions.Item label="会馆星级">
                             <Input disabled value={grade} size='small' onChange />
@@ -200,7 +253,7 @@ export default class OneGym extends Component {
                     </div>
                 {
                     announcement.map((item, index) => {
-                        return <div style={{ paddingLeft: 20, marginBottom: 10 }} key={item.id}>
+                        return <div style={{ paddingLeft: 20, marginBottom: 10 }} key={index}>
                             <Input
                                 value={item.content}
                                 disabled={item.statu}
@@ -208,6 +261,7 @@ export default class OneGym extends Component {
                                 onChange={(e) => this.newAnnouncement(index, e)}
                             />
                             <Button onClick={() => this.updateAnnouncement(index)}>{item.btn}</Button>
+                            <Button type="primary" danger onClick={() => this.deleteAnnouncement(index)}>删除</Button>
                         </div>
                     })
                 }
@@ -217,12 +271,12 @@ export default class OneGym extends Component {
                     </div>
                 <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around' }}>
                     {
-                        active.map(item => {
-                            return <div style={{ marginRight: 10, marginBottom: 30 }} key={item.id}>
-                                <Card title={item.title} extra={<Button type="primary" danger>删除</Button>}
+                        activeTitle.map((item,index) => {
+                            return <div style={{ marginRight: 10, marginBottom: 30 }} key={index}>
+                                <Card title={item} extra={<Button type="primary" onClick={()=>this.delActive(index)}  danger>删除</Button>}
                                     style={{ width: 300 }}>
-                                    <p>惊喜：{item.content}</p>
-                                    <img style={{ width: 250, height: 140, marginTop: 20 }} src={item.imgPath} alt="" />
+                                    <p style={{height:90}}>惊喜：{activeContent[index]}</p>
+                                    <img style={{ width: 250, height: 140, marginTop: 20 }} src={require(`../assets/images/${activeImage[index]}`)} alt="" />
                                 </Card>
                             </div>
                         })
@@ -230,9 +284,9 @@ export default class OneGym extends Component {
                     <div style={{ marginRight: 10, marginBottom: 30 }} >
                         <Card title='新增活动'
                             style={{ width: 300 }}>
-                            <p style={{
-                                fontSize: 200, lineHeight: 1.2, fontWeight: 100, color: '#f2f2f2', cursor: 'pointer',
-                                border: '3px solid #f2f2f2',margin:0,padding:0,textAlign:'center'
+                            <p onClick={this.addActive} style={{
+                                fontSize: 200, lineHeight: 1.3, fontWeight: 100, color: '#f2f2f2', cursor: 'pointer',
+                                border: '2px solid #f2f2f2',margin:0,padding:0,textAlign:'center'
                             }}>+
                             </p>
                         </Card>
