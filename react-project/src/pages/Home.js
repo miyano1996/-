@@ -17,6 +17,14 @@ const Orders = Loadable({
     loader: () => import('./orders/Orders'),
     loading: () => <div>加载中...</div>
 })
+const Sdetails = Loadable({
+    loader: () => import('./list/Sdetails'),
+    loading: () => <div>加载中...</div>
+})
+const Cdetails = Loadable({
+    loader: () => import('./list/Cdetails'),
+    loading: () => <div>加载中...</div>
+})
 const Studentslist = Loadable({
     loader: () => import('./list/Studentlist'),
     loading: () => <div>加载中...</div>
@@ -34,6 +42,18 @@ const Login = Loadable({
 const AddGyms = Loadable({
     loader: () => import('./AddGyms'),
     loading: () => <div>加载中...</div>
+})
+
+//管理员审核
+const AdminReview = Loadable({
+    loader: () => import('./AdminReview'),
+    loading: () => <div>加载中...</div>
+})
+
+//轮播图上传
+const AdminPropaganda = Loadable({
+    loader: () =>import('./AdminPropaganda'),
+    loading: () =><div>加载中...</div>
 })
 
 const { Header, Content } = Layout;
@@ -67,13 +87,16 @@ export default class Home extends Component {
                         >
                             <HashRouter>
                                 <Switch>
-                                    <Redirect exact path="/home" to="/home/Coacheslist"></Redirect>
-                                    <Route path="/home/login" component={Login}></Route>
+                                    <Redirect exact path="/home" to="/home/oneGym"></Redirect>
                                     <Route path="/home/Complaint" component={Complaint}></Route>
                                     <Route path="/home/Studentslist" component={Studentslist}></Route>
                                     <Route path="/home/Coacheslist" component={Coacheslist}></Route>
                                     <Route path="/home/Orders" component={Orders}></Route>
+                                    <Route path="/home/Sdetails" component={Sdetails}></Route>
+                                    <Route path="/home/Cdetails" component={Cdetails}></Route>
                                     <Route path="/home/addGyms" component={AddGyms}></Route>
+                                    <Route path="/home/adminReview" component={AdminReview}></Route>
+                                    <Route path="/home/adminPropaganda" component={AdminPropaganda}></Route>
                                     <Route path="/home/oneGym" component={OneGym}></Route>
                                 </Switch>
                             </HashRouter>
@@ -81,6 +104,6 @@ export default class Home extends Component {
                     </Layout>
                 </Layout>
             </Layout>
-        )
-    }
+    );
+  }
 }

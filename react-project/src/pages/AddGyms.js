@@ -33,13 +33,12 @@ class addGyms extends Component {
         let {select,phone,upload} = values;
         upload = upload.map(ele=>{return ele.name});
         let {city,district,lat,lng,province,street,streetNumber} = this.props;
-        // console.log(_id,upload,city,district,lat,lng,province,street,streetNumber);
-        let address = `省份：${province}，城市：${city}，区：${district}，街道：${street}${streetNumber},经度：${lng}，纬度：${lat}`
+        let address = JSON.stringify({province,city,district,street,streetNumber,lng,lat});
+        let time = new Date().toLocaleString();
         const data =await api.gym.addGym({
-            _id,name:select,telephone:phone,images:upload,address,status:'0'
+            _id,name:select,telephone:phone,images:upload,address,status:'0',time
         });
-        // console.log(data);
-        if(data.nModified === '1'){
+        if(data.success){
             message.success('申请提交成功，请耐心等待审核');
             this.setState({
                 isSubmit:true
@@ -52,6 +51,7 @@ class addGyms extends Component {
     render() {
         return (
             <div>
+                <h1 style={{fontSize:20,fontWeight:'800'}}>场馆申请流程</h1>
                 <Steps>
                     <Step status="finish" title="场馆注册人登陆" icon={<UserOutlined />} />
                     <Step status="finish" title="提交场馆信息" icon={<SolutionOutlined />} />

@@ -21,6 +21,27 @@ const gym = {
             method:'post',
             data
         })
+    },
+    getGymByStatus(params){
+        return axios({
+            url:'/gym/getGymByStatus',
+            method:'get',
+            params
+        })
+    },
+    changeGymStatus(data){
+        return axios({
+            url:'/gym/changeGymStatus',
+            method:'post',
+            data
+        })
+    },
+    getGymByText(params){
+        return axios({
+            url:'/gym/getGymByText',
+            method:'get',
+            params
+        })
     }
 }
 

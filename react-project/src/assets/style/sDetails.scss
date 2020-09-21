@@ -1,0 +1,33 @@
+.sDetails{
+    .box{
+        width: 400px;
+        .headimg{
+           display: flex;
+           align-items: center;
+           padding: 0 30px;
+           p{
+               margin: 0 0 0 30px;
+               font-size: 20px;
+               font-weight: 600;
+           }
+        }
+        .list{
+            padding: 0 30px;
+            .ant-divider-horizontal.ant-divider-with-text::before,.ant-divider-horizontal.ant-divider-with-text::after{
+                border-top: 3px solid rgb(22, 1, 1);
+            }
+            span{
+                font-weight: 550;
+            }
+            p{
+                padding: 0 0 0 28px;
+                font-size: 16px;
+                color: rgb(157, 158, 158);
+            }
+        }
+        .btn{
+            width: 340px;
+            margin: 0 auto;
+        }
+    }
+}
