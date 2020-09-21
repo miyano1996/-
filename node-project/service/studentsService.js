@@ -1,4 +1,4 @@
-const { getOne, reg, isExist } = require('../dao/studentsDao');
+const { getOne, reg, isExist,login } = require('../dao/studentsDao');
 
 module.exports.getOne = async (data) => {
 	const getdata = await getOne(data);
@@ -11,9 +11,20 @@ module.exports.getOne = async (data) => {
 	}
 }
 
+module.exports.login = async (data) => {
+	const getdata = await login(data);
+	// console.log('vv',getdata)
+	if (getdata.length > 0) {
+		// 后端返回处理结果给前端
+		return { success: true, msg: "登录成功", getdata };
+	} else {
+		return { success: false, msg: '登录失败，用户名或密码错误。' };
+	}
+}
+
 module.exports.reg = async data => {
 	const isReg = await isExist(data);
-	if (isReg.length > 1) {
+	if (isReg.length > 0) {
 		return { success: false, msg: "该用户名已被注册" };
 	} else {
 		const obj = await reg(data);
