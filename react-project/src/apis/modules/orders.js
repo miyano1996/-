@@ -14,7 +14,13 @@ const orders = {
             method: 'POST',
             data,
         })
+    },
+    getOrders(data){
+        return axios({
+            url: '/orders/getOrders',
+            method: 'GET',
+            params:data
+        })
     }
 }
-
 export default orders

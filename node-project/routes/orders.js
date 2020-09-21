@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const { addOrder, getAllOrders, delOrder } = require('../service/ordersService')
+const { addOrder, getAllOrders, getOrders } = require('../service/ordersService')
 
 //新增订单
 router.post('/addOrder', async (req, res, next) => {
@@ -18,5 +18,12 @@ router.post('/deleteOrder', async (req, res, next) => {
     await delOrder(req.body)
     res.send({ success: true })
 })
+
+router.get('/getOrders', async (req, res, next) => {
+    // console.log(req.query);
+    const data = await getOrders(req.query)
+    res.send(data)
+})
+
 
 module.exports = router;
