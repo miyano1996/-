@@ -8,9 +8,9 @@ export default class addActive extends Component {
         this.state = {
             loading: false,
             _id: '',
-            myRows: { activeTitle: '', activeContent: '',activeImage:'' },
+            myRows: { activeTitle: '', activeContent: '', activeImage: '' },
             visible: false,
-            rows:{}
+            rows: {}
         };
         this.getGym()
     }
@@ -60,7 +60,7 @@ export default class addActive extends Component {
     }
     addTitle = (e) => {
         const myRows = this.state.myRows
-        myRows.activeTitle= e.target.value
+        myRows.activeTitle = e.target.value
         this.setState({ myRows: myRows })
     }
     addContent = (e) => {
@@ -81,7 +81,7 @@ export default class addActive extends Component {
         });
         // console.log(345);
     };
-    onOk =async (e) => {
+    onOk = async (e) => {
         this.setState({
             visible: false,
         });
@@ -91,10 +91,10 @@ export default class addActive extends Component {
         const rows = this.state.rows
         rows.activeTitle.push(this.state.myRows.activeTitle)
         rows.activeContent.push(this.state.myRows.activeContent)
-        
-        this.state.myRows.activeImage?rows.activeImage.push(this.state.myRows.activeImage):rows.activeImage.push('')
-        await this.setState({rows:rows})
-        const data = await api.gym.updateGym({ _id: this.state._id, ...this.state.rows })
+
+        this.state.myRows.activeImage ? rows.activeImage.push(this.state.myRows.activeImage) : rows.activeImage.push('')
+        await this.setState({ rows: rows })
+        await api.gym.updateGym({ _id: this.state._id, ...this.state.rows })
     }
     render() {
         const { loading, imageUrl } = this.state;
@@ -104,7 +104,6 @@ export default class addActive extends Component {
                 <div style={{ marginTop: 8 }}>Upload</div>
             </div>
         );
-        const { rows } = this.state
         return (
             <div className='addActive' style={{ backgroundColor: 'white', padding: 20 }}>
                 <div><p>活动标题：</p> <Input onChange={this.addTitle}></Input></div>

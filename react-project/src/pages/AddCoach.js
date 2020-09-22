@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { Button, Input,Modal } from 'antd';
-import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import api from '../apis/api'
 export default class AddCoach extends Component {
     constructor() {
-        super()
+        super() 
         this.state = {
             loading: false,
             _id: '',
@@ -75,14 +74,6 @@ export default class AddCoach extends Component {
         });
     }
     render() {
-        const { loading, imageUrl } = this.state;
-        const uploadButton = (
-            <div>
-                {loading ? <LoadingOutlined /> : <PlusOutlined />}
-                <div style={{ marginTop: 8 }}>Upload</div>
-            </div>
-        );
-        const { rows } = this.state
         return (
             <div className='addActive' style={{ backgroundColor: 'white', padding: 20 }}>
                 <h1 style={{ backgroundColor: '#f2f2f2', padding: '5px', fontWeight: 'bold', fontSize: '18px' }}>添加教练</h1>

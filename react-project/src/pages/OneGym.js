@@ -153,6 +153,15 @@ export default class OneGym extends Component {
     toStudents = () => {
         this.props.history.push('/home/studentslist')
     }
+    onchange = (pageNumber, pageSize) =>{
+        console.log(pageNumber, pageSize);
+        try {
+            this.setState({current:pageNumber})
+            this.getOrdersAsync({ pageNumber, pageSize })
+            this.setState({ loading: false })
+        } catch (error) {
+        }
+    }
     render() {
         const { totalCount, loading, current, disabled, changeinformation, rows, orders } = this.state
         const person = JSON.parse(localStorage.userInfo).role
@@ -168,14 +177,7 @@ export default class OneGym extends Component {
         const pagination = {
             total: totalCount,
             defaultPageSize: 3,
-            onChange: (pageNumber, pageSize) => {
-                console.log(pageNumber, pageSize);
-                try {
-                    this.getOrdersAsync({ pageNumber, pageSize })
-                    this.setState({ loading: false })
-                } catch (error) {
-                }
-            },
+            onChange: this.onchange,
             current
         }
         const columns = [
