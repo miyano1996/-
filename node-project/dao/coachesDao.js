@@ -17,3 +17,6 @@ module.exports.updateCoaches = async function ({ _id, isDelete }) {
     const msg = await coachesModel.update({ _id }, { isDelete });
     return msg
 }
+module.exports.addCoach = async (data) => {
+    return await coachesModel.create(data);
+}
