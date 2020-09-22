@@ -16,7 +16,7 @@ const coaches = {
       data,
     });
   },
-  addCoach(params){
+  addCoach(params) {
     return axios({
       url: `/coaches/addCoach`,
       method: "get",
