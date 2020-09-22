@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Button, Input, Modal } from 'antd';
-import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import api from '../apis/api'
 export default class AddCoach extends Component {
     constructor() {
@@ -9,7 +8,7 @@ export default class AddCoach extends Component {
             loading: false,
             _id: '',
             rows: { activeTitle: [], activeContent: [] },
-            newCoach: {},
+            newCoach: { gym: JSON.parse(localStorage.userInfo)._id },
             visible: false
         };
         this.getGym()
@@ -75,14 +74,6 @@ export default class AddCoach extends Component {
         });
     }
     render() {
-        const { loading } = this.state;
-        // const uploadButton = (
-        //     <div>
-        //         {loading ? <LoadingOutlined /> : <PlusOutlined />}
-        //         <div style={{ marginTop: 8 }}>Upload</div>
-        //     </div>
-        // );
-        const { rows } = this.state
         return (
             <div className='addActive' style={{ backgroundColor: 'white', padding: 20 }}>
                 <h1 style={{ backgroundColor: '#f2f2f2', padding: '5px', fontWeight: 'bold', fontSize: '18px' }}>添加教练</h1>

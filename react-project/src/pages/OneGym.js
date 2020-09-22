@@ -24,8 +24,11 @@ export default class OneGym extends Component {
     }
     //获取订单
     getOrdersAsync = async () => {
-        const orders = await api.orders.getOrders({ _id: JSON.parse(localStorage.userInfo)._id });
-        this.setState({ orders: orders.rows })
+        // console.log(JSON.parse(localStorage.userInfo)._id);
+        const _id = JSON.parse(localStorage.userInfo)._id
+        let orders = await api.orders.getAllOrders({_id,pageSize:3,pageSee:this.state.current});
+        console.log(orders);
+        this.setState({ orders: orders.rows ,totalCount:orders.total})
         // console.log(this.state.orders);
     }
     //获取场馆
@@ -54,7 +57,7 @@ export default class OneGym extends Component {
         const rows = this.state.rows
         rows.announcement[index].statu = !rows.announcement[index].statu
         if (rows.announcement[index].btn === '修改') {
-            rows.announcement[index].btn = '确认'
+            rows.announcement[index].btn = '确认';
         } else if (rows.announcement[index].btn === '确认') {
             rows.announcement[index].btn = '修改'
         }
@@ -150,6 +153,15 @@ export default class OneGym extends Component {
     toStudents = () => {
         this.props.history.push('/home/studentslist')
     }
+    onchange = (pageNumber, pageSize) =>{
+        console.log(pageNumber, pageSize);
+        try {
+            this.setState({current:pageNumber})
+            this.getOrdersAsync({ pageNumber, pageSize })
+            this.setState({ loading: false })
+        } catch (error) {
+        }
+    }
     render() {
         const { totalCount, loading, current, disabled, changeinformation, rows, orders } = this.state
         const person = JSON.parse(localStorage.userInfo).role
@@ -165,14 +177,7 @@ export default class OneGym extends Component {
         const pagination = {
             total: totalCount,
             defaultPageSize: 3,
-            onChange: (pageNumber, pageSize) => {
-                console.log(pageNumber, pageSize);
-                try {
-                    this.getOrdersAsync({ pageNumber, pageSize })
-                    this.setState({ loading: false })
-                } catch (error) {
-                }
-            },
+            onChange: this.onchange,
             current
         }
         const columns = [
