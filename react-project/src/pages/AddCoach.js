@@ -63,7 +63,7 @@ export default class AddCoach extends Component {
         });
         // console.log(345);
     };
-    onOk =async (e) => {
+    onOk = async () => {
         // console.log(this.state.newCoach);
         await api.coaches.addCoach(this.state.newCoach)
         this.setState({
