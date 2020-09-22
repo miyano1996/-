@@ -21,4 +21,8 @@ module.exports.changeGymStatus = async ({_id,status})=>await gymModel.updateOne(
 //根据一个字段信息获取场馆信息
 module.exports.getGymByText = async (data)=>await gymModel.find(data);
 
+//获取场馆信息
+module.exports.getGym = async (data) =>await gymModel.find(data)
 
+//更改场馆信息
+module.exports.updateGym = async (data) =>await gymModel.updateOne({_id:data._id,...data})
