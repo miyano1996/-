@@ -25,9 +25,10 @@ export default class OneGym extends Component {
     //获取订单
     getOrdersAsync = async () => {
         // console.log(JSON.parse(localStorage.userInfo)._id);
-        let orders = await api.orders.getAllOrders(JSON.parse(localStorage.userInfo)._id);
-        // console.log(orders);
-        this.setState({ orders: orders.rows })
+        const _id = JSON.parse(localStorage.userInfo)._id
+        let orders = await api.orders.getAllOrders({_id,pageSize:3,pageSee:this.state.current});
+        console.log(orders);
+        this.setState({ orders: orders.rows ,totalCount:orders.total})
         // console.log(this.state.orders);
     }
     //获取场馆
@@ -56,7 +57,7 @@ export default class OneGym extends Component {
         const rows = this.state.rows
         rows.announcement[index].statu = !rows.announcement[index].statu
         if (rows.announcement[index].btn === '修改') {
-            rows.announcement[index].btn = '确认'
+            rows.announcement[index].btn = '确认';
         } else if (rows.announcement[index].btn === '确认') {
             rows.announcement[index].btn = '修改'
         }
@@ -167,10 +168,12 @@ export default class OneGym extends Component {
         const pagination = {
             total: totalCount,
             defaultPageSize: 3,
+            defaultCurrent:1,
             onChange: (pageNumber, pageSize)=>{
                 console.log(pageNumber, pageSize);
                 try {
-                    this.getOrdersAsync({ pageNumber, pageSize })
+                    this.setState({current:pageSize})
+                    this.getOrdersAsync()
                     this.setState({loading:false})
                 } catch (error) {
                 }

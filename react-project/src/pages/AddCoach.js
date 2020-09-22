@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Input, Upload, message,Modal } from 'antd';
+import { Button, Input,Modal } from 'antd';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import api from '../apis/api'
 export default class AddCoach extends Component {
@@ -9,7 +9,7 @@ export default class AddCoach extends Component {
             loading: false,
             _id: '',
             rows: { activeTitle: [], activeContent: [] },
-            newCoach: {},
+            newCoach: { gym: JSON.parse(localStorage.userInfo)._id},
             visible: false
         };
         this.getGym()

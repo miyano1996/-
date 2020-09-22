@@ -20,7 +20,7 @@ const coaches = {
     return axios({
       url: `/coaches/addCoach`,
       method: "get",
-      params
+      params:{...params,students:[],headImage:'',loginAddress:'',workingTime:'',price:'',isRest:true,isDelete:'false'}
     });
   }
 };

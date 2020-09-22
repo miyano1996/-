@@ -1,12 +1,12 @@
 import axios from '../axios'
 
 const orders = {
-    getAllOrders(id) {
-        console.log(id);
+    getAllOrders(data) {
+        console.log(data);
         return axios({
             url: '/orders/getAllOrders',
             method: 'GET',
-            params: { id }
+            params: data
         })
     },
     deleteOrder(data) {

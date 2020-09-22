@@ -91,7 +91,8 @@ export default class addActive extends Component {
         const rows = this.state.rows
         rows.activeTitle.push(this.state.myRows.activeTitle)
         rows.activeContent.push(this.state.myRows.activeContent)
-        rows.activeImage.push(this.state.myRows.activeImage)
+        
+        this.state.myRows.activeImage?rows.activeImage.push(this.state.myRows.activeImage):rows.activeImage.push('')
         await this.setState({rows:rows})
         const data = await api.gym.updateGym({ _id: this.state._id, ...this.state.rows })
     }
