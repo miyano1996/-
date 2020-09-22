@@ -19,5 +19,5 @@ module.exports.getAllComplaints = async function (data) {
 };
 // 删除投诉(软删除)
 module.exports.delComplaint = async function (data) {
-    await complaintModel.updateOne({ _id: data._id }, { status: data.success });
+    return await complaintModel.updateOne({ _id: data.id }, { status: data.success });
 }

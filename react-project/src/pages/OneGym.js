@@ -24,9 +24,7 @@ export default class OneGym extends Component {
     }
     //获取订单
     getOrdersAsync = async () => {
-        // console.log(JSON.parse(localStorage.userInfo)._id);
-        let orders = await api.orders.getAllOrders(JSON.parse(localStorage.userInfo)._id);
-        console.log(orders);
+        const orders = await api.orders.getOrders({ _id: JSON.parse(localStorage.userInfo)._id });
         this.setState({ orders: orders.rows })
         // console.log(this.state.orders);
     }
