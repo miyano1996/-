@@ -21,6 +21,11 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            label:hover{
+                color:#1877f2;
+                cursor: pointer;
+                text-decoration: underline;
+            }
         }
     }
 }
