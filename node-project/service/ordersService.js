@@ -11,7 +11,8 @@ module.exports.getAllOrders = async function (data) {
     if (msg.rows.length > 0) {
         return data = {
             rows: msg.rows,
-            success: true
+            success: true,
+            total:msg.total
         }
     } else {
         return data = {
@@ -33,7 +34,8 @@ module.exports.getOrders = async function (data) {
     if (msg.rows.length > 0) {
         return data = {
             rows: msg.rows,
-            success: true
+            success: true,
+            // total:msg.total
         }
     } else {
         return data = {

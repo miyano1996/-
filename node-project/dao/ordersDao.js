@@ -17,10 +17,19 @@ module.exports.addOrder = async function (data) {
 module.exports.getAllOrders = async function (data) {
     // const num = await ordersModel.find({ delet: false });
     // const delnum = await ordersModel.find({ removed: true });
-    const msg = await ordersModel.find({ gym: data.id, delet: false }).populate('students').populate('coaches').populate('gym')
-    // .limit(data.datanum - 0).skip((data.pagenum - 1) * (data.datanum - 0));
+    // console.log({ gym: data.id, delet: false });
+    const {pageSize,pageSee} = data
+    // console.log(data);
+    const total = await ordersModel.find({ gym: data._id, delet: false }).populate('students').populate('coaches').populate('gym').countDocuments();
+    const msg = await ordersModel.find({ gym: data._id, delet: false }).populate('students').populate('coaches').populate('gym')
+        //展示的数据数量，方法内的数据类型必须为number
+        .limit(pageSize - 0)
+        //跳过的数据数量
+        .skip((pageSee - 1) * pageSize);
+        // console.log(total);
     return data = {
         rows: msg,
+        total
         // num: num.length,
         // delnum: delnum.length
     }
@@ -29,6 +38,9 @@ module.exports.getAllOrders = async function (data) {
 //获取场馆订单
 module.exports.getOrders = async function (obj) {
     const msg = await ordersModel.find({ gym: "5f684a17ed6c0000ef007954" })
+    console.log(obj);
+    const msg = await ordersModel.find({ gym: "5f684a17ed6c0000ef007954" })
+    console.log(msg);
     return data = {
         rows: msg
     }
