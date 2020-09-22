@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { Modal, message, Button } from 'antd';
 import '../../assets/style/complaint.scss';
 import api from '../../apis/api'
+
 
 
 export default class Complaint extends Component {
@@ -21,9 +23,21 @@ export default class Complaint extends Component {
             console.log(error);
         }
     }
-    async delit(id) {
+    async sure(id) {
         const data = await api.complaint.delComplaint(id);
-        this.getAllcomplaint();
+        if (data.success) {
+            message.success('确定成功');
+            this.getAllcomplaint();
+        }
+    }
+    surActive = (index) => {
+        Modal.confirm({
+            title: '提示',
+            content: '确认后如果有异议可以选择申诉',
+            okText: '确认',
+            cancelText: '取消',
+            onOk: () => this.sure(index),
+        });
     }
     render() {
         return (
@@ -53,7 +67,7 @@ export default class Complaint extends Component {
                         </div>
                     </div>
                     <div className="complaint-footer">
-                        {item.status ? <span className="active">有异议?点击申诉</span> : <span onClick={() => { this.delit(item._id) }}>确定</span>}
+                        {item.status ? <Button className="active">有异议?点击申诉</Button> : <Button type="primary" onClick={() => { this.surActive(item._id) }}>确定</Button>}
 
 
                     </div>

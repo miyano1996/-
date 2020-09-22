@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Input, Upload, message, Modal } from 'antd';
+import { Button, Input, Modal } from 'antd';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import api from '../apis/api'
 export default class AddCoach extends Component {
@@ -75,13 +75,13 @@ export default class AddCoach extends Component {
         });
     }
     render() {
-        const { loading, imageUrl } = this.state;
-        const uploadButton = (
-            <div>
-                {loading ? <LoadingOutlined /> : <PlusOutlined />}
-                <div style={{ marginTop: 8 }}>Upload</div>
-            </div>
-        );
+        const { loading } = this.state;
+        // const uploadButton = (
+        //     <div>
+        //         {loading ? <LoadingOutlined /> : <PlusOutlined />}
+        //         <div style={{ marginTop: 8 }}>Upload</div>
+        //     </div>
+        // );
         const { rows } = this.state
         return (
             <div className='addActive' style={{ backgroundColor: 'white', padding: 20 }}>

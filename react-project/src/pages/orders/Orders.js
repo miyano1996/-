@@ -1,18 +1,8 @@
 import React, { Component } from 'react';
-import { Table, Space, Button, Modal } from 'antd';
+import { Table, Space, Button, Modal, message } from 'antd';
 import '../../assets/style/orders.scss'
 import api from '../../apis/api'
 
-
-// const rowSelection = {
-//     onChange: (selectedRowKeys, selectedRows) => {
-//         console.log(`被选中的ID: ${selectedRowKeys}`, '选中的行: ', selectedRows);
-//     },
-//     getCheckboxProps: record => ({
-//         disabled: record.name === 'Disabled User', // Column configuration not to be checked
-//         name: record.name,
-//     }),
-// };
 export default class Orders extends Component {
     componentDidMount() {
         this.getAllOrders();
@@ -69,14 +59,14 @@ export default class Orders extends Component {
             okText: '确认',
             cancelText: '取消',
             onOk: () => this.deleteit(index),
-            // onCancel:this.hideModal
         });
 
     }
     async deleteit(id) {
         try {
             await api.orders.deleteOrder({ _id: id, success: true });
-            await this.getAllOrders()
+            await this.getAllOrders();
+            message.success('删除成功');
         } catch (error) {
             console.log('报错' + error);
         }
@@ -99,10 +89,6 @@ export default class Orders extends Component {
         return (
             <div className="orders-box">
                 <Table
-                    // rowSelection={{
-                    //     type: "checkbox",
-                    //     ...rowSelection,
-                    // }}
                     columns={this.state.columns}
                     rowKey="_id"
                     dataSource={this.state.dataSource}

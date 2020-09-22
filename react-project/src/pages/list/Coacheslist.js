@@ -63,7 +63,7 @@ export default class Studentlist extends Component {
             console.log(rows);
             this.setState({ data: rows, totalCount, current: pageNumber })
         } catch (error) {
-
+            console.log('错误=====================================');
         }
     }
     updatedStudent = (text) => {
@@ -74,7 +74,6 @@ export default class Studentlist extends Component {
 
     }
     onChange = (pageNumber, pageSize) => {
-        console.log(pageNumber, pageSize);
         this.getallCoaches({ pageNumber, pageSize })
 
     }
