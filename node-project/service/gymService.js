@@ -1,7 +1,10 @@
-const { register, isReuse, login, addGym, getGymByStatus, changeGymStatus, getGymByText, getGym, updateGym } = require('../dao/gymDao');
+const { register, isReuse, login, addGym, getGymByStatus, changeGymStatus, getGymByText, getGym, updateGym,saveCheckCode,changePassword } = require('../dao/gymDao');
 
 const jwt = require('jsonwebtoken'); //token
 const { KEY } = require('../utils/consts.js'); //封装的密钥串
+const getCode = require('../utils/randomCode')//获取乱码
+//引用发短信模快
+const sendMessage = require('../utils/sendMessage');
 
 //注册
 module.exports.register = async data => {
@@ -89,5 +92,34 @@ module.exports.getGymByText = async data => {
     if (obj.length) {
         return { success: true, msg: '获取成功', rows: obj }
     }
-    return { success: false, msg: '获取失败' }
+    return {success:false,msg:'获取失败'}
+}
+
+//发送验证码
+module.exports.sendCheckCode = async ({_id,telephone}) =>{
+    const checkCode = await sendMessage(telephone);
+    const res = await saveCheckCode({_id,checkCode});
+    if(res.nModified =='1'){
+        return {success:true,msg:"存入成功"}  
+    }
+    return {success:false,msg:'存入失败'}
+}
+//修改密码
+module.exports.changePassword = async data=>{
+    const res = await changePassword(data);
+    if(res.nModified === 1){
+        return {success:true,msg:"修改密码成功!"}
+    }else{
+        return {success:false,msg:"修改密码失败"}
+    }
+}
+//清空验证码
+module.exports.clearCheckCode = async ({_id})=>{
+    const code = getCode(22)
+    const res = await saveCheckCode({_id,checkCode:code});
+    if(res.nModified === '1'){
+        return {success:true}
+    }else{
+        return {success:false}
+    }
 }

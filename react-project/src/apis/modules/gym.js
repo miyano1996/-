@@ -57,7 +57,29 @@ const gym = {
             method: 'get',
             params
         })
-    }
+    },
+    sendCheckCode(data){
+        return axios({
+            url:'/gym/sendCheckCode',
+            method:"POST",
+            data
+        })
+    },
+    changePassword(data){
+        return axios({
+            url:"/gym/changePassword",
+            method:"POST",
+            data
+        })
+    },
+    clearCheckCode(data){
+        return axios({
+            url:"/gym/clearCheckCode",
+            method:"POST",
+            data
+        })
+    },
+
 }
 
 export default gym

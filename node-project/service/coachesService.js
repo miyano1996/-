@@ -1,4 +1,5 @@
-
+const jwt = require('jsonwebtoken'); //token
+const { KEY } = require('../utils/consts.js'); //封装的密钥串
 const { getCoaches, delCoaches, getOne, updateCoaches, addCoach,reg,isExist,login } = require("../dao/coachesDao");
 
 //获取教练
@@ -66,18 +67,17 @@ module.exports.reg = async data => {
 }
 
 //登录
-module.exports.login = async data => {
+module.exports.login = async data =>{
     const isLogin = await login(data);
-    if (isLogin.length) {
-        const { account, name, role, _id } = isLogin[0];
+    if(isLogin.length){
+		const {account,name,role,_id} = isLogin[0];
         const token = jwt.sign(
-            { account },//用于设置token中要保存的用户信息
-            KEY,//密钥， 任意字符串
-            { expiresIn: 60 * 60 }//设置token的有效期，单位秒
-        )
-        return { success: true, msg: "登录成功", rows: { userInfo: { name, _id, role }, token } };
-    } else {
-        return { success: false, msg: '账号或密码错误' };
+			{account},//用于设置token中要保存的用户信息
+			KEY,//密钥， 任意字符串
+			{ expiresIn: 60 * 60 }//设置token的有效期，单位秒
+            )
+        return { success: true, msg: "登录成功" ,rows:{userInfo:{name,_id,role},token}};
+    }else{
+        return { success: false,msg: '账号或密码错误'};
     }
-
 }
