@@ -9,6 +9,7 @@ router.post('/details',async (req,res,next)=>{
 })
 
 router.get('/reg',async (req,res)=>{
+  console.log(req.query,'ssss')
   const data = await reg(req.query);
   res.send(data);
 }) 

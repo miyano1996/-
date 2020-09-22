@@ -1,5 +1,5 @@
 
-const { getCoaches, delCoaches, getOne, updateCoaches, addCoach,reg } = require("../dao/coachesDao");
+const { getCoaches, delCoaches, getOne, updateCoaches, addCoach,reg,isExist,login } = require("../dao/coachesDao");
 
 //获取教练
 module.exports.getCoaches = async function (data) {
@@ -63,4 +63,21 @@ module.exports.reg = async data => {
 		}
 		return { success: false, msg: "注册失败", obj };
 	}
+}
+
+//登录
+module.exports.login = async data => {
+    const isLogin = await login(data);
+    if (isLogin.length) {
+        const { account, name, role, _id } = isLogin[0];
+        const token = jwt.sign(
+            { account },//用于设置token中要保存的用户信息
+            KEY,//密钥， 任意字符串
+            { expiresIn: 60 * 60 }//设置token的有效期，单位秒
+        )
+        return { success: true, msg: "登录成功", rows: { userInfo: { name, _id, role }, token } };
+    } else {
+        return { success: false, msg: '账号或密码错误' };
+    }
+
 }
