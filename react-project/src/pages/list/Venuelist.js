@@ -67,7 +67,7 @@ export default class Studentlist extends Component {
     render() {
         return (
             <div className="List">
-                <Table columns={this.state.columns} dataSource={this.state.data} className="table" />
+                <Table columns={this.state.columns} rowKey="_id" dataSource={this.state.data} className="table" />
             </div>
         )
     }

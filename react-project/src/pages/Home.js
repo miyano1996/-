@@ -17,20 +17,27 @@ const Orders = Loadable({
     loader: () => import('./orders/Orders'),
     loading: () => <div>加载中...</div>
 })
+
+const Coacheslist = Loadable({
+    loader: () => import('../pages/list/Coacheslist'),
+    loading: () => <div>加载中...</div>
+})
+
 const Studentslist = Loadable({
     loader: () => import('./list/Studentlist'),
     loading: () => <div>加载中...</div>
 })
-const Coacheslist = Loadable({
-    loader: () => import('./list/Coacheslist'),
-    loading: () => <div>加载中...</div>
-})
+
 const AddCoach = Loadable({
     loader: () => import('./AddCoach'),
     loading: () => <div>加载中...</div>
 })
 const AddStudents = Loadable({
     loader: () => import('./AddStudents'),
+    loading: () => <div>加载中...</div>
+})
+const Login = Loadable({
+    loader: () => import('./loginAndRegister/Login'),
     loading: () => <div>加载中...</div>
 })
 
@@ -103,7 +110,7 @@ export default class Home extends Component {
                         >
                             <HashRouter>
                                 <Switch>
-                                    <Redirect exact path="/home" to="/home/oneGym"></Redirect>
+                                    <Redirect exact path="/home" to="/home/Coacheslist"></Redirect>
                                     <Route path="/home/Complaint" component={Complaint}></Route>
                                     <Route path="/home/Studentslist" component={Studentslist}></Route>
                                     <Route path="/home/Coacheslist" component={Coacheslist}></Route>
@@ -124,6 +131,6 @@ export default class Home extends Component {
                     </Layout>
                 </Layout>
             </Layout>
-        )
+        );
     }
 }
