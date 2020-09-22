@@ -15,23 +15,16 @@ module.exports.addOrder = async function (data) {
 
 // 获取所有订单
 module.exports.getAllOrders = async function (data) {
-    // const num = await ordersModel.find({ delet: false });
-    // const delnum = await ordersModel.find({ removed: true });
-    // console.log({ gym: data.id, delet: false });
-    const {pageSize,pageSee} = data
-    // console.log(data);
-    const total = await ordersModel.find({ gym: data._id, delet: false }).populate('students').populate('coaches').populate('gym').countDocuments();
-    const msg = await ordersModel.find({ gym: data._id, delet: false }).populate('students').populate('coaches').populate('gym')
+    const { pageSize, pageSee } = data
+    const total = await ordersModel.find({ gym: data.id, delet: false }).populate('students').populate('coaches').populate('gym').countDocuments();
+    const msg = await ordersModel.find({ gym: data.id, delet: false }).populate('students').populate('coaches').populate('gym')
         //展示的数据数量，方法内的数据类型必须为number
         .limit(pageSize - 0)
         //跳过的数据数量
         .skip((pageSee - 1) * pageSize);
-        // console.log(total);
     return data = {
         rows: msg,
         total
-        // num: num.length,
-        // delnum: delnum.length
     }
 
 };

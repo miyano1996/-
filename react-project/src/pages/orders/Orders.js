@@ -50,7 +50,8 @@ export default class Orders extends Component {
             },
         ],
         pagenum: 1,
-        datanum: 10
+        datanum: 10,
+        totalCount: 0
     }
     delActive = (index) => {
         Modal.confirm({
@@ -72,12 +73,17 @@ export default class Orders extends Component {
         }
 
     }
+    onchange = async (pageNumber) => {
+        await this.setState({ pagenum: pageNumber })
+        this.getAllOrders()
+    }
     async getAllOrders() {
         try {
             const { _id } = JSON.parse(localStorage.userInfo);
-            const data = await api.orders.getAllOrders(_id);
+            const data = await api.orders.getAllOrders({ id: _id, pageSize: this.state.datanum, pageSee: this.state.pagenum });
             await this.setState({
-                dataSource: data.rows
+                dataSource: data.rows,
+                totalCount: data.total
             })
 
         } catch (error) {
@@ -92,8 +98,8 @@ export default class Orders extends Component {
                     columns={this.state.columns}
                     rowKey="_id"
                     dataSource={this.state.dataSource}
-                    pagination={{ position: ['bottomCenter'] }}
-                    onChange={() => console.log('afawfaf')}
+                    pagination={{ position: ['bottomCenter'], total: this.state.totalCount, onChange: this.onchange }}
+
 
                 />
             </div>

@@ -2,7 +2,6 @@ import axios from '../axios'
 
 const orders = {
     getAllOrders(data) {
-        console.log(data);
         return axios({
             url: '/orders/getAllOrders',
             method: 'GET',
@@ -16,11 +15,11 @@ const orders = {
             data,
         })
     },
-    getOrders(data){
+    getOrders(data) {
         return axios({
             url: '/orders/getOrders',
             method: 'GET',
-            params:data
+            params: data
         })
     }
 }
