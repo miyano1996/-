@@ -11,7 +11,7 @@ export default class Studentlist extends Component {
                 title: '头像',
                 render: (text, record) => (
                     <Space size="middle">
-                        {/* <Avatar size={60} src={require(`../../assets/images/${text.headImage}`)} /> */}
+                        <Avatar size={60} src={require(`../../assets/images/${text.headImage}`)} />
                     </Space>
                 ),
 
@@ -60,7 +60,6 @@ export default class Studentlist extends Component {
     async getallCoaches(parmas = { pageSize: 10, pageNumber: 1 }) {
         try {
             let { rows, totalCount, pageNumber } = await api.coaches.getCoaches(parmas);
-            console.log(rows);
             this.setState({ data: rows, totalCount, current: pageNumber })
         } catch (error) {
             console.log('错误=====================================');
