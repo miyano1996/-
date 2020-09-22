@@ -91,24 +91,24 @@ export default class OneGym extends Component {
         announcementType: '新增',
         rows: { announcement: [], activeContent: [], activeTitle: [], activeImage: [], address: '{}' },
         _id: '',
-        orders:[]
+        orders: []
     }
     async componentDidMount() {
         await this.setState({ _id: JSON.parse(localStorage.userInfo)._id })
         // this.setState({_id:'5f65a8ffbb2219492cc67b9f'})
         this.getGymsAsync()
-this.getOrdersAsync()
+        this.getOrdersAsync()
     }
     //获取订单
-    getOrdersAsync = async ()=>{
-        const orders = await api.orders.getOrders({_id:JSON.parse(localStorage.userInfo)._id});
-        this.setState({orders:orders.rows})
+    getOrdersAsync = async () => {
+        const orders = await api.orders.getOrders({ _id: JSON.parse(localStorage.userInfo)._id });
+        this.setState({ orders: orders.rows })
         console.log(orders);
     }
     //获取场馆
     getGymsAsync = async () => {
-        const data =await api.gym.getGym(JSON.parse(localStorage.userInfo)._id);
-        this.setState({rows:data.rows});
+        const data = await api.gym.getGym(JSON.parse(localStorage.userInfo)._id);
+        this.setState({ rows: data.rows });
         // console.log(data);
     }
     //更改场馆

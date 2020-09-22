@@ -7,6 +7,13 @@ const complaint = {
             method: 'GET',
             params: { id }
         })
+    },
+    delComplaint(id) {
+        return axios({
+            url: '/complaint/delComplaint',
+            method: 'POST',
+            data: { id, success: true }
+        })
     }
 }
 
