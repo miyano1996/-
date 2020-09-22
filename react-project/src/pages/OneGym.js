@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Descriptions, Input, Card, Table, Space, Popconfirm, Modal } from 'antd';
+import { Button, Descriptions, Input, Card, Table, Modal } from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import api from '../apis/api';
 
@@ -13,8 +13,8 @@ export default class OneGym extends Component {
         orders: [],
         totalCount: 0,
         list: [],
-        current:1,
-        loading:false
+        current: 1,
+        loading: false
     }
     async componentDidMount() {
         await this.setState({ _id: JSON.parse(localStorage.userInfo)._id })
@@ -24,9 +24,7 @@ export default class OneGym extends Component {
     }
     //获取订单
     getOrdersAsync = async () => {
-        // console.log(JSON.parse(localStorage.userInfo)._id);
-        let orders = await api.orders.getAllOrders(JSON.parse(localStorage.userInfo)._id);
-        // console.log(orders);
+        const orders = await api.orders.getOrders({ _id: JSON.parse(localStorage.userInfo)._id });
         this.setState({ orders: orders.rows })
         // console.log(this.state.orders);
     }
@@ -38,8 +36,8 @@ export default class OneGym extends Component {
     }
     //更改场馆
     updateGymAsync = async (obj) => {
-        const data = await api.gym.updateGym(obj)
-        // this.getGymsAsync()
+        await api.gym.updateGym(obj)
+        this.getGymsAsync()
     }
     //更改基础信息
     changeInformation = () => {
@@ -153,7 +151,7 @@ export default class OneGym extends Component {
         this.props.history.push('/home/studentslist')
     }
     render() {
-        const { orderlist, totalCount, loading, current,disabled, changeinformation, rows, orders } = this.state
+        const { totalCount, loading, current, disabled, changeinformation, rows, orders } = this.state
         const person = JSON.parse(localStorage.userInfo).role
         // console.log(123);
         const { name, grade, telephone, address, businessTime, idea, time, activeContent, activeTitle, announcement, activeImage } = rows
@@ -167,11 +165,11 @@ export default class OneGym extends Component {
         const pagination = {
             total: totalCount,
             defaultPageSize: 3,
-            onChange: (pageNumber, pageSize)=>{
+            onChange: (pageNumber, pageSize) => {
                 console.log(pageNumber, pageSize);
                 try {
                     this.getOrdersAsync({ pageNumber, pageSize })
-                    this.setState({loading:false})
+                    this.setState({ loading: false })
                 } catch (error) {
                 }
             },
@@ -187,7 +185,7 @@ export default class OneGym extends Component {
                     //     okText="确定"
                     //     cancelText="取消"
                     // >
-                        <Button type='primary' size='small'>{item.coaches.name}</Button>
+                    <Button type='primary' size='small'>{item.coaches.name}</Button>
                     // </Popconfirm>
 
                 ),
@@ -206,7 +204,7 @@ export default class OneGym extends Component {
                     //     okText="确定"
                     //     cancelText="取消"
                     // >
-                        <Button type='danger' size='small'>{item.students.name}</Button>
+                    <Button type='danger' size='small'>{item.students.name}</Button>
                     // </Popconfirm>
 
                 ),
@@ -306,7 +304,7 @@ export default class OneGym extends Component {
                     课程安排
                     </div>
                 <div>
-                    <Table rowKey='_id' loading={loading} columns={columns} dataSource={orders} pagination={pagination}/>
+                    <Table rowKey='_id' loading={loading} columns={columns} dataSource={orders} pagination={pagination} />
 
                 </div>
                 <div className='title'>
