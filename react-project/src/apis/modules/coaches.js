@@ -28,6 +28,14 @@ const coaches = {
       data,
     });
   },
-}
 
+  addCoach(params) {
+    return axios({
+      url: `/coaches/addCoach`,
+      method: "get",
+      params
+    });
+  }
+
+}
 export default coaches;
