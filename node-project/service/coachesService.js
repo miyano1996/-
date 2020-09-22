@@ -1,5 +1,5 @@
 
-const { getCoaches, delCoaches, getOne, updateCoaches } = require("../dao/coachesDao");
+const { getCoaches, delCoaches, getOne, updateCoaches, addCoach } = require("../dao/coachesDao");
 
 //获取教练
 module.exports.getCoaches = async function (data) {
@@ -40,4 +40,12 @@ module.exports.getOne = async (data) => {
     } else {
         return { success: false, msg: '获取信息失败' };
     }
+}
+//新增教练
+module.exports.addCoach = async (data) => {
+    const rows = await addCoach(data);
+    // console.log('vv',getdata)
+    // 后端返回处理结果给前端
+    return { success: true, msg: "获取教练成功", rows };
+
 }

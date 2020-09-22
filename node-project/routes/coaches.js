@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 //中间写内容
-let { getCoaches, delCoaches, getOne, updateCoaches } = require("../service/coachesService");
+let { getCoaches, delCoaches, getOne, updateCoaches, addCoach } = require("../service/coachesService");
 
 
 router.post("/getCoaches", async (req, res, next) => {

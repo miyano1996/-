@@ -33,7 +33,7 @@ const coaches = {
     return axios({
       url: `/coaches/addCoach`,
       method: "get",
-      params
+      params: { ...params, students: [], headImage: '废物.jpg', age: "未知", gender: '未知', loginAddress: '', workingTime: '', price: '', isRest: true, isDelete: 'false' }
     });
   }
 
