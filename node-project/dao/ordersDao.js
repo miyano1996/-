@@ -39,8 +39,6 @@ module.exports.getAllOrders = async function (data) {
 module.exports.getOrders = async function (obj) {
     const msg = await ordersModel.find({ gym: "5f684a17ed6c0000ef007954" })
     console.log(obj);
-    const msg = await ordersModel.find({ gym: "5f684a17ed6c0000ef007954" })
-    console.log(msg);
     return data = {
         rows: msg
     }
