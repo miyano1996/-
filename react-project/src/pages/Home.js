@@ -27,10 +27,7 @@ const Studentslist = Loadable({
     loader: () => import('./list/Studentlist'),
     loading: () => <div>加载中...</div>
 })
-const Coacheslist = Loadable({
-    loader: () => import('./list/Coacheslist'),
-    loading: () => <div>加载中...</div>
-})
+
 const AddCoach = Loadable({
     loader: () => import('./AddCoach'),
     loading: () => <div>加载中...</div>
@@ -123,7 +120,6 @@ export default class Home extends Component {
                                     {/* <Route path="/home/adminReview" component={AdminReview}></Route> */}
                                     <Route path="/home/adminReview" component={AdminReview}></Route>
                                     <Route path="/home/adminPropaganda" component={AdminPropaganda}></Route>
-                                    <Route path="/home/Coacheslist" component={Coacheslist}></Route>
                                     <Route path="/home/oneGym" component={OneGym}></Route>
                                     <Route path="/home/addCoach" component={AddCoach}></Route>
                                     <Route path="/home/addStudents" component={AddStudents}></Route>
