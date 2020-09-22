@@ -21,4 +21,8 @@ module.exports.changeGymStatus = async ({_id,status})=>await gymModel.updateOne(
 //根据一个字段信息获取场馆信息
 module.exports.getGymByText = async (data)=>await gymModel.find(data);
 
+//将验证码存入数据库
+module.exports.saveCheckCode = async ({_id,checkCode}) => await gymModel.updateOne({_id},{checkCode})
 
+//修改密码
+module.exports.changePassword = async ({_id,password})=> await gymModel.updateOne({_id},{password})

@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-const { register,login,addGym,getGymByStatus,changeGymStatus,getGymByText } = require('../service/gymService');
+const { register,login,addGym,getGymByStatus,changeGymStatus,getGymByText,sendCheckCode,clearCheckCode,changePassword } = require('../service/gymService');
 
 //注册
 router.post('/register',async (req,res,next)=>{
@@ -33,5 +33,19 @@ router.get('/getGymByText',async (req,res)=>{
   const data = await getGymByText(req.query);
   res.send(data);
 })
-
+//发送验证码
+router.post('/sendCheckCode',async (req,res)=>{
+  const data = await sendCheckCode(req.body);
+  res.send(data)
+})
+//修改密码
+router.post('/changePassword',async (req,res)=>{
+  const data = await changePassword(req.body);
+  res.send(data);
+})
+//清空验证码
+router.post('/clearCheckCode',async(req,res)=>{
+  const data =await clearCheckCode(req.body);
+  res.send(data)
+})
 module.exports = router;

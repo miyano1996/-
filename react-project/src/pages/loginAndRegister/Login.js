@@ -17,6 +17,7 @@ const tailLayout = {
     },
 };
 
+
 class Login extends Component {
     onFinish = async (values) => {
         try {
@@ -32,6 +33,7 @@ class Login extends Component {
 
     };
     render() {
+
         return (
             <div className="login-box-container">
                 <div className="login-box">
@@ -53,7 +55,7 @@ class Login extends Component {
                                 },
                             ]}
                         >
-                            <Input />
+                            <Input id="account"/>
                         </Form.Item>
 
                         <Form.Item
@@ -72,7 +74,7 @@ class Login extends Component {
                         <Form.Item {...tailLayout}>
                             <div className="form-bottom-item">
                                 <Button type="primary" htmlType="submit">登录</Button>
-                                <label>忘记密码？</label>
+                                <label onClick={()=>{this.props.openDrawer({account:document.getElementById("account").value})}}>忘记密码？</label>
                             </div>
                         </Form.Item>
                     </Form>

@@ -15,6 +15,13 @@ const gym = {
             data
         })
     },
+    getGymByAccount(params){
+        return axios({
+            url:"/gym/getGymByAccount",
+            method:"GET",
+            params
+        })
+    },
     addGym(data){
         return axios({
             url:'/gym/addGym',
@@ -42,7 +49,29 @@ const gym = {
             method:'get',
             params
         })
-    }
+    },
+    sendCheckCode(data){
+        return axios({
+            url:'/gym/sendCheckCode',
+            method:"POST",
+            data
+        })
+    },
+    changePassword(data){
+        return axios({
+            url:"/gym/changePassword",
+            method:"POST",
+            data
+        })
+    },
+    clearCheckCode(data){
+        return axios({
+            url:"/gym/clearCheckCode",
+            method:"POST",
+            data
+        })
+    },
+
 }
 
 export default gym
