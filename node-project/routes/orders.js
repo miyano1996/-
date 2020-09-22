@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const { addOrder, getAllOrders, getOrders } = require('../service/ordersService')
+const { addOrder, getAllOrders, getOrders, delOrder } = require('../service/ordersService')
 
 //新增订单
 router.post('/addOrder', async (req, res, next) => {

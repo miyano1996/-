@@ -17,10 +17,13 @@ export default class Complaint extends Component {
             await this.setState({
                 list: data.rows
             })
-            console.log(this.state.list);
         } catch (error) {
             console.log(error);
         }
+    }
+    async delit(id) {
+        const data = await api.complaint.delComplaint(id);
+        this.getAllcomplaint();
     }
     render() {
         return (
@@ -50,7 +53,7 @@ export default class Complaint extends Component {
                         </div>
                     </div>
                     <div className="complaint-footer">
-                        {item.status ? <span className="active">有异议?点击申诉</span> : <span >立即处理</span>}
+                        {item.status ? <span className="active">有异议?点击申诉</span> : <span onClick={() => { this.delit(item._id) }}>确定</span>}
 
 
                     </div>

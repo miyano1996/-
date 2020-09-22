@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table, Space, Button } from 'antd';
+import { Table, Space, Button, Modal } from 'antd';
 import '../../assets/style/orders.scss'
 import api from '../../apis/api'
 
@@ -54,13 +54,24 @@ export default class Orders extends Component {
                 title: '操作',
                 render: (text) => (
                     <Space size="middle">
-                        <Button type="primary" danger onClick={() => this.deleteit(text._id)}>删除</Button>
+                        <Button type="primary" danger onClick={() => this.delActive(text._id)}>删除</Button>
                     </Space>
                 ),
             },
         ],
         pagenum: 1,
         datanum: 10
+    }
+    delActive = (index) => {
+        Modal.confirm({
+            title: '警告',
+            content: '确定要删除吗？',
+            okText: '确认',
+            cancelText: '取消',
+            onOk: () => this.deleteit(index),
+            // onCancel:this.hideModal
+        });
+
     }
     async deleteit(id) {
         try {

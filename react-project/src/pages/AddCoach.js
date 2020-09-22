@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Input, Upload, message,Modal } from 'antd';
+import { Button, Input, Modal } from 'antd';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import api from '../apis/api'
 export default class AddCoach extends Component {
@@ -63,7 +63,7 @@ export default class AddCoach extends Component {
         });
         // console.log(345);
     };
-    onOk =async (e) => {
+    onOk = async (e) => {
         // console.log(this.state.newCoach);
         await api.coaches.addCoach(this.state.newCoach)
         this.setState({
