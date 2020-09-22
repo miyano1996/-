@@ -2,6 +2,7 @@ import axios from '../axios'
 
 const orders = {
     getAllOrders(id) {
+        console.log(id);
         return axios({
             url: '/orders/getAllOrders',
             method: 'GET',

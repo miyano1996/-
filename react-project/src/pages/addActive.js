@@ -8,7 +8,7 @@ export default class addActive extends Component {
         this.state = {
             loading: false,
             _id: '',
-            myRows: { activeTitle: '', activeContent: '' },
+            myRows: { activeTitle: '', activeContent: '',activeImage:'' },
             visible: false,
             rows:{}
         };
@@ -27,6 +27,8 @@ export default class addActive extends Component {
     handleChange = info => {
         if (info.file.status === 'uploading') {
             this.setState({ loading: true });
+            const myRows = this.state.myRows
+            myRows.activeImage = info.file.name
             return;
         }
         if (info.file.status === 'done') {
@@ -89,6 +91,7 @@ export default class addActive extends Component {
         const rows = this.state.rows
         rows.activeTitle.push(this.state.myRows.activeTitle)
         rows.activeContent.push(this.state.myRows.activeContent)
+        rows.activeImage.push(this.state.myRows.activeImage)
         await this.setState({rows:rows})
         const data = await api.gym.updateGym({ _id: this.state._id, ...this.state.rows })
     }
@@ -108,7 +111,7 @@ export default class addActive extends Component {
                 <div><p>活动图片：</p>
                     <div>
                         <Upload
-                            name="avatar"
+                            name="logo"
                             listType="picture-card"
                             className="avatar-uploader"
                             showUploadList={false}

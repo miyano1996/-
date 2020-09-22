@@ -35,7 +35,7 @@ export default class addStudents extends Component {
     }
     addUsername = (e) => {
         const newStudents = this.state.newStudents
-        newStudents.username = (e.target.value)
+        newStudents.account = (e.target.value)
         this.setState({ newStudents })
     }
     addPassword = (e) => {
@@ -56,7 +56,9 @@ export default class addStudents extends Component {
         });
         // console.log(345);
     };
-    onOk = (e) => {
+    onOk = async (e) => {
+        console.log(this.state.newStudents);
+        await api.students.regAsync(this.state.newStudents)
         this.setState({
             visible: false,
         });
