@@ -1,4 +1,4 @@
-const { getAllOrders, addOrder, delOrder, getOrder } = require('../dao/ordersDao');
+const { getAllOrders, addOrder, delOrder, getOrder, getOrders } = require('../dao/ordersDao');
 
 //添加订单
 module.exports.addOrder = async function (data) {
