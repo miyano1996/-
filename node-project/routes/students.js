@@ -15,7 +15,9 @@ router.post('/reg',async (req,res)=>{
 
 //登录
 router.post('/login',async (req,res)=>{
+  console.log(req.body);
   const data = await login(req.body);
+  console.log(data);
   res.send(data)
 })
 
