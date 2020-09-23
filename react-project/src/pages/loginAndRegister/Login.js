@@ -26,10 +26,12 @@ class Login extends Component {
             localStorage.setItem('token',token);
             localStorage.setItem("gymID",userInfo._id);
             localStorage.setItem('userInfo',JSON.stringify(userInfo));
-            message.success(res.msg)
+            if(res.success){
+                message.success(res.msg)
+            }else{message.error(res.msg)}
             this.props.history.push('/home')
         } catch (error) {
-            message.error(error.msg)
+            message.error("账号或密码错误！")
         }
 
     };
