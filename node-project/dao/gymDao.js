@@ -26,3 +26,8 @@ module.exports.getGym = async (data) => await gymModel.find(data)
 
 //更改场馆信息
 module.exports.updateGym = async (data) => await gymModel.updateOne({ _id: data._id, ...data })
+//将验证码存入数据库
+module.exports.saveCheckCode = async ({_id,checkCode}) => await gymModel.updateOne({_id},{checkCode})
+
+//修改密码
+module.exports.changePassword = async ({_id,password})=> await gymModel.updateOne({_id},{password})

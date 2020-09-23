@@ -64,6 +64,18 @@ export default class Login extends Component {
                             <Input.Password />
                         </Form.Item>
                         <Form.Item
+                            label="手机号"
+                            name="telephone"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Please input your tel number!',
+                                },
+                            ]}
+                        >
+                            <Input />
+                        </Form.Item>
+                        <Form.Item
                             label="昵称"
                             name="name"
                             rules={[
