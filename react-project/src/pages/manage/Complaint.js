@@ -70,7 +70,6 @@ export default class Complaint extends Component {
                             {item.status ? <Button className="active">有异议?点击申诉</Button> : <Button type="primary" onClick={() => { this.surActive(item._id) }}>确定</Button>}
                         </div>
                     </div>)}
-
                 </div>
         )
     }
