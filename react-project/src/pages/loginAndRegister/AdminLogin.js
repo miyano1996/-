@@ -24,8 +24,8 @@ export default class AdminLogin extends Component {
             const { token, userInfo } = res.rows;
             localStorage.setItem('token', token);
             localStorage.setItem('userInfo', JSON.stringify(userInfo));
-
             message.success(res.msg)
+            this.props.history.push('/home')
         } catch (error) {
             message.error(error.msg)
         }

@@ -17,15 +17,15 @@ export default class OneGym extends Component {
         loading: false
     }
     async componentDidMount() {
-        await this.setState({ _id: localStorage.gymID })
+        await this.setState({ _id: JSON.parse(localStorage.userInfo)._id })
         // this.setState({_id:'5f65a8ffbb2219492cc67b9f'})
         await this.getGymsAsync()
         this.getOrdersAsync()
     }
     //获取订单
     getOrdersAsync = async () => {
-        // console.log(localStorage.gymID);
-        const _id = localStorage.gymID
+        // console.log(JSON.parse(localStorage.userInfo)._id);
+        const _id = JSON.parse(localStorage.userInfo)._id
         let orders = await api.orders.getAllOrders({_id,pageSize:3,pageSee:this.state.current});
         console.log(orders);
         this.setState({ orders: orders.rows ,totalCount:orders.total})
@@ -33,9 +33,9 @@ export default class OneGym extends Component {
     }
     //获取场馆
     getGymsAsync = async () => {
-        const data = await api.gym.getGym(localStorage.gymID);
+        const data = await api.gym.getGym(JSON.parse(localStorage.userInfo)._id);
         this.setState({ rows: data.rows });
-        console.log(data);
+        // console.log(data);
     }
     //更改场馆
     updateGymAsync = async (obj) => {
@@ -54,8 +54,10 @@ export default class OneGym extends Component {
     }
     //更改公告
     updateAnnouncement = (index) => {
+        // console.log(123);
         const rows = this.state.rows
         rows.announcement[index].statu = !rows.announcement[index].statu
+        console.log(rows.announcement[index].btn);
         if (rows.announcement[index].btn === '修改') {
             rows.announcement[index].btn = '确认';
         } else if (rows.announcement[index].btn === '确认') {
@@ -67,19 +69,25 @@ export default class OneGym extends Component {
     }
     //更改公告状态
     newAnnouncement = (index, e) => {
+        console.log(1);
         const rows = this.state.rows
         rows.announcement[index].content = e.target.value
         this.setState({ rows: rows })
-        this.updateGymAsync({ _id: this.state._id, ...this.state.rows })
+        // this.updateGymAsync({ _id: this.state._id, ...this.state.rows })
     }
     //新增公告
     addAnnouncement = async () => {
         const rows = this.state.rows
-        rows.announcement.push({ content: '', statu: false, id: rows.announcement.length, btn: '确定' })
+        if(rows.announcement.length===0){
+            rows.announcement.push({ content: '', statu: false, id: 0, btn: '确定' })
+        }else {
+            rows.announcement.push({ content: '', statu: false, id: rows.announcement[rows.announcement.length-1].id+1, btn: '确定' })
+        }
         await this.setState({ rows: rows })
         this.updateGymAsync({ _id: this.state._id, ...this.state.rows })
         // console.log(this.state.rows);
         this.setState({ announcementType: '确定' })
+        console.log(this.state.rows.announcement);
     }
     deleteAnnouncement = async (index) => {
         const rows = this.state.rows
@@ -164,9 +172,9 @@ export default class OneGym extends Component {
     }
     render() {
         const { totalCount, loading, current, disabled, changeinformation, rows, orders } = this.state
-        const person = JSON.parse(localStorage.userInfo).role
+        // const person = JSON.parse(localStorage.userInfo).role
         // console.log(123);
-        const { name, grade, telephone, address, businessTime, idea, time, activeContent, activeTitle, announcement, activeImage } = rows
+        const { owner,name, grade, telephone, address, businessTime, idea, time, activeContent, activeTitle, announcement, activeImage } = rows
         var newAdd = JSON.parse(address)
         var addArr = []
         // console.log(rows);
@@ -239,7 +247,7 @@ export default class OneGym extends Component {
                             <Input disabled={disabled} value={telephone} size='small' onChange={this.newTelephone} />
                         </Descriptions.Item>
                         <Descriptions.Item label="创始人">
-                            <Input disabled value={person} size='small' onChange />
+                            <Input disabled value={owner} size='small' onChange />
                         </Descriptions.Item>
                         <Descriptions.Item label="会馆地址">
                             <Input disabled value={answer} size='small' onChange />
@@ -273,7 +281,7 @@ export default class OneGym extends Component {
                                 style={{ width: 700 }}
                                 onChange={(e) => this.newAnnouncement(index, e)}
                             />
-                            <Button onClick={() => this.updateAnnouncement(index)}>{item.btn}</Button>
+                            <Button onClick={() => this.updateAnnouncement(index)}>修改</Button>
                             <Button type="primary" danger onClick={() => this.deleteAnnouncement(index)}>删除</Button>
                         </div>
                     })

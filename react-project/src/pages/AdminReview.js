@@ -1,4 +1,4 @@
-import { Table, notification, Space, Image, Popconfirm, message } from 'antd';
+import { Table, notification, Space, Image, Popconfirm, message,Button } from 'antd';
 import React, { Component } from 'react';
 import { SmileOutlined } from '@ant-design/icons';
 import api from '../apis/api';
@@ -10,7 +10,7 @@ export default class AdminReview extends Component {
                 title: '场馆名称',
                 dataIndex: 'name',
                 key: 'name',
-                render: text => <a>{text}</a>,
+                render: text => <span>{text}</span>,
             },
             {
                 title: '联系电话',
@@ -57,7 +57,7 @@ export default class AdminReview extends Component {
                             okText="同意"
                             cancelText="取消"
                         >
-                            <a onClick={() => this.clickHidel(text, '同意')}>同意</a>
+                            <Button type="primary" onClick={() => this.clickHidel(text, '同意')}>同意</Button>
                         </Popconfirm>
 
                         <Popconfirm
@@ -67,7 +67,7 @@ export default class AdminReview extends Component {
                             okText="拒绝"
                             cancelText="取消"
                         >
-                            <a onClick={() => this.clickHidel(text, '拒绝')}>拒绝</a>
+                            <Button type="waring" onClick={() => this.clickHidel(text, '拒绝')}>拒绝</Button>
                         </Popconfirm>
                     </Space>
                 ),

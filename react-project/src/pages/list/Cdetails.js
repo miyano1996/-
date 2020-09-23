@@ -10,7 +10,7 @@ export default class Cdetails extends Component {
         workingTime:[],
         course:[],
         students:[],
-        id:'5f61fb0f71190000aa004ec4'
+        id:'5f6afe750c31000049007551'
     }
     componentDidMount(){
         this.getData(this.state.id)

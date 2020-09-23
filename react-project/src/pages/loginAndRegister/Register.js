@@ -27,6 +27,22 @@ export default class Login extends Component {
                     "-1823576cb007cbbf.gif"
                 ],
                 address: "{\"province\":\"四川省\",\"city\":\"成都市\",\"district\":\"郫都区\",\"street\":\"美墅街\",\"streetNumber\":\"\",\"lng\":103.97463012422635,\"lat\":30.729378718384197}",
+                isDelete:false,
+                grade:"3",
+                coaches:[],
+                students:[],//保存所有学生数据
+                name:'',//场馆名字
+                JD:'',//招聘信息
+                businessTime:'',//营业时间
+                idea:'',//经营理念
+                time:'',//会馆创建时间
+                activeContent:[],//活动详情，对应活动图片
+                activeTitle:[],//活动标题
+                announcement:[],//公告
+                status:"-1",//状态值：0表示正在申请，1表示申请成功，2表示申请失败
+                activeImage:[],
+                time:[],//申请时间
+                checkCode:'',//验证
             });
             message.success(res.msg)
         } catch (error) {
@@ -84,7 +100,7 @@ export default class Login extends Component {
                         </Form.Item>
                         <Form.Item
                             label="昵称"
-                            name="name"
+                            name="owner"
                             rules={[
                                 {
                                     required: true,
