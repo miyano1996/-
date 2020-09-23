@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Table, Space, Button, Popconfirm, message, Modal, Form, Input } from 'antd';
+import { Table, Space, Button, Popconfirm, message } from 'antd';
 import api from '../../apis/api';
 
 
@@ -66,7 +66,7 @@ export default class Studentlist extends Component {
     }
     //详情信息
     gotoGymdetail(e) {
-        localStorage.GymID = e._id;
+        localStorage.gymID = e._id;
         this.props.history.push("/home/oneGym")
     };
     //获取教练

@@ -19,8 +19,8 @@ export const siderArr = [
     icon: <LaptopOutlined />,
     fartitle: "场馆",
     son: [
-      { key: "/home/oneGym", title: "场馆列表" },
-      { key: "/home/adminReview", title: "场馆审批",roles:['gym'] },
+      { key: "/home/Gymlist", title: "场馆列表" },
+      { key: "/home/adminReview", title: "场馆审批", roles: ['gym'] },
     ],
     //   roles:['超级管理员']//显示权限
   },
