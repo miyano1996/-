@@ -131,7 +131,7 @@ export default class addActive extends Component {
                         okText="确认"
                         cancelText="取消"
                     >
-                        <p>确定新增此？</p>
+                        <p>确定新增此活动？</p>
                     </Modal></div>
             </div>
         )
