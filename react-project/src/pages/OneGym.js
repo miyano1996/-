@@ -171,7 +171,7 @@ export default class OneGym extends Component {
     }
     render() {
         const { totalCount, loading, current, disabled, changeinformation, rows, orders } = this.state
-        // const person = JSON.parse(localStorage.userInfo).role
+        // const person = JSON.parse(localStorage.gymID).role
         // console.log(123);
         const { owner, name, grade, telephone, address, businessTime, idea, time, activeContent, activeTitle, announcement, activeImage } = rows
         var newAdd = JSON.parse(address)

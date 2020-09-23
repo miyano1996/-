@@ -5,6 +5,7 @@ module.exports.getCoaches = async function ({ pageSize, pageNumber, _id }) {
     let total = await coachesModel.find();
     let totalCount = total.filter(item => item.isDelete == false && item.gym == _id);
     let arr = await coachesModel.find({ isDelete: false, gym: _id }).limit(pageSize - 0).skip((pageNumber - 1) * pageSize);
+    console.log(arr);
     return { arr, totalCount: totalCount.length, pageSize, pageNumber };
 }
 module.exports.getOne = async (data) => {
