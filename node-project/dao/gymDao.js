@@ -22,7 +22,7 @@ module.exports.changeGymStatus = async ({ _id, status }) => await gymModel.updat
 module.exports.getGymByText = async (data) => await gymModel.find(data);
 
 //获取场馆信息
-module.exports.getGym = async (data) => await gymModel.find(data)
+module.exports.getGym = async (data) => await gymModel.find({_id:data._id,isDelete:false})
 
 //更改场馆信息
-module.exports.updateGym = async (data) => await gymModel.updateOne({ _id: data._id, ...data })
+module.exports.updateGym = async (data) => await gymModel.updateOne({ _id: data._id},{ ...data })

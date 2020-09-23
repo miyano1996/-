@@ -11,7 +11,7 @@ export default class Studentlist extends Component {
                 title: '头像',
                 render: (text, record) => (
                     <Space size="middle">
-                        {/* <Avatar size={60} src={require(`../../assets/images/${text.headImage}`)} /> */}
+                        <Avatar size={60} src={require(`../../assets/images/${text.headImage}`)} />
                     </Space>
                 ),
 
