@@ -54,8 +54,10 @@ export default class OneGym extends Component {
     }
     //更改公告
     updateAnnouncement = (index) => {
+        // console.log(123);
         const rows = this.state.rows
         rows.announcement[index].statu = !rows.announcement[index].statu
+        console.log(rows.announcement[index].btn);
         if (rows.announcement[index].btn === '修改') {
             rows.announcement[index].btn = '确认';
         } else if (rows.announcement[index].btn === '确认') {
@@ -75,11 +77,16 @@ export default class OneGym extends Component {
     //新增公告
     addAnnouncement = async () => {
         const rows = this.state.rows
-        rows.announcement.push({ content: '', statu: false, id: rows.announcement.length, btn: '确定' })
+        if(rows.announcement.length===0){
+            rows.announcement.push({ content: '', statu: false, id: 0, btn: '确定' })
+        }else {
+            rows.announcement.push({ content: '', statu: false, id: rows.announcement[rows.announcement.length-1].id+1, btn: '确定' })
+        }
         await this.setState({ rows: rows })
         this.updateGymAsync({ _id: this.state._id, ...this.state.rows })
         // console.log(this.state.rows);
         this.setState({ announcementType: '确定' })
+        console.log(this.state.rows.announcement);
     }
     deleteAnnouncement = async (index) => {
         const rows = this.state.rows
@@ -164,9 +171,9 @@ export default class OneGym extends Component {
     }
     render() {
         const { totalCount, loading, current, disabled, changeinformation, rows, orders } = this.state
-        const person = JSON.parse(localStorage.userInfo).role
+        // const person = JSON.parse(localStorage.userInfo).role
         // console.log(123);
-        const { name, grade, telephone, address, businessTime, idea, time, activeContent, activeTitle, announcement, activeImage } = rows
+        const { owner,name, grade, telephone, address, businessTime, idea, time, activeContent, activeTitle, announcement, activeImage } = rows
         var newAdd = JSON.parse(address)
         var addArr = []
         // console.log(rows);
@@ -239,7 +246,7 @@ export default class OneGym extends Component {
                             <Input disabled={disabled} value={telephone} size='small' onChange={this.newTelephone} />
                         </Descriptions.Item>
                         <Descriptions.Item label="创始人">
-                            <Input disabled value={person} size='small' onChange />
+                            <Input disabled value={owner} size='small' onChange />
                         </Descriptions.Item>
                         <Descriptions.Item label="会馆地址">
                             <Input disabled value={answer} size='small' onChange />
@@ -273,7 +280,7 @@ export default class OneGym extends Component {
                                 style={{ width: 700 }}
                                 onChange={(e) => this.newAnnouncement(index, e)}
                             />
-                            <Button onClick={() => this.updateAnnouncement(index)}>{item.btn}</Button>
+                            <Button onClick={() => this.updateAnnouncement(index)}>修改</Button>
                             <Button type="primary" danger onClick={() => this.deleteAnnouncement(index)}>删除</Button>
                         </div>
                     })

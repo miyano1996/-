@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Table, Space, Button, Avatar, Popconfirm, message } from 'antd';
+
 import api from '../../apis/api'
 
 export default class Studentlist extends Component {
@@ -95,7 +96,9 @@ export default class Studentlist extends Component {
             onChange: this.onChange
         }
         return (
+            
             <div className="List">
+
                 <Table rowKey="_id" pagination={pagination} columns={columns} dataSource={data} className="table" />
             </div>
         )

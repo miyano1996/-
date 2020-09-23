@@ -8,7 +8,8 @@ const gymSchema = new mongoose.Schema({
     telephone:String,
     coaches:Array,//保存所有教练数据
     students:Array,//保存所有学生数据
-    name:String,
+    owner:String,//馆主姓名
+    name:String,//场馆名字
     images:Array,  //活动图片
     address:String,
     JD:String,//招聘信息

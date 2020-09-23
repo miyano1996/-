@@ -1,7 +1,9 @@
 const { studentsModel } = require('./modules/studentsModel')
 
 module.exports.getOne = async (data) => {
+	// console.log(data,'sss')
 	return await studentsModel.find({_id:data.id});
+	// console.log(await studentsModel.find({_id:data.id}))
 }
 
 

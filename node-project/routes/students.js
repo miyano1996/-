@@ -8,15 +8,16 @@ router.post('/details',async (req,res,next)=>{
   res.send(data)
 })
 
-router.get('/reg',async (req,res)=>{
-  console.log(req.query,'ssss')
-  const data = await reg(req.query);
+router.post('/reg',async (req,res)=>{
+  const data = await reg(req.body);
   res.send(data);
 }) 
 
 //登录
 router.post('/login',async (req,res)=>{
+  console.log(req.body);
   const data = await login(req.body);
+  console.log(data);
   res.send(data)
 })
 
