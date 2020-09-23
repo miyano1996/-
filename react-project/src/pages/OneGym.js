@@ -69,10 +69,11 @@ export default class OneGym extends Component {
     }
     //更改公告状态
     newAnnouncement = (index, e) => {
+        console.log(1);
         const rows = this.state.rows
         rows.announcement[index].content = e.target.value
         this.setState({ rows: rows })
-        this.updateGymAsync({ _id: this.state._id, ...this.state.rows })
+        // this.updateGymAsync({ _id: this.state._id, ...this.state.rows })
     }
     //新增公告
     addAnnouncement = async () => {
