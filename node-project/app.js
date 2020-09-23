@@ -4,7 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 // 引入的token文件=========================================================================
-var jwtAuth = require('./utils/jwt');
+var jwtAuth = require('./utils/jwt.js');
 //连接数据库
 require('./dao/database/database');
 
@@ -39,7 +39,7 @@ app.use(function (req, res, next) {
 });
 
 //在所有一级路径前启用token拦截===============================================
-// app.use(jwtAuth);
+app.use(jwtAuth);
 
 //路由地址
 
