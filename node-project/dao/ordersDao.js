@@ -31,7 +31,6 @@ module.exports.getAllOrders = async function (data) {
 //获取场馆订单
 module.exports.getOrders = async function (obj) {
     const msg = await ordersModel.find({ gym: "5f684a17ed6c0000ef007954" })
-    console.log(obj);
     return data = {
         rows: msg
     }

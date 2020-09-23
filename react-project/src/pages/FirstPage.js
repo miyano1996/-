@@ -45,6 +45,7 @@ export default class FirstPage extends Component {
         });
     };
     //表单提交
+    //验证验证码
     onFinish = async values => {
         const { _id } = this.state;
         try {
@@ -52,7 +53,7 @@ export default class FirstPage extends Component {
             if (res.success) {
                 message.success("验证成功！")
                 this.showChildrenDrawer()
-            }else{
+            } else {
                 message.error("验证失败！")
             }
         } catch (error) {
@@ -71,18 +72,18 @@ export default class FirstPage extends Component {
                 _id,
                 name,
                 telephone,
-                loading:false
+                loading: false
             });
-            this.sendCheckCode({_id,telephone})
+            this.sendCheckCode({ _id, telephone })
         } catch (error) {
             message.warning("该账号未注册！")
         }
     }
-    enterLoading=()=>{
-        this.setState({loading:true})
+    enterLoading = () => {
+        this.setState({ loading: true })
     }
-    outLoading=()=>{
-        this.setState({loading:false})
+    outLoading = () => {
+        this.setState({ loading: false })
     }
     //发送验证码
     sendCheckCode = async ({ _id, telephone }) => {
@@ -91,35 +92,35 @@ export default class FirstPage extends Component {
             console.log(data)
             //按键进入loading
             this.enterLoading()
-            setTimeout(async() => {
-                const res = await api.gym.clearCheckCode({_id})
+            setTimeout(async () => {
+                const res = await api.gym.clearCheckCode({ _id })
                 console.log(res)
-            }, 1000*30);
+            }, 1000 * 30);
             setTimeout(() => {
-              this.outLoading()
+                this.outLoading()
             }, 6000);
         } catch (error) {
             message.error("发送失败！")
         }
     }
-    changePassword = async values =>{
-        
-        const {_id} = this.state
+    changePassword = async values => {
+
+        const { _id } = this.state
         try {
-            console.log({_id,...values})
-            const res = await api.gym.changePassword({_id,...values})
-            if(res.success){
+            console.log({ _id, ...values })
+            const res = await api.gym.changePassword({ _id, ...values })
+            if (res.success) {
                 message.success(res.msg)
-            }else{
+            } else {
                 message.error(res.success)
             }
         } catch (error) {
-            console.log('err',error)
+            console.log('err', error)
             message.error("修改的密码不能与原密码相同")
         }
     }
     render() {
-        const { visible, telephone,loading,_id } = this.state
+        const { visible, telephone, loading, _id } = this.state
         return (
             <div className="first-page">
                 <header>
@@ -226,7 +227,7 @@ export default class FirstPage extends Component {
                                 <Button type="primary" htmlType="submit">
                                     确认
                             </Button>
-                                <Button type='default' loading={loading} onClick={()=>{this.sendCheckCode({_id,telephone})}}>
+                                <Button type='default' loading={loading} onClick={() => { this.sendCheckCode({ _id, telephone }) }}>
                                     重新发送
                             </Button>
                             </Form.Item>
