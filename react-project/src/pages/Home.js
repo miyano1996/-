@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Layout, Menu, Breadcrumb, Image } from "antd";
 import SideBar from "../components/SideBar";
-import { HashRouter, Switch, Route, Redirect,NavLink } from "react-router-dom";
+import { HashRouter, Switch, Route, Redirect, NavLink } from "react-router-dom";
 import Loadable from "react-loadable";
 //懒加载
 
@@ -81,7 +81,15 @@ const Cdetails = Loadable({
 
 const { Header, Content } = Layout;
 export default class Home extends Component {
+  state = {
+    userName: ""
+  }
+  componentDidMount=()=>{
+    const userName = JSON.parse(localStorage.getItem('userInfo')).owner
+    this.setState({userName})
+  }
   render() {
+    const { userName } = this.state
     return (
       <Layout>
         <Header className="header">
@@ -95,12 +103,13 @@ export default class Home extends Component {
             <Menu.Item key="2">消息</Menu.Item>
             <Menu.Item key="3"><NavLink to="/home/adminPropaganda">管理中心</NavLink></Menu.Item>
           </Menu>
-          <p>功夫瑜伽后台管理系统</p>
+          <p>功夫瑜伽后台管理系统  <span className="showUserName">欢迎您 {userName}</span></p>
+      
         </Header>
         <Layout>
           <SideBar />
           <Layout style={{ padding: "0 24px 24px" }}>
-          <Breadcrumb style={{ margin: "16px 0" }}>
+            <Breadcrumb style={{ margin: "16px 0" }}>
               <Breadcrumb.Item>Home</Breadcrumb.Item>
               <Breadcrumb.Item>List</Breadcrumb.Item>
               <Breadcrumb.Item>App</Breadcrumb.Item>
