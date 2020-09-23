@@ -8,8 +8,8 @@ router.post('/details',async (req,res,next)=>{
   res.send(data)
 })
 
-router.get('/reg',async (req,res)=>{
-  const data = await reg(req.query);
+router.post('/reg',async (req,res)=>{
+  const data = await reg(req.body);
   res.send(data);
 }) 
 
