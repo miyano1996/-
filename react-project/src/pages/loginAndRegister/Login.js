@@ -24,6 +24,7 @@ class Login extends Component {
             const res = await api.gym.login(values);
             const {token,userInfo} = res.rows;
             localStorage.setItem('token',token);
+            localStorage.setItem("gymID",userInfo._id);
             localStorage.setItem('userInfo',JSON.stringify(userInfo));
             message.success(res.msg)
             this.props.history.push('/home')

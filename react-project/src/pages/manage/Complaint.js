@@ -43,7 +43,7 @@ export default class Complaint extends Component {
         return (
             <div className="complaint-box">
 
-                {this.state.list.map((item) => <div className="complaint-item" key="_id">
+                {this.state.list.map((item) => <div className="complaint-item" key={item._id}>
                     <div className="item-top">
                         <span>用户名:
                             <span className="username">
