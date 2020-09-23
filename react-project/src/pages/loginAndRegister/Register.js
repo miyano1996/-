@@ -20,7 +20,14 @@ const tailLayout = {
 export default class Login extends Component {
     onFinish = async (values) => {
         try {
-            const res = await api.gym.register({ ...values, role: "gym" });
+            const res = await api.gym.register({ 
+                ...values, 
+                role: "gym",
+                images: [
+                    "-1823576cb007cbbf.gif"
+                ],
+                address: "{\"province\":\"四川省\",\"city\":\"成都市\",\"district\":\"郫都区\",\"street\":\"美墅街\",\"streetNumber\":\"\",\"lng\":103.97463012422635,\"lat\":30.729378718384197}",
+            });
             message.success(res.msg)
         } catch (error) {
             message.error(error.msg)
@@ -77,7 +84,7 @@ export default class Login extends Component {
                         </Form.Item>
                         <Form.Item
                             label="昵称"
-                            name="owner"
+                            name="name"
                             rules={[
                                 {
                                     required: true,
