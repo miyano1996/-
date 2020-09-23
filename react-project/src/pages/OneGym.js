@@ -17,15 +17,15 @@ export default class OneGym extends Component {
         loading: false
     }
     async componentDidMount() {
-        await this.setState({ _id: localStorage.gymID })
+        await this.setState({ _id: JSON.parse(localStorage.userInfo)._id })
         // this.setState({_id:'5f65a8ffbb2219492cc67b9f'})
         await this.getGymsAsync()
         this.getOrdersAsync()
     }
     //获取订单
     getOrdersAsync = async () => {
-        // console.log(localStorage.gymID);
-        const _id = localStorage.gymID
+        // console.log(JSON.parse(localStorage.userInfo)._id);
+        const _id = JSON.parse(localStorage.userInfo)._id
         let orders = await api.orders.getAllOrders({_id,pageSize:3,pageSee:this.state.current});
         console.log(orders);
         this.setState({ orders: orders.rows ,totalCount:orders.total})
@@ -33,9 +33,9 @@ export default class OneGym extends Component {
     }
     //获取场馆
     getGymsAsync = async () => {
-        const data = await api.gym.getGym(localStorage.gymID);
+        const data = await api.gym.getGym(JSON.parse(localStorage.userInfo)._id);
         this.setState({ rows: data.rows });
-        console.log(data);
+        // console.log(data);
     }
     //更改场馆
     updateGymAsync = async (obj) => {
@@ -77,7 +77,11 @@ export default class OneGym extends Component {
     //新增公告
     addAnnouncement = async () => {
         const rows = this.state.rows
-        rows.announcement.push({ content: '', statu: false, id: rows.announcement.length+1, btn: '确定' })
+        if(rows.announcement.length===0){
+            rows.announcement.push({ content: '', statu: false, id: 0, btn: '确定' })
+        }else {
+            rows.announcement.push({ content: '', statu: false, id: rows.announcement[rows.announcement.length-1].id+1, btn: '确定' })
+        }
         await this.setState({ rows: rows })
         this.updateGymAsync({ _id: this.state._id, ...this.state.rows })
         // console.log(this.state.rows);
