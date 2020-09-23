@@ -84,7 +84,7 @@ export default class Login extends Component {
                         </Form.Item>
                         <Form.Item
                             label="昵称"
-                            name="name"
+                            name="owner"
                             rules={[
                                 {
                                     required: true,
