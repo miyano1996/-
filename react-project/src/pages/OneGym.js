@@ -26,9 +26,9 @@ export default class OneGym extends Component {
     getOrdersAsync = async () => {
         // console.log(JSON.parse(localStorage.userInfo)._id);
         const _id = JSON.parse(localStorage.userInfo)._id
-        let orders = await api.orders.getAllOrders({_id,pageSize:3,pageSee:this.state.current});
+        let orders = await api.orders.getAllOrders({ _id, pageSize: 3, pageSee: this.state.current });
         console.log(orders);
-        this.setState({ orders: orders.rows ,totalCount:orders.total})
+        this.setState({ orders: orders.rows, totalCount: orders.total })
         // console.log(this.state.orders);
     }
     //获取场馆
@@ -78,10 +78,10 @@ export default class OneGym extends Component {
     //新增公告
     addAnnouncement = async () => {
         const rows = this.state.rows
-        if(rows.announcement.length===0){
+        if (rows.announcement.length === 0) {
             rows.announcement.push({ content: '', statu: false, id: 0, btn: '确定' })
-        }else {
-            rows.announcement.push({ content: '', statu: false, id: rows.announcement[rows.announcement.length-1].id+1, btn: '确定' })
+        } else {
+            rows.announcement.push({ content: '', statu: false, id: rows.announcement[rows.announcement.length - 1].id + 1, btn: '确定' })
         }
         await this.setState({ rows: rows })
         this.updateGymAsync({ _id: this.state._id, ...this.state.rows })
@@ -161,10 +161,10 @@ export default class OneGym extends Component {
     toStudents = () => {
         this.props.history.push('/home/studentslist')
     }
-    onchange = (pageNumber, pageSize) =>{
+    onchange = (pageNumber, pageSize) => {
         console.log(pageNumber, pageSize);
         try {
-            this.setState({current:pageNumber})
+            this.setState({ current: pageNumber })
             this.getOrdersAsync({ pageNumber, pageSize })
             this.setState({ loading: false })
         } catch (error) {
@@ -174,7 +174,7 @@ export default class OneGym extends Component {
         const { totalCount, loading, current, disabled, changeinformation, rows, orders } = this.state
         // const person = JSON.parse(localStorage.userInfo).role
         // console.log(123);
-        const { owner,name, grade, telephone, address, businessTime, idea, time, activeContent, activeTitle, announcement, activeImage } = rows
+        const { owner, name, grade, telephone, address, businessTime, idea, time, activeContent, activeTitle, announcement, activeImage } = rows
         var newAdd = JSON.parse(address)
         var addArr = []
         // console.log(rows);

@@ -14,6 +14,9 @@ const students = {
             method: 'get',
             params
         })
+    },
+    getallStudents() {
+
     }
 }
 
