@@ -17,17 +17,21 @@ const Orders = Loadable({
     loader: () => import('./orders/Orders'),
     loading: () => <div>加载中...</div>
 })
-
+//教练列表
 const Coacheslist = Loadable({
     loader: () => import('../pages/list/Coacheslist'),
     loading: () => <div>加载中...</div>
 })
-
+//学院列表
 const Studentslist = Loadable({
     loader: () => import('./list/Studentlist'),
     loading: () => <div>加载中...</div>
 })
-
+//场馆列表
+const Gymlist = Loadable({
+    loader: () => import("../pages/list/Gymlist"),
+    loading: () => <div>加载中...</div>
+})
 const AddCoach = Loadable({
     loader: () => import('./AddCoach'),
     loading: () => <div>加载中...</div>
@@ -110,10 +114,11 @@ export default class Home extends Component {
                         >
                             <HashRouter>
                                 <Switch>
-                                    <Redirect exact path="/home" to="/home/Coacheslist"></Redirect>
+                                    <Redirect exact path="/home" to="/home/Gymlist"></Redirect>
                                     <Route path="/home/Complaint" component={Complaint}></Route>
                                     <Route path="/home/Studentslist" component={Studentslist}></Route>
                                     <Route path="/home/Coacheslist" component={Coacheslist}></Route>
+                                    <Route path="/home/Gymlist" component={Gymlist}></Route>
                                     <Route path="/home/Orders" component={Orders}></Route>
                                     <Route path="/home/addGyms" component={AddGyms}></Route>
                                     <Route path="/home/addActive" component={addActive}></Route>

@@ -29,6 +29,21 @@ const gym = {
             params: { _id }
         })
     },
+    getAllGym(data) {
+        console.log(data);
+        return axios({
+            url: '/gym/getAllGym',
+            method: "post",
+            data,
+        })
+    },
+    delGym(data) {
+        return axios({
+            url: '/gym/delGym',
+            method: 'POST',
+            data
+        })
+    },
     updateGym(data) {
         return axios({
             url: '/gym/updateGym',

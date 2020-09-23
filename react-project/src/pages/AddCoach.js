@@ -9,7 +9,7 @@ export default class AddCoach extends Component {
             loading: false,
             _id: '',
             rows: { activeTitle: [], activeContent: [] },
-            newCoach: {},
+            newCoach: { gym: JSON.parse(localStorage.userInfo)._id },
             visible: false
         };
         this.getGym()

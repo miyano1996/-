@@ -26,7 +26,7 @@ module.exports.delCoaches = async function (data) {
 module.exports.updateCoaches = async function (data) {
     let msg = await updateCoaches(data);
     if (msg.ok === 1) {
-        return { success: true, msg: "删除成功" }
+        return { success: true, msg: "修改成功" }
     }
 }
 

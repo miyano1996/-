@@ -1,8 +1,32 @@
-const { register, isReuse, login, addGym, getGymByStatus, changeGymStatus, getGymByText, getGym, updateGym } = require('../dao/gymDao');
+const { register, isReuse, login, addGym, getGymByStatus, changeGymStatus, getGymByText, getGym, updateGym, getAllGym, delGym } = require('../dao/gymDao');
 
 const jwt = require('jsonwebtoken'); //token
 const { KEY } = require('../utils/consts.js'); //封装的密钥串
+//获取所有场馆
+module.exports.getAllGym = async (data) => {
+    const { arr, totalCount, pageSize, pageNumber } = await getAllGym(data);
+    if (arr.length > 0) {
+        return {
+            success: true,
+            msg: "获取成功",
+            rows: arr,
+            totalCount,
+            pageSize,
+            pageNumber
+        };
+    }
 
+}
+//删除场馆
+module.exports.delGym = async (data) => {
+    const msg = await delGym(data);
+    if (msg.nModified === 1) {
+        return {
+            success: true,
+            msg: '删除成功'
+        }
+    }
+}
 //注册
 module.exports.register = async data => {
     const res = await isReuse(data);
