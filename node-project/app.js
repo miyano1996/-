@@ -41,7 +41,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(allowCrossDomain); // 使用该中间件
 
 //在所有一级路径前启用token拦截===============================================
-app.use(jwtAuth);
+// app.use(jwtAuth);
 
 //路由地址
 app.use('/admin', adminRouter);
