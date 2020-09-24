@@ -17,7 +17,18 @@ module.exports.isExist = async data => {
 
 //注册
 module.exports.reg = async data => {
-	return await studentsModel.create(data);
+	return await studentsModel.create({
+		account: data.account,
+		password: data.password,
+		telephone: "未设置",
+		headImage: data.headImage || "",
+		name: data.name || "暂无昵称",
+		loginAdress: "未知",
+		isDelete: false,//(是否被管理员删除)
+		points: "0",//(学员积分)
+		age: '未知',
+		gender: '未知'
+	});
 }
 
 //登录

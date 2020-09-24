@@ -56,7 +56,7 @@ export default class Orders extends Component {
     delActive = (index) => {
         Modal.confirm({
             title: '警告',
-            content: '确定要删除吗？',
+            content: '删除后不可恢复,确认删除吗?',
             okText: '确认',
             cancelText: '取消',
             onOk: () => this.deleteit(index),
