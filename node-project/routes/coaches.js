@@ -15,7 +15,7 @@ router.post("/delCoaches", async (req, res, next) => {
   res.send(msg);
 })
 //修改信息
-router.post("updateCoaches", async (req, res, next) => {
+router.post("/updateCoaches", async (req, res, next) => {
   const msg = await updateCoaches(req.body);
   res.send(msg)
 })
@@ -32,6 +32,7 @@ router.post('/reg', async (req, res) => {
 //login
 router.post('/login', async (req, res) => {
   const data = await login(req.body);
+  console.log(data)
   res.send(data)
 })
 //新增教练

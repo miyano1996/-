@@ -1,8 +1,19 @@
 var express = require('express');
 var router = express.Router();
 
-const { register, login, addGym, getGymByStatus, changeGymStatus, getGymByText, getGym, updateGym,sendCheckCode,clearCheckCode,changePassword } = require('../service/gymService');
+const { register, login, addGym, getGymByStatus, changeGymStatus, getGymByText, getGym, updateGym, sendCheckCode, clearCheckCode, changePassword, getAllGym, delGym } = require('../service/gymService');
 
+//获取所有场馆
+router.post('/getAllGym', async (req, res, next) => {
+  const data = await getAllGym(req.body);
+  res.send(data);
+})
+//删除场馆信息
+router.post('/delGym', async (req, res, next) => {
+  console.log(req.body);
+  const data = await delGym(req.body);
+  res.send(data);
+})
 //注册
 router.post('/register', async (req, res, next) => {
   const data = await register(req.body)
@@ -47,18 +58,18 @@ router.post('/updateGym', async (req, res) => {
 })
 
 //发送验证码
-router.post('/sendCheckCode',async (req,res)=>{
+router.post('/sendCheckCode', async (req, res) => {
   const data = await sendCheckCode(req.body);
   res.send(data)
 })
 //修改密码
-router.post('/changePassword',async (req,res)=>{
+router.post('/changePassword', async (req, res) => {
   const data = await changePassword(req.body);
   res.send(data);
 })
 //清空验证码
-router.post('/clearCheckCode',async(req,res)=>{
-  const data =await clearCheckCode(req.body);
+router.post('/clearCheckCode', async (req, res) => {
+  const data = await clearCheckCode(req.body);
   res.send(data)
 })
 module.exports = router;

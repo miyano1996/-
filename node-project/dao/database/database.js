@@ -5,10 +5,6 @@ const mongoose = require('mongoose');
 // const dbURI = 'mongodb://localhost/fitness';
 const dbURI = 'mongodb://root:a100_200@dds-bp1bd276dd4cdae4-pub.mongodb.rds.aliyuncs.com:3717';
 
-//若需连接本地可以把路径设置:可选路径
-//111.231.189.144:27017
-//localhost
-// 连接数据库
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true });
 // 当数据库连接成功后触发该事件
 mongoose.connection.on('connected', function () {

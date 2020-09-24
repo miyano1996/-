@@ -41,39 +41,36 @@ export default class Complaint extends Component {
     }
     render() {
         return (
-            <div className="complaint-box">
-
-                {this.state.list.map((item) => <div className="complaint-item" key={item._id}>
-                    <div className="item-top">
-                        <span>用户名:
+            this.state.list.length === 0 ? <h1>暂无数据</h1> :
+                <div className="complaint-box">
+                    {this.state.list.map((item) => <div className="complaint-item" key={item._id}>
+                        <div className="item-top">
+                            <span>用户名:
                             <span className="username">
-                                {item.studentId.name}
+                                    {item.studentId.name}
+                                </span>
                             </span>
-                        </span>
-                        <span>订单编号:
+                            <span>订单编号:
                         <span className="orderid">{item.ordersId._id}</span>
-                        </span>
-                        <span>教练:
+                            </span>
+                            <span>教练:
                                 <span className="orderid">{item.coacheId.name}</span>
-                        </span>
-                        <span>日期:
+                            </span>
+                            <span>日期:
                             <span className="orderid">{item.time}</span>
-                        </span>
-                    </div>
-                    <div className="item-body">
-                        <span>投诉内容:</span>
-                        <div className="complaint-text">
-                            {item.text}
+                            </span>
                         </div>
-                    </div>
-                    <div className="complaint-footer">
-                        {item.status ? <Button className="active">有异议?点击申诉</Button> : <Button type="primary" onClick={() => { this.surActive(item._id) }}>确定</Button>}
-
-
-                    </div>
-                </div>)}
-
-            </div>
+                        <div className="item-body">
+                            <span>投诉内容:</span>
+                            <div className="complaint-text">
+                                {item.text}
+                            </div>
+                        </div>
+                        <div className="complaint-footer">
+                            {item.status ? <Button className="active">有异议?点击申诉</Button> : <Button type="primary" onClick={() => { this.surActive(item._id) }}>确定</Button>}
+                        </div>
+                    </div>)}
+                </div>
         )
     }
 }
