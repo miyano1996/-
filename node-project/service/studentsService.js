@@ -1,11 +1,11 @@
-const { getOne, reg, isExist,login,getStudent } = require('../dao/studentsDao');
+const { getOne, reg, isExist,login,getStudent,upLoadAll,upLat } = require('../dao/studentsDao');
 
 const jwt = require('jsonwebtoken'); //token
 const { KEY } = require('../utils/consts.js'); //封装的密钥串
 
 module.exports.getOne = async (data) => {
 	const getdata = await getOne(data);
-	// console.log('vv',getdata)
+	console.log('vv',getdata)
 	if (getdata.length > 0) {
 		// 后端返回处理结果给前端
 		return { success: true, msg: "获取信息成功", getdata };
@@ -53,5 +53,23 @@ module.exports.login = async data =>{
     }else{
         return { success: false,msg: '账号或密码错误'};
     }
+}
+
+//上传所有信息
+module.exports.upLoadAll = async data =>{
+	const obj = await upLoadAll(data);
+	if(obj.nModified == '1'){
+		return {success:true,msg:'修改信息成功',rows:obj}
+	}
+	return {success:false,msg:'修改信息失败',rows:obj};
+}
+
+//上传经纬度
+module.exports.upLat = async data =>{
+	const obj = await upLat(data);
+	if(obj.nModified == '1'){
+		return {success:true,msg:'经纬度上传成功',rows:obj}
+	}
+	return {success:false,msg:'经纬度上传失败',rows:obj};
 }
 

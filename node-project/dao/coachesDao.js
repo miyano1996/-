@@ -37,3 +37,6 @@ module.exports.updateCoaches = async function ({ _id, isDelete }) {
 module.exports.addCoach = async (data) => {
     return await coachesModel.create(data);
 }
+
+//上传完善信息
+module.exports.upLoadAll = async ({_id,telephone,headImage,name,nick,gender,age,price,workingTime,isRest,course,social}) => await coachesModel.updateOne({_id},{telephone,headImage,name,nick,gender,age,price,workingTime,isRest,course,social});
