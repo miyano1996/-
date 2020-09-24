@@ -1,4 +1,4 @@
-import { Table, notification, Space, Image, Popconfirm, message,Button } from 'antd';
+import { Table, notification, Space, Image, Popconfirm, message, Button } from 'antd';
 import React, { Component } from 'react';
 import { SmileOutlined } from '@ant-design/icons';
 import api from '../apis/api';
@@ -93,7 +93,7 @@ export default class AdminReview extends Component {
         setTimeout(() => {
             this.openNotification();
         }, 1000);
-        
+
     }
 
     getGyms = async () => {
@@ -133,6 +133,7 @@ export default class AdminReview extends Component {
                 await this.changeGymStatus(text, '2')
                 // console.log(obj);
                 break;
+            default: break;
         }
     }
 
@@ -147,17 +148,17 @@ export default class AdminReview extends Component {
 
     openNotification = () => {
         notification.open({
-          message: '场馆申请提醒',
-          description:
-            `当前共有${this.state.gymInfo.length}条待处理申请`,
+            message: '场馆申请提醒',
+            description:
+                `当前共有${this.state.gymInfo.length}条待处理申请`,
             icon: <SmileOutlined style={{ color: '#108ee9' }} />,
         });
-      };
+    };
 
     render() {
         return (
             <div>
-                <h1 style={{fontSize:20,fontWeight:'800'}}>场馆申请列表</h1>
+                <h1 style={{ fontSize: 20, fontWeight: '800' }}>场馆申请列表</h1>
                 <Table rowKey="_id" columns={this.state.columns} dataSource={this.state.gymInfo} />
             </div>
         )

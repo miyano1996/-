@@ -1,5 +1,10 @@
 import React, { Component } from "react";
 import { Layout, Menu } from "antd";
+// import {
+//   UserOutlined,
+//   LaptopOutlined,
+//   NotificationOutlined,
+// } from "@ant-design/icons";
 import { withRouter } from "react-router-dom"; //组件加入history的高阶配置
 import { filterSider, siderArr } from "../config/siderArr"; //一个遍历权限后sider数组的方法  要动态渲染的内容
 
