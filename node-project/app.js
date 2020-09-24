@@ -4,13 +4,13 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 // 引入的token文件=========================================================================
-var jwtAuth = require('./utils/jwt.js');
+// var jwtAuth = require('./utils/jwt.js');
 //连接数据库
 require('./dao/database/database');
 //跨域中间件
 var allowCrossDomain = function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With,Origin,Content-Type,Accept,Authorization");
+  res.header("Access-Control-Allow-Headers", "token,X-Requested-With,Origin,Content-Type,Accept,Authorization");
   res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
   res.header('Access-Control-Allow-Credentials', 'true');
   next();
@@ -41,7 +41,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(allowCrossDomain); // 使用该中间件
 
 //在所有一级路径前启用token拦截===============================================
-app.use(jwtAuth);
+// app.use(jwtAuth);
 
 //路由地址
 app.use('/admin', adminRouter);

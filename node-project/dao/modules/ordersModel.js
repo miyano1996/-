@@ -1,7 +1,4 @@
 const mongoose = require('mongoose');
-const { studentsModel } = require('./studentsModel')
-const { coachesModel } = require('./coachesModel')
-const { gymModel } = require('./gymModel')
 
 const ordersSchema = new mongoose.Schema({
     gym: {

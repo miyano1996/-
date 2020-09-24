@@ -32,6 +32,7 @@ router.post('/reg', async (req, res) => {
 //login
 router.post('/login', async (req, res) => {
   const data = await login(req.body);
+  console.log(data)
   res.send(data)
 })
 //新增教练
