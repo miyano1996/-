@@ -26,7 +26,7 @@ export default class OneGym extends Component {
     getOrdersAsync = async () => {
         // console.log(localStorage.gymID);
         const _id = localStorage.gymID
-        let orders = await api.orders.getAllOrders({ id:_id, pageSize: 3, pageSee: this.state.current });
+        let orders = await api.orders.getAllOrders({ id: _id, pageSize: 3, pageSee: this.state.current });
         console.log(orders);
         this.setState({ orders: orders.rows, totalCount: orders.total })
         // console.log(this.state.orders);
@@ -229,6 +229,9 @@ export default class OneGym extends Component {
             {
                 title: '订单状态',
                 dataIndex: 'status',
+                render: (text) => {
+                    return { text } ? <span>已支付</span> : <span>未支付</span>
+                },
                 key: 'status',
             },
         ];
