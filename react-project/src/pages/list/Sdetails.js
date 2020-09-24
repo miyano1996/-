@@ -5,7 +5,9 @@ import { UserOutlined, WhatsAppOutlined, EnvironmentOutlined, DollarOutlined } f
 
 export default class Sdetails extends Component {
     state = {
-        list: {}
+        list: {
+            headImage:'sweet.jpg',//默认值
+        }
     }
     getData = async () => {
         const { getone } = api.students;
@@ -18,11 +20,12 @@ export default class Sdetails extends Component {
     }
     render() {
         const { name, account, headImage, telephone, loginAdress, points } = this.state.list;
+        const imgpath="http://localhost:4000/temp/"+headImage;
         return (
             <div className="sDetails">
                 <div className="box">
                     <div className="headimg">
-                        <Avatar size={64} src={headImage} />
+                        <Avatar size={64} src={imgpath} />
                         <p>{name}</p>
                     </div>
                     <div className="list">

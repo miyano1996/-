@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 //中间写内容
-let { getCoaches, delCoaches, getOne, updateCoaches, addCoach,reg,login } = require("../service/coachesService");
+let { getCoaches, delCoaches, getOne, updateCoaches, addCoach,reg,login,upLoadAll } = require("../service/coachesService");
 
 
 router.post("/getCoaches", async (req, res, next) => {
@@ -39,5 +39,10 @@ router.post('/login', async (req, res) => {
 router.get('/addCoach', async (req, res, next) => {
   const rows = await addCoach(req.query)
   res.send(rows)
+})
+//上传详细信息
+router.post('/upLoadAll',async (req,res)=>{
+  const data = await upLoadAll(req.body);
+  res.send(data);
 })
 module.exports = router;

@@ -92,6 +92,10 @@ export default class Home extends Component {
         const userName = JSON.parse(localStorage.getItem('userInfo')).owner
         this.setState({ userName })
     }
+    logout = ()=>{
+        this.props.history.push("/firstPage");
+        localStorage.setItem("token",'')
+    }
     render() {
         const { userName } = this.state
         return (
@@ -104,8 +108,8 @@ export default class Home extends Component {
                     {/* <div className="logo" /> */}
                     <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["1"]}>
                         <Menu.Item key="1"><NavLink to="/home/Studentslist">首页</NavLink></Menu.Item>
-                        <Menu.Item key="2">消息</Menu.Item>
-                        <Menu.Item key="3"><NavLink to="/home/adminPropaganda">管理中心</NavLink></Menu.Item>
+                        <Menu.Item key="2"><NavLink to="/home/adminPropaganda">管理中心</NavLink></Menu.Item>
+                        <Menu.Item key="3" onClick={this.logout}>退出登录</Menu.Item>
                     </Menu>
                     <p>功夫瑜伽后台管理系统  <span className="showUserName">欢迎您 {userName}</span></p>
 

@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
-
-const { getOne, reg, login, getStudent, delStudent } = require('../service/studentsService')
+const { getOne, reg, login, getStudent, delStudent,upLoadAll,upLat } = require('../service/studentsService')
 
 router.post('/details', async (req, res, next) => {
   const data = await getOne(req.body)
@@ -28,6 +27,16 @@ router.post("/getallStudents", async (req, res, next) => {
 //删除学生
 router.post("/delStudent", async (req, res, next) => {
   const data = await delStudent(req.body);
+  res.send(data);
+})
+
+router.post('/upLoadAll',async (req,res)=>{
+  const data = await upLoadAll(req.body);
+  res.send(data);
+})
+
+router.post('/upLat',async (req,res)=>{
+  const data = await upLat(req.body);
   res.send(data);
 })
 

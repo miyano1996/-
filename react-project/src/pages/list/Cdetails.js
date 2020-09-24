@@ -5,7 +5,9 @@ import { TrademarkOutlined, EnvironmentOutlined, WhatsAppOutlined, FireOutlined,
 
 export default class Cdetails extends Component {
     state = {
-        list: {},
+        list: {
+            headImage:'sweet.jpg',//默认值
+        },
         gym: '',
         workingTime: [],
         course: [],
@@ -23,20 +25,22 @@ export default class Cdetails extends Component {
             list: data.getdata[0], gym: data.getdata[0].gym.name,
             course: data.getdata[0].course, workingTime,
             students: data.getdata[0].students
-        })
+        });
     }
 
     render() {
         //course课程项目,students上课时间
-        const { name, account, headImage, telephone, loginAddress, isRest, price, } = this.state.list;
-        const { gym, course, workingTime, students } = this.state;
-        console.log(this.state.list)
+        const {name,account,headImage,telephone,loginAddress,isRest,price,}=this.state.list;
+        const {gym,course,workingTime,students}=this.state;
+        const imgpath="http://localhost:4000/temp/"+headImage;
+        // console.log(headImage,this.list)
+
         return (
             <div className="c-details">
                 <div className="cBox">
                     <div className="left">
                         <div className="left-head">
-                            <Avatar size={64} src={require(`../../assets/images/${headImage}`)} />
+                            <Avatar size={64} src={imgpath}/>
                             <p>{name}</p>
                         </div>
                         <div className="left-box">
