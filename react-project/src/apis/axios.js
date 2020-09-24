@@ -10,9 +10,8 @@ instance.interceptors.request.use(
     (config) => {
         const token = localStorage.token;
         //两个都要 别删
+            config.headers.token = token;      
             config.headers.Authorization = 'Bearer '+ token
-            config.headers.token ='Bearer '+ token;
-      
         return config
     },
     (err) => {
