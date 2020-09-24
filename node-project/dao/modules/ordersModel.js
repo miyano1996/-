@@ -17,7 +17,7 @@ const ordersSchema = new mongoose.Schema({
         ref: 'studentsModel'
     },//{_id,name}（学员）   5f685c6ea04e0000f1000d01
     time: String,//（订单生成时间）
-    pay: Boolean,//（订单状态）布尔值  true:已付款
+    status: Boolean,//（订单状态）布尔值  true:已付款
     delet: Boolean,//删除状态,负责店家软删除  true为删除
     orderPrice: String,//（订单价格
     className: String

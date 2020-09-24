@@ -41,10 +41,11 @@ export default class Login extends Component {
                 announcement:[],//公告
                 status:"-1",//状态值：0表示正在申请，1表示申请成功，2表示申请失败
                 activeImage:[],
-                time:[],//申请时间
                 checkCode:'',//验证
             });
-            message.success(res.msg)
+            if(res.success){
+                message.success(res.msg)
+            }else{message.error(res.msg)}
         } catch (error) {
             message.error(error.msg)
         }

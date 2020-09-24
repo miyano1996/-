@@ -58,6 +58,7 @@ export default class Studentlist extends Component {
                 key: 'action',
                 render: (text, { name, _id, isDelete }) => (
                     <Space size="middle">
+                        <Button type="primary" onClick={() => this.gotoCoachesdetail(text)}>详情</Button>
                         <Button type="primary" onClick={() => this.showModal(text)}>修改</Button>
                         <Popconfirm
                             title={`确定要删除${name}教练吗？`}
@@ -149,6 +150,11 @@ export default class Studentlist extends Component {
             },
         ],
         data: [],
+    }
+    //教练详情
+    gotoCoachesdetail(e) {
+        localStorage.coachesID = e._id;
+        this.props.history.push("/home/Cdetails")
     }
     //提交//修改信息
     onFinish = async (values) => {

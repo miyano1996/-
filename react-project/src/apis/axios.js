@@ -1,15 +1,21 @@
 // //设置拦截器
+
 import axios from 'axios'
+import {HashRouter} from 'react-router-dom'
 const instance = axios.create({
     baseURL: 'http://localhost:4000'
 })
 //设置请求拦截器
 instance.interceptors.request.use(
     (config) => {
+        const token = localStorage.token;
+    
+            config.headers.Authorization ='Bearer '+ token;
+      
         return config
     },
     (err) => {
-        return err
+        return Promise.reject(err)
     }
 )
 //设置响应拦截器
@@ -23,7 +29,13 @@ instance.interceptors.response.use(
         }
     },
     (err) => {
-        //此处可以获取状态码，然后根据状态码做出对应行为
+        if (err.response.status === 401) { //401 token 头过期
+            alert("您的认证已过期，请重新登录")
+            const router = new HashRouter()
+            router.history.push('/firstPage')
+            return { data: { msg: '身份认证失败,请重新登录', success: false } }
+
+        }
         return err
     }
 )

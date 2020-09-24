@@ -18,7 +18,8 @@ export default class FirstPage extends Component {
         drawerVisible: false,
         telephone: '',
         _id: "",
-        name: ""
+        name: "",
+        childrenDrawer:false
     }
     setVisible = (bool) => {
         this.setState({ visible: bool })
@@ -111,8 +112,9 @@ export default class FirstPage extends Component {
             const res = await api.gym.changePassword({ _id, ...values })
             if (res.success) {
                 message.success(res.msg)
+                this.onClose()
             } else {
-                message.error(res.success)
+                message.error("修改的密码不能与原密码相同")
             }
         } catch (error) {
             console.log('err', error)
