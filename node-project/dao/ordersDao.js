@@ -28,13 +28,6 @@ module.exports.getAllOrders = async function (data) {
     }
 
 };
-//获取场馆订单
-module.exports.getOrders = async function (obj) {
-    const msg = await ordersModel.find({ gym: "5f684a17ed6c0000ef007954" })
-    return data = {
-        rows: msg
-    }
-};
 // 获取指定的订单
 module.exports.getOrder = async function (data) {
     const msg = await ordersModel.find({ _id: data })

@@ -1,6 +1,6 @@
 const { model } = require('mongoose');
 const { studentsModel } = require('./modules/studentsModel')
-
+const { ordersModel } = require('./modules/ordersModel');
 module.exports.getOne = async (data) => {
 	return await studentsModel.find({ _id: data.id });
 }
