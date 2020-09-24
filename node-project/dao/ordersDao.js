@@ -15,6 +15,7 @@ module.exports.addOrder = async function (data) {
 
 // 获取所有订单
 module.exports.getAllOrders = async function (data) {
+    console.log(data);
     const { pageSize, pageSee } = data
     const total = await ordersModel.find({ gym: data.id, delet: false }).populate('students').populate('coaches').populate('gym').countDocuments();
     const msg = await ordersModel.find({ gym: data.id, delet: false }).populate('students').populate('coaches').populate('gym')
