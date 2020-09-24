@@ -10,25 +10,25 @@ export default class Cdetails extends Component {
         workingTime:[],
         course:[],
         students:[],
-        id:'5f6afe750c31000049007551'
+        id:'5f6afefd0c31000049007552'
     }
     componentDidMount(){
         this.getData(this.state.id)
     }
     getData=async (id)=>{
         const data=await api.coaches.getone({id});
-        //工作日  字符串转数组遍历
+        // 工作日  字符串转数组遍历
         const workingTime=(data.getdata[0].workingTime).split(',')
         this.setState({list:data.getdata[0],gym:data.getdata[0].gym.name,
                        course:data.getdata[0].course,workingTime,
-                       students:data.getdata[0].students})
+                       students:data.getdata[0].students});
     }
 
     render() {
         //course课程项目,students上课时间
         const {name,account,headImage,telephone,loginAddress,isRest,price,}=this.state.list;
         const {gym,course,workingTime,students}=this.state;
-        console.log(headImage)
+        // console.log(headImage,this.list)
 
         return (
             <div className="c-details">
