@@ -1,5 +1,5 @@
 const { studentsModel } = require('./modules/studentsModel')
-
+const { ordersModel } = require('./modules/ordersModel');
 module.exports.getOne = async (data) => {
 	return await studentsModel.find({ _id: data.id });
 }
@@ -23,3 +23,8 @@ module.exports.reg = async data => {
 //登录
 module.exports.login = async ({ account, password }) => await studentsModel.find({ account, password });
 
+//获取场馆学生
+
+module.exports.getGymStudent = async ({ _id }) => {
+	const arr = await ordersModel.find({ gym: _id }).populate('students').populate('coaches').populate('gym').countDocuments();
+}
