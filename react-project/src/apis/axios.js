@@ -9,9 +9,9 @@ const instance = axios.create({
 instance.interceptors.request.use(
     (config) => {
         const token = localStorage.token;
-    
-            config.headers.token ='Bearer '+ token;
-      
+        //两个都要 别删
+            config.headers.token = token;      
+            config.headers.Authorization = 'Bearer '+ token
         return config
     },
     (err) => {
@@ -33,8 +33,8 @@ instance.interceptors.response.use(
             alert("您的认证已过期，请重新登录")
             const router = new HashRouter()
             router.history.push('/firstPage')
+            localStorage.setItem("token",'')
             return { data: { msg: '身份认证失败,请重新登录', success: false } }
-
         }
         return err
     }
