@@ -7,7 +7,7 @@ const jwtAuth = expressJWT({
     credentialsRequired: true
 }).unless({
     // 配置不需要 token 验证的 url 路径
-    path: ['/admin/login', '/gym/register', '/gym/login','/images/upload','/gym/sendCheckCode','/gym/changePassword','/gym/clearCheckCode','/gym/getGymByText']
+    path: ['/admin/login', '/gym/register', '/gym/login','/images/upload','/gym/sendCheckCode','/gym/changePassword','/gym/clearCheckCode','/gym/getGymByText','/students/login','/students/reg','/coaches/login','coaches/reg']
 });
 
 module.exports = jwtAuth;

@@ -133,6 +133,7 @@ export default class AdminReview extends Component {
                 await this.changeGymStatus(text, '2')
                 // console.log(obj);
                 break;
+            default:break
         }
     }
 
