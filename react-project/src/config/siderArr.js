@@ -20,7 +20,9 @@ export const siderArr = [
     fartitle: "场馆",
     son: [
       { key: "/home/oneGym", title: "场馆列表" },
-      { key: "/home/adminReview", title: "场馆审批",roles:['gym'] },
+      { key: "/home/adminReview", title: "场馆审批", roles: ['gym'] },
+      { key: "/home/Orders", title: "订单列表", roles: ['gym'] },
+      { key: "/home/Complaint", title: "投诉管理", roles: ['gym'] },
     ],
     //   roles:['超级管理员']//显示权限
   },
