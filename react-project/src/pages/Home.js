@@ -91,7 +91,7 @@ export default class Home extends Component {
           />
           {/* <div className="logo" /> */}
           <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["1"]}>
-            <Menu.Item key="1">首页</Menu.Item>
+            <Menu.Item key="1"><NavLink to="/home/Studentslist">首页</NavLink></Menu.Item>
             <Menu.Item key="2">消息</Menu.Item>
             <Menu.Item key="3"><NavLink to="/home/adminPropaganda">管理中心</NavLink></Menu.Item>
           </Menu>
