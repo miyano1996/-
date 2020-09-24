@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Layout, Menu } from "antd";
-import {
-  UserOutlined,
-  LaptopOutlined,
-  NotificationOutlined,
-} from "@ant-design/icons";
+// import {
+//   UserOutlined,
+//   LaptopOutlined,
+//   NotificationOutlined,
+// } from "@ant-design/icons";
 import { withRouter } from "react-router-dom"; //组件加入history的高阶配置
 import { filterSider, siderArr } from "../config/siderArr"; //一个遍历权限后sider数组的方法  要动态渲染的内容
 
@@ -19,7 +19,7 @@ class SideBar extends Component {
     }
     this.props.history.push(key);
   };
-  
+
   mapsider = (data) => {//封装递归遍历sider数组  打印  包含了二级数组
     return filterSider(data).map((item) => {
       const { farKey, icon, fartitle, son, key, title } = item; //解构数据   便于简写
@@ -35,8 +35,8 @@ class SideBar extends Component {
   };
 
   render() {
-    const {location}=this.props;//获取当前网页地址 用来确认key选中状态
-    const keyFar=localStorage.keyFar;
+    const { location } = this.props;//获取当前网页地址 用来确认key选中状态
+    const keyFar = localStorage.keyFar;
 
     return (
       <Sider width={200} className="site-layout-background">

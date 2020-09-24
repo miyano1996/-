@@ -1,3 +1,4 @@
+const { model } = require('mongoose');
 const { studentsModel } = require('./modules/studentsModel')
 
 module.exports.getOne = async (data) => {
@@ -5,6 +6,13 @@ module.exports.getOne = async (data) => {
 }
 
 
+//获取学生
+
+module.exports.getStudent = async ({ _id, pageSize, pageNumber }) => {
+	let totalCount = await (await studentsModel.find({ isDelete: false })).filter(item => item.gym.includes(_id)).length;
+	let arr = await studentsModel.find({ isDelete: false, gym: { $elemMatch: { $eq: _id } } }).limit(pageSize - 0).skip((pageNumber - 1) * pageSize);
+	return { arr, totalCount, pageSize, pageNumber };
+}
 
 //login
 module.exports.login = async data => {
@@ -23,3 +31,8 @@ module.exports.reg = async data => {
 //登录
 module.exports.login = async ({ account, password }) => await studentsModel.find({ account, password });
 
+//删除学生
+
+module.exports.delStudent = async ({ _id, isDelete }) => {
+	return await studentsModel.update({ _id }, { isDelete })
+}

@@ -1,7 +1,28 @@
-const { getOne, reg, isExist,login,getStudent } = require('../dao/studentsDao');
+const { getOne, reg, isExist, login, getStudent, delStudent } = require('../dao/studentsDao');
 
 const jwt = require('jsonwebtoken'); //token
 const { KEY } = require('../utils/consts.js'); //封装的密钥串
+
+
+//删除学生
+module.exports.delStudent = async (data) => {
+	const msg = await delStudent(data);
+	if (msg.ok === 1) {
+		return msg;
+	}
+}
+
+//获取学生
+module.exports.getStudent = async (data) => {
+	const { arr, totalCount, pageSize, pageNumber } = await getStudent(data);
+	if (arr.length > 0) {
+		return {
+			success: true,
+			msg: '获取成功',
+			totalCount, pageSize, pageNumber, arr
+		}
+	}
+}
 
 module.exports.getOne = async (data) => {
 	const getdata = await getOne(data);
@@ -30,18 +51,18 @@ module.exports.reg = async data => {
 }
 
 //登录
-module.exports.login = async data =>{
-    const isLogin = await login(data);
-    if(isLogin.length){
-		const {account,name,role,_id} = isLogin[0];
-        const token = jwt.sign(
-			{account},//用于设置token中要保存的用户信息
+module.exports.login = async data => {
+	const isLogin = await login(data);
+	if (isLogin.length) {
+		const { account, name, role, _id } = isLogin[0];
+		const token = jwt.sign(
+			{ account },//用于设置token中要保存的用户信息
 			KEY,//密钥， 任意字符串
 			{ expiresIn: 60 * 60 }//设置token的有效期，单位秒
-            )
-        return { success: true, msg: "登录成功" ,rows:{userInfo:{name,_id,role},token}};
-    }else{
-        return { success: false,msg: '账号或密码错误'};
-    }
+		)
+		return { success: true, msg: "登录成功", rows: { userInfo: { name, _id, role }, token } };
+	} else {
+		return { success: false, msg: '账号或密码错误' };
+	}
 }
 
