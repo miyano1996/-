@@ -10,7 +10,6 @@ router.post('/getAllGym', async (req, res, next) => {
 })
 //删除场馆信息
 router.post('/delGym', async (req, res, next) => {
-  console.log(req.body);
   const data = await delGym(req.body);
   res.send(data);
 })
