@@ -53,3 +53,8 @@ module.exports.upLat = async ({_id,loginAdress}) => await studentsModel.updateOn
 module.exports.delStudent = async ({ _id, isDelete }) => {
 	return await studentsModel.update({ _id }, { isDelete })
 }
+//修改密码
+
+module.exports.updatePassword = async ({ account, password,newPassword }) => {
+	return await studentsModel.update({ account,password }, { password:newPassword })
+}
