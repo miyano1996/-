@@ -1,10 +1,10 @@
 const jwt = require('jsonwebtoken'); //token
 const { KEY } = require('../utils/consts.js'); //封装的密钥串
-const { getCoaches, delCoaches, getOne, updateCoaches, addCoach,reg,isExist,login,upLoadAll,updatePassword } = require("../dao/coachesDao");
+const { getCoaches, delCoaches, getOne, updateCoaches, addCoach, reg, isExist, login, upLoadAll, updatePassword } = require("../dao/coachesDao");
 
 //获取教练
 module.exports.getCoaches = async function (data) {
-    let { arr, totalCount, pageSize, pageNumber } = await getCoaches(data);
+    let { arr, totalCount, pageSize, pageNumber, total } = await getCoaches(data);
     if (arr.length > 0) {
         return {
             success: true,
@@ -12,7 +12,12 @@ module.exports.getCoaches = async function (data) {
             rows: arr,
             totalCount,
             pageSize,
-            pageNumber
+            pageNumber,
+            total
+        };
+    } else {
+        return {
+            total
         };
     }
 }
@@ -53,49 +58,49 @@ module.exports.addCoach = async (data) => {
 
 //教练注册
 module.exports.reg = async data => {
-	const isReg = await isExist(data);
-	if (isReg.length > 0) {
-		return { success: false, msg: "该用户名已被注册" };
-	} else {
-		const obj = await reg(data);
-		// console.log(obj);
-		if (obj._id) {
-			return { success: true, msg: "注册成功", obj };
-		}
-		return { success: false, msg: "注册失败", obj };
-	}
+    const isReg = await isExist(data);
+    if (isReg.length > 0) {
+        return { success: false, msg: "该用户名已被注册" };
+    } else {
+        const obj = await reg(data);
+        // console.log(obj);
+        if (obj._id) {
+            return { success: true, msg: "注册成功", obj };
+        }
+        return { success: false, msg: "注册失败", obj };
+    }
 }
 
 //登录
-module.exports.login = async data =>{
+module.exports.login = async data => {
     const isLogin = await login(data);
-    if(isLogin.length){
-		const {account,name,role,_id} = isLogin[0];
+    if (isLogin.length) {
+        const { account, name, role, _id } = isLogin[0];
         const token = jwt.sign(
-			{account},//用于设置token中要保存的用户信息
-			KEY,//密钥， 任意字符串
-			{ expiresIn: 60 * 60 }//设置token的有效期，单位秒
-            )
-        return { success: true, msg: "登录成功" ,rows:{userInfo:{name,_id,role},token}};
-    }else{
-        return { success: false,msg: '账号或密码错误'};
+            { account },//用于设置token中要保存的用户信息
+            KEY,//密钥， 任意字符串
+            { expiresIn: 60 * 60 }//设置token的有效期，单位秒
+        )
+        return { success: true, msg: "登录成功", rows: { userInfo: { name, _id, role }, token } };
+    } else {
+        return { success: false, msg: '账号或密码错误' };
     }
 }
 
 //上传所有信息
-module.exports.upLoadAll = async data =>{
+module.exports.upLoadAll = async data => {
     console.log(data);
-	const obj = await upLoadAll(data);
-	if(obj.nModified == '1'){
-		return {success:true,msg:'修改信息成功',rows:obj}
-	}
-	return {success:false,msg:'修改信息失败',rows:obj};
+    const obj = await upLoadAll(data);
+    if (obj.nModified == '1') {
+        return { success: true, msg: '修改信息成功', rows: obj }
+    }
+    return { success: false, msg: '修改信息失败', rows: obj };
 }
 //修改密码
-module.exports.updatePassword = async data =>{
-	const obj = await updatePassword(data);
-	if(obj.nModified == '1'){
-		return {success:true,msg:'修改密码成功',rows:obj}
-	}
-	return {success:false,msg:'修改密码失败',rows:obj};
+module.exports.updatePassword = async data => {
+    const obj = await updatePassword(data);
+    if (obj.nModified == '1') {
+        return { success: true, msg: '修改密码成功', rows: obj }
+    }
+    return { success: false, msg: '修改密码失败', rows: obj };
 }
