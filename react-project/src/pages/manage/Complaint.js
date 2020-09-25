@@ -41,7 +41,7 @@ export default class Complaint extends Component {
     }
     render() {
         return (
-            this.state.list.length == 0 ? <h1>暂无数据</h1> :
+            this.state.list.length === 0 ? <h1>暂无数据</h1> :
                 <div className="complaint-box">
                     {this.state.list.map((item) => <div className="complaint-item" key={item._id}>
                         <div className="item-top">

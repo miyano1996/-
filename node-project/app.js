@@ -4,10 +4,17 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 // 引入的token文件=========================================================================
-var jwtAuth = require('./utils/jwt');
+var jwtAuth = require('./utils/jwt.js');
 //连接数据库
 require('./dao/database/database');
-
+//跨域中间件
+var allowCrossDomain = function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "token,X-Requested-With,Origin,Content-Type,Accept,Authorization");
+  res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
+  res.header('Access-Control-Allow-Credentials', 'true');
+  next();
+}
 
 var adminRouter = require('./routes/admin');
 var imagesRouter = require('./routes/images');//图片上传一级路径
@@ -30,19 +37,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-//跨域中间件
-app.use(function (req, res, next) {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Headers", "content-type,token,x-requested-with");
-  // res.setHeader('Access-Control-Allow-Methods',"DELETE")
-  next();
-});
+;
+app.use(allowCrossDomain); // 使用该中间件
 
 //在所有一级路径前启用token拦截===============================================
-// app.use(jwtAuth);
+app.use(jwtAuth);
 
 //路由地址
-
 app.use('/admin', adminRouter);
 app.use('/images', imagesRouter);
 app.use('/gym', gymRouter);

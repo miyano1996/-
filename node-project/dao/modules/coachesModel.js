@@ -18,7 +18,10 @@ const coachesSchema = new mongoose.Schema({
     },
     isRest: Boolean,//（是否休息中）
     course: Array,//(所教授课程)，
-    isDelete: Boolean//（是否被管理员、场馆删除）
+    isDelete: Boolean,//（是否被管理员、场馆删除）
+    nick:String,
+    social:String,//社交状态
+    role:String,//用于手机端角色识别
 
 }, { versionKey: false });
 module.exports.coachesModel = mongoose.model('coachesModel', coachesSchema, 'coaches');

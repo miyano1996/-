@@ -14,6 +14,20 @@ const students = {
             method: 'get',
             params
         })
+    },
+    getallStudents(data) {
+        return axios({
+            url: "/students/getallStudents",
+            method: 'POST',
+            data
+        })
+    },
+    delStudent(data) {
+        return axios({
+            url: "/students/delStudent",
+            method: 'POST',
+            data
+        })
     }
 }
 

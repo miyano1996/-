@@ -21,11 +21,16 @@ export default class AdminLogin extends Component {
     onFinish = async (values) => {
         try {
             const res = await api.admin.login(values);
+            console.log(res)
             const { token, userInfo } = res.rows;
             localStorage.setItem('token', token);
             localStorage.setItem('userInfo', JSON.stringify(userInfo));
-
-            message.success(res.msg)
+            if(res.success){
+                message.success(res.msg)
+            }else{
+                message.error(res.msg)
+            }
+            this.props.history.push('/home')
         } catch (error) {
             message.error(error.msg)
         }

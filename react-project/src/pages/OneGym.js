@@ -17,23 +17,23 @@ export default class OneGym extends Component {
         loading: false
     }
     async componentDidMount() {
-        await this.setState({ _id: JSON.parse(localStorage.userInfo)._id })
+        await this.setState({ _id: localStorage.gymID })
         // this.setState({_id:'5f65a8ffbb2219492cc67b9f'})
         await this.getGymsAsync()
         this.getOrdersAsync()
     }
     //获取订单
     getOrdersAsync = async () => {
-        // console.log(JSON.parse(localStorage.userInfo)._id);
-        const _id = JSON.parse(localStorage.userInfo)._id
-        let orders = await api.orders.getAllOrders({_id,pageSize:3,pageSee:this.state.current});
+        // console.log(localStorage.gymID);
+        const _id = localStorage.gymID
+        let orders = await api.orders.getAllOrders({ id: _id, pageSize: 3, pageSee: this.state.current });
         console.log(orders);
-        this.setState({ orders: orders.rows ,totalCount:orders.total})
+        this.setState({ orders: orders.rows, totalCount: orders.total })
         // console.log(this.state.orders);
     }
     //获取场馆
     getGymsAsync = async () => {
-        const data = await api.gym.getGym(JSON.parse(localStorage.userInfo)._id);
+        const data = await api.gym.getGym(localStorage.gymID);
         this.setState({ rows: data.rows });
         // console.log(data);
     }
@@ -72,15 +72,15 @@ export default class OneGym extends Component {
         const rows = this.state.rows
         rows.announcement[index].content = e.target.value
         this.setState({ rows: rows })
-        this.updateGymAsync({ _id: this.state._id, ...this.state.rows })
+        // this.updateGymAsync({ _id: this.state._id, ...this.state.rows })
     }
     //新增公告
     addAnnouncement = async () => {
         const rows = this.state.rows
-        if(rows.announcement.length===0){
+        if (rows.announcement.length === 0) {
             rows.announcement.push({ content: '', statu: false, id: 0, btn: '确定' })
-        }else {
-            rows.announcement.push({ content: '', statu: false, id: rows.announcement[rows.announcement.length-1].id+1, btn: '确定' })
+        } else {
+            rows.announcement.push({ content: '', statu: false, id: rows.announcement[rows.announcement.length - 1].id + 1, btn: '确定' })
         }
         await this.setState({ rows: rows })
         this.updateGymAsync({ _id: this.state._id, ...this.state.rows })
@@ -160,10 +160,10 @@ export default class OneGym extends Component {
     toStudents = () => {
         this.props.history.push('/home/studentslist')
     }
-    onchange = (pageNumber, pageSize) =>{
+    onchange = (pageNumber, pageSize) => {
         console.log(pageNumber, pageSize);
         try {
-            this.setState({current:pageNumber})
+            this.setState({ current: pageNumber })
             this.getOrdersAsync({ pageNumber, pageSize })
             this.setState({ loading: false })
         } catch (error) {
@@ -171,9 +171,9 @@ export default class OneGym extends Component {
     }
     render() {
         const { totalCount, loading, current, disabled, changeinformation, rows, orders } = this.state
-        // const person = JSON.parse(localStorage.userInfo).role
+        // const person = JSON.parse(localStorage.gymID).role
         // console.log(123);
-        const { owner,name, grade, telephone, address, businessTime, idea, time, activeContent, activeTitle, announcement, activeImage } = rows
+        const { owner, name, grade, telephone, address, businessTime, idea, time, activeContent, activeTitle, announcement, activeImage } = rows
         var newAdd = JSON.parse(address)
         var addArr = []
         // console.log(rows);
@@ -229,6 +229,9 @@ export default class OneGym extends Component {
             {
                 title: '订单状态',
                 dataIndex: 'status',
+                render: (text) => {
+                    return { text } ? <span>已支付</span> : <span>未支付</span>
+                },
                 key: 'status',
             },
         ];

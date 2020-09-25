@@ -19,7 +19,11 @@ const coaches = {
     })
   },
   updateCoaches(data) {
-
+    return axios({
+      url: '/coaches/updateCoaches',
+      method: "POST",
+      data
+    })
   },
   getone(data) {
     return axios({

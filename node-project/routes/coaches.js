@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 //中间写内容
-let { getCoaches, delCoaches, getOne, updateCoaches, addCoach,reg,login } = require("../service/coachesService");
+let { getCoaches, delCoaches, getOne, updateCoaches, addCoach,reg,login,upLoadAll,updatePassword } = require("../service/coachesService");
 
 
 router.post("/getCoaches", async (req, res, next) => {
@@ -15,7 +15,7 @@ router.post("/delCoaches", async (req, res, next) => {
   res.send(msg);
 })
 //修改信息
-router.post("updateCoaches", async (req, res, next) => {
+router.post("/updateCoaches", async (req, res, next) => {
   const msg = await updateCoaches(req.body);
   res.send(msg)
 })
@@ -32,11 +32,22 @@ router.post('/reg', async (req, res) => {
 //login
 router.post('/login', async (req, res) => {
   const data = await login(req.body);
+  console.log(data)
   res.send(data)
 })
 //新增教练
 router.get('/addCoach', async (req, res, next) => {
   const rows = await addCoach(req.query)
   res.send(rows)
+})
+//上传详细信息
+router.post('/upLoadAll',async (req,res)=>{
+  const data = await upLoadAll(req.body);
+  res.send(data);
+})
+//修改密码
+router.post('/updatePassword',async (req,res)=>{
+  const data = await updatePassword(req.body);
+  res.send(data);
 })
 module.exports = router;
