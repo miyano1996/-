@@ -93,7 +93,8 @@ export default class Home extends Component {
         this.setState({ userName })
     }
     logout = ()=>{
-        this.props.history.push("/firstPage");
+        const {role}  = JSON.parse(localStorage.userInfo)
+        this.props.history.push( role==="gym"?"/firstPage":"/adminLogin");
         localStorage.setItem("token",'')
     }
     render() {

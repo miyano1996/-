@@ -35,7 +35,6 @@ export const siderArr = [
     son: [
       { key: "/home/Gymlist", title: "场馆列表" },
       { key: "/home/adminReview", title: "场馆审批" },
-   
     ],
       roles:['admin']//显示权限
   },
