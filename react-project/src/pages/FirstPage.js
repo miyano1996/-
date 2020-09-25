@@ -112,6 +112,8 @@ export default class FirstPage extends Component {
             const res = await api.gym.changePassword({ _id, ...values })
             if (res.success) {
                 message.success(res.msg)
+                //关闭抽屉
+                this.onChildrenDrawerClose()
                 this.onClose()
             } else {
                 message.error("修改的密码不能与原密码相同")
@@ -133,8 +135,6 @@ export default class FirstPage extends Component {
                                 <span className="brand-title">一起健♂身</span>
                             </div>
                             <div className="right-item">
-                                <a href="#/login">登录</a>
-                                <a href="#/register">注册</a>
                                 <span>关于我们</span>
                                 <span>投诉与建议</span>
                             </div>
