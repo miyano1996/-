@@ -84,7 +84,6 @@ module.exports.login = async data =>{
 
 //上传所有信息
 module.exports.upLoadAll = async data =>{
-    console.log(data);
 	const obj = await upLoadAll(data);
 	if(obj.nModified == '1'){
 		return {success:true,msg:'修改信息成功',rows:obj}

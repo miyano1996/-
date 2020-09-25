@@ -40,7 +40,8 @@ module.exports.addCoach = async (data) => {
 }
 
 //上传完善信息
-module.exports.upLoadAll = async ({_id,telephone,headImage,name,nick,gender,age,price,workingTime,isRest,course,social}) => await coachesModel.updateOne({_id},{telephone,headImage,name,nick,gender,age,price,workingTime,isRest,course,social});
+module.exports.upLoadAll = async data => await coachesModel.updateOne({_id:data._id},{...data});
+
 //修改密码
 module.exports.updatePassword = async ({ account, password,newPassword }) => {
 	return await coachesModel.update({ account,password }, { password:newPassword })

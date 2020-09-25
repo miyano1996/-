@@ -15,6 +15,7 @@ const studentsSchema = new mongoose.Schema({
     gym: Array,//购课的时候绑定场馆
     coaches: Array,//绑定教练
     age: String,
-    gender: String
+    gender: String,
+    role: String,//手机端要用    别删！！！！！！！！！
 }, { versionKey: false });
 module.exports.studentsModel = mongoose.model('studentsModel', studentsSchema, 'students');

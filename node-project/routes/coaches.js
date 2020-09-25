@@ -42,6 +42,7 @@ router.get('/addCoach', async (req, res, next) => {
 })
 //上传详细信息
 router.post('/upLoadAll',async (req,res)=>{
+  
   const data = await upLoadAll(req.body);
   res.send(data);
 })

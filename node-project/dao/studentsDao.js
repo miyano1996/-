@@ -43,7 +43,7 @@ module.exports.reg = async data => {
 module.exports.login = async ({ account, password }) => await studentsModel.find({ account, password });
 
 //上传完善信息
-module.exports.upLoadAll = async ({_id,telephone,headImage,name,nick,gender,social,age}) => await studentsModel.updateOne({_id},{telephone,headImage,name,nick,gender,social,age});
+module.exports.upLoadAll = async (data) => await studentsModel.updateOne({_id:data._id},{data});
 
 //登陆成功后获取当前经纬度
 module.exports.upLat = async ({_id,loginAdress}) => await studentsModel.updateOne({_id},loginAdress);
