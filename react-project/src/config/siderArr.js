@@ -1,6 +1,6 @@
 //动态侧边栏
 import React from "react"; //图标样式所需要
-import { UserOutlined, LaptopOutlined } from "@ant-design/icons";
+import { UserOutlined, LaptopOutlined,BankOutlined,SoundOutlined} from "@ant-design/icons";
 
 export const siderArr = [
   //   { key: "/home/system", title: "首页" },
@@ -13,24 +13,38 @@ export const siderArr = [
       // { key: "/home/Coacheslist", title: "教练列表",roles:['超级管理员']},
       { key: "/home/Coacheslist", title: "教练列表" },
     ],
+      roles:['gym']//显示权限
+
   },
   {
     farKey: "sub2",
-    icon: <LaptopOutlined />,
+    icon: <BankOutlined/>,
     fartitle: "场馆",
     son: [
-      { key: "/home/oneGym", title: "场馆列表" },
-      { key: "/home/adminReview", title: "场馆审批", roles: ['gym'] },
-      { key: "/home/Orders", title: "订单列表", roles: ['gym'] },
-      { key: "/home/Complaint", title: "投诉管理", roles: ['gym'] },
+      { key: "/home/Orders", title: "订单列表"},
+      { key: "/home/Complaint", title: "投诉管理"},
     ],
+      roles:['gym']//显示权限
+
     //   roles:['超级管理员']//显示权限
   },
   {
+    farKey: "sub4",
+    icon:<LaptopOutlined />,
+    fartitle: "场馆管理",
+    son: [
+      { key: "/home/Gymlist", title: "场馆列表" },
+      { key: "/home/adminReview", title: "场馆审批" },
+   
+    ],
+      roles:['admin']//显示权限
+  },
+  {
     farKey: "sub3",
-    icon: <LaptopOutlined />,
-    fartitle: "活动策划",
-    son: [{ key: "/home/adminPropaganda", title: "添加活动" }],
+    icon:<SoundOutlined />,
+    fartitle: "广告投放",
+    son: [{ key: "/home/adminPropaganda", title: "添加广告" }],
+    roles:['admin']//显示权限
   },
 ];
 
