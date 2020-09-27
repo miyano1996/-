@@ -40,4 +40,9 @@ module.exports.addCoach = async (data) => {
 }
 
 //上传完善信息
-module.exports.upLoadAll = async ({_id,telephone,headImage,name,nick,gender,age,price,workingTime,isRest,course,social}) => await coachesModel.updateOne({_id},{telephone,headImage,name,nick,gender,age,price,workingTime,isRest,course,social});
+module.exports.upLoadAll = async (data) => await coachesModel.updateOne({_id:data._id},{...data});
+
+//获取所有教练
+module.exports.getCoachAll = async (data)=>{
+    return await coachesModel.find(data)
+}

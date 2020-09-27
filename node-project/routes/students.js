@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const { getOne, reg, login, getStudent, delStudent,upLoadAll,upLat } = require('../service/studentsService')
+const { getOne, reg, login, getStudent, delStudent,upLoadAll,upLat,getStuByText } = require('../service/studentsService')
 
 router.post('/details', async (req, res, next) => {
   const data = await getOne(req.body)
@@ -36,7 +36,13 @@ router.post('/upLoadAll',async (req,res)=>{
 })
 
 router.post('/upLat',async (req,res)=>{
+  console.log(req.body);
   const data = await upLat(req.body);
+  res.send(data);
+})
+
+router.get('/getStuByText',async (req,res)=>{
+  const data = await getStuByText(req.query);
   res.send(data);
 })
 
