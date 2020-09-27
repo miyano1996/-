@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken'); //token
 const { KEY } = require('../utils/consts.js'); //封装的密钥串
-const { getCoaches, delCoaches, getOne, updateCoaches, addCoach,reg,isExist,login,upLoadAll,updatePassword ,getEveryCoaches} = require("../dao/coachesDao");
+const { getCoaches, delCoaches, getOne, updateCoaches, addCoach,reg,isExist,login,upLoadAll,getCoachAll,updatePassword ,getEveryCoaches} = require("../dao/coachesDao");
 
 //获取教练
 module.exports.getCoaches = async function (data) {
@@ -103,6 +103,15 @@ module.exports.upLoadAll = async data =>{
 		return {success:true,msg:'修改信息成功',rows:obj}
 	}
 	return {success:false,msg:'修改信息失败',rows:obj};
+}
+
+//获取所有教练
+module.exports.getCoachAll = async data =>{
+    const obj = await getCoachAll(data);
+    if(obj.length > 0){
+        return {success:true,msg:'获取所有教练成功',rows:obj}
+    }
+    return {success:false,msg:'获取所有教练失败',rows:obj}
 }
 //修改密码
 module.exports.updatePassword = async data =>{
