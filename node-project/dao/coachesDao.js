@@ -12,6 +12,10 @@ module.exports.getOne = async (data) => {
     return await coachesModel.find({ _id: data.id }).populate('gym');
     // return await coachesModel.find({_id:data.id});
 }
+module.exports.getEveryCoaches = async (data) => {
+    return await coachesModel.find();
+    // return await coachesModel.find({_id:data.id});
+}
 //验证是否重名
 module.exports.isExist = async data => {
     return await coachesModel.find({ account: data.account });
