@@ -39,3 +39,6 @@ module.exports.getOrder = async function (data) {
 module.exports.delOrder = async function (data) {
     await ordersModel.updateOne({ _id: data._id }, { delet: data.success });
 }
+
+//获取任意字段订单
+module.exports.getOrderByText = async data => await ordersModel.find(data);

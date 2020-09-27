@@ -12,6 +12,10 @@ module.exports.getOne = async (data) => {
     return await coachesModel.find({ _id: data.id }).populate('gym');
     // return await coachesModel.find({_id:data.id});
 }
+module.exports.getEveryCoaches = async (data) => {
+    return await coachesModel.find();
+    // return await coachesModel.find({_id:data.id});
+}
 //验证是否重名
 module.exports.isExist = async data => {
     return await coachesModel.find({ account: data.account });
@@ -40,7 +44,12 @@ module.exports.addCoach = async (data) => {
 }
 
 //上传完善信息
-module.exports.upLoadAll = async data => await coachesModel.updateOne({_id:data._id},{...data});
+module.exports.upLoadAll = async (data) => await coachesModel.updateOne({_id:data._id},{...data});
+
+//获取所有教练
+module.exports.getCoachAll = async (data)=>{
+    return await coachesModel.find(data)
+}
 
 //修改密码
 module.exports.updatePassword = async ({ account, password,newPassword }) => {

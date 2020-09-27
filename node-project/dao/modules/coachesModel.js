@@ -22,6 +22,7 @@ const coachesSchema = new mongoose.Schema({
     nick:String,
     social:String,//社交状态
     role:String,//用于手机端角色识别
+    points:String
 
 }, { versionKey: false });
 module.exports.coachesModel = mongoose.model('coachesModel', coachesSchema, 'coaches');
