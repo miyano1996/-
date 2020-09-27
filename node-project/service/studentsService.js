@@ -1,5 +1,5 @@
 
-const { getOne, reg, isExist, login, getStudent, delStudent,upLoadAll,upLat,getStuByText } = require('../dao/studentsDao');
+const { getOne, reg, isExist, login, getStudent, delStudent,upLoadAll,upLat,getStuByText,updatePassword  } = require('../dao/studentsDao');
 
 const jwt = require('jsonwebtoken'); //token
 const { KEY } = require('../utils/consts.js'); //封装的密钥串
@@ -74,6 +74,14 @@ module.exports.upLoadAll = async data =>{
 		return {success:true,msg:'修改信息成功',rows:obj}
 	}
 	return {success:false,msg:'修改信息失败',rows:obj};
+}
+//修改密码
+module.exports.updatePassword = async data =>{
+	const obj = await updatePassword(data);
+	if(obj.nModified == '1'){
+		return {success:true,msg:'修改密码成功',rows:obj}
+	}
+	return {success:false,msg:'修改密码失败',rows:obj};
 }
 
 //上传经纬度

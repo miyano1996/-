@@ -58,3 +58,8 @@ module.exports.delStudent = async ({ _id, isDelete }) => {
 module.exports.getStuByText = async data =>{
 	return await studentsModel.find(data);
 }
+//修改密码
+
+module.exports.updatePassword = async ({ account, password,newPassword }) => {
+	return await studentsModel.update({ account,password }, { password:newPassword })
+}

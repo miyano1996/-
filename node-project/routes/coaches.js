@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 //中间写内容
-let { getCoaches, delCoaches, getOne, updateCoaches, addCoach,reg,login,upLoadAll,getCoachAll } = require("../service/coachesService");
+let { getCoaches, delCoaches, getOne, updateCoaches, addCoach,reg,login,upLoadAll,getCoachAll,getEveryCoaches,updatePassword } = require("../service/coachesService");
 
 
 router.post("/getCoaches", async (req, res, next) => {
@@ -19,7 +19,11 @@ router.post("/updateCoaches", async (req, res, next) => {
   const msg = await updateCoaches(req.body);
   res.send(msg)
 })
-
+//获取所有教练
+router.get('/getEveryCoaches', async (req, res, next) => {
+  const data = await getEveryCoaches(req.body)
+  res.send(data)
+})
 //详细信息
 router.post('/details', async (req, res, next) => {
   const data = await getOne(req.body)
@@ -49,6 +53,10 @@ router.post('/upLoadAll',async (req,res)=>{
 //获取所有教练
 router.get('/getCoachAll',async (req,res)=>{
   const data = await getCoachAll(req.query);
+})
+//修改密码
+router.post('/updatePassword',async (req,res)=>{
+  const data = await updatePassword(req.body);
   res.send(data);
 })
 module.exports = router;

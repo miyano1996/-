@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken'); //token
 const { KEY } = require('../utils/consts.js'); //封装的密钥串
-const { getCoaches, delCoaches, getOne, updateCoaches, addCoach,reg,isExist,login,upLoadAll,getCoachAll } = require("../dao/coachesDao");
+const { getCoaches, delCoaches, getOne, updateCoaches, addCoach,reg,isExist,login,upLoadAll,getCoachAll,updatePassword ,getEveryCoaches} = require("../dao/coachesDao");
 
 //获取教练
 module.exports.getCoaches = async function (data) {
@@ -14,6 +14,17 @@ module.exports.getCoaches = async function (data) {
             pageSize,
             pageNumber
         };
+    }
+}
+//获取所有教练
+module.exports.getEveryCoaches = async (data) => {
+    const getdata = await getEveryCoaches(data);
+    // console.log('vv',getdata)
+    if (getdata.length > 0) {
+        // 后端返回处理结果给前端
+        return { success: true, msg: "获取教练成功", getdata };
+    } else {
+        return { success: false, msg: '获取教练失败' };
     }
 }
 //删除教练
@@ -99,4 +110,12 @@ module.exports.getCoachAll = async data =>{
         return {success:true,msg:'获取所有教练成功',rows:obj}
     }
     return {success:false,msg:'获取所有教练失败',rows:obj}
+}
+//修改密码
+module.exports.updatePassword = async data =>{
+	const obj = await updatePassword(data);
+	if(obj.nModified == '1'){
+		return {success:true,msg:'修改密码成功',rows:obj}
+	}
+	return {success:false,msg:'修改密码失败',rows:obj};
 }
