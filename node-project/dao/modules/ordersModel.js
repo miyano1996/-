@@ -17,6 +17,7 @@ const ordersSchema = new mongoose.Schema({
     status: Boolean,//（订单状态）布尔值  true:已付款
     delet: Boolean,//删除状态,负责店家软删除  true为删除
     orderPrice: String,//（订单价格
-    className: String
+    className: String,
+    payment:String
 }, { versionKey: false });
 module.exports.ordersModel = mongoose.model('ordersModel', ordersSchema, 'orders');

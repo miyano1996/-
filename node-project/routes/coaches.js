@@ -26,6 +26,7 @@ router.get('/getEveryCoaches', async (req, res, next) => {
 })
 //详细信息
 router.post('/details', async (req, res, next) => {
+  // console.log(req.body);
   const data = await getOne(req.body)
   res.send(data)
 })

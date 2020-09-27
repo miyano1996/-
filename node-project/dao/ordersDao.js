@@ -1,7 +1,7 @@
 const { ordersModel } = require('./modules/ordersModel');
 // 添加订单
 module.exports.addOrder = async function (data) {
-    await ordersModel.create(data);
+   return await ordersModel.create(data);
 };
 // 用户结账
 // module.exports.pay = async function (data) {

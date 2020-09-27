@@ -45,6 +45,8 @@ module.exports.updateCoaches = async function (data) {
 //详细信息
 module.exports.getOne = async (data) => {
     const getdata = await getOne(data);
+    console.log(getdata);
+
     // console.log('vv',getdata)
     if (getdata.length > 0) {
         // 后端返回处理结果给前端

@@ -47,7 +47,9 @@ router.get('/getGymByText', async (req, res) => {
 
 //获取场馆信息
 router.get('/getGym', async (req, res) => {
+  console.log(req.query)
   const data = await getGym(req.query);
+  
   res.send(data)
 });
 
