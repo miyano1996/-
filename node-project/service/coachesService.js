@@ -4,6 +4,7 @@ const { getCoaches, delCoaches, getOne, updateCoaches, addCoach, reg, isExist, l
 
 //获取教练
 module.exports.getCoaches = async function (data) {
+    console.log(data);
     let { arr, totalCount, pageSize, pageNumber, total } = await getCoaches(data);
     if (arr.length > 0) {
         return {
@@ -13,7 +14,6 @@ module.exports.getCoaches = async function (data) {
             totalCount,
             pageSize,
             pageNumber,
-            total
         };
     } else {
         return {
