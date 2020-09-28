@@ -54,6 +54,7 @@ router.post('/upLoadAll',async (req,res)=>{
 //获取所有教练
 router.get('/getCoachAll',async (req,res)=>{
   const data = await getCoachAll(req.query);
+  res.send(data);
 })
 //修改密码
 router.post('/updatePassword',async (req,res)=>{
