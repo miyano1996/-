@@ -2,7 +2,7 @@ const { getAllOrders, addOrder, delOrder, getOrder, getOrders,getOrderByText } =
 
 //添加订单
 module.exports.addOrder = async function (data) {
-    await addOrder(data);
+    return await addOrder(data);
 };
 
 //获取所有订单
