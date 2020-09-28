@@ -43,15 +43,20 @@ module.exports.reg = async data => {
 module.exports.login = async ({ account, password }) => await studentsModel.find({ account, password });
 
 //上传完善信息
-module.exports.upLoadAll = async ({_id,telephone,headImage,name,nick,gender,social,age}) => await studentsModel.updateOne({_id},{telephone,headImage,name,nick,gender,social,age});
+module.exports.upLoadAll = async (data) => await studentsModel.updateOne({_id:data._id},{...data});
 
 //登陆成功后获取当前经纬度
-module.exports.upLat = async ({_id,loginAdress}) => await studentsModel.updateOne({_id},loginAdress);
+module.exports.upLat = async ({_id,loginAdress}) => await studentsModel.updateOne({_id},{loginAdress});
 
 //删除学生
 
 module.exports.delStudent = async ({ _id, isDelete }) => {
 	return await studentsModel.update({ _id }, { isDelete })
+}
+
+//获取任意字段学员
+module.exports.getStuByText = async data =>{
+	return await studentsModel.find(data);
 }
 //修改密码
 

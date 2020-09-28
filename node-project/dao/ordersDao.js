@@ -1,7 +1,7 @@
 const { ordersModel } = require('./modules/ordersModel');
 // 添加订单
 module.exports.addOrder = async function (data) {
-    await ordersModel.create(data);
+   return await ordersModel.create(data);
 };
 // 用户结账
 // module.exports.pay = async function (data) {
@@ -39,3 +39,6 @@ module.exports.getOrder = async function (data) {
 module.exports.delOrder = async function (data) {
     await ordersModel.updateOne({ _id: data._id }, { delet: data.success });
 }
+
+//获取任意字段订单
+module.exports.getOrderByText = async data => await ordersModel.find(data);

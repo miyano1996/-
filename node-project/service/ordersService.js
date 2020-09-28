@@ -1,8 +1,8 @@
-const { getAllOrders, addOrder, delOrder, getOrder, getOrders } = require('../dao/ordersDao');
+const { getAllOrders, addOrder, delOrder, getOrder, getOrders,getOrderByText } = require('../dao/ordersDao');
 
 //添加订单
 module.exports.addOrder = async function (data) {
-    await addOrder(data);
+    return await addOrder(data);
 };
 
 //获取所有订单
@@ -44,3 +44,12 @@ module.exports.getOrders = async function (data) {
         }
     }
 };
+
+//获取任意字段订单
+module.exports.getOrderByText = async data =>{
+    const obj = await getOrderByText(data);
+    if(obj.length > 0){
+        return {success:true,msg:'获取订单成功',rows:obj}
+    }
+    return {success:false,msg:'获取订单失败',rows:obj}
+}

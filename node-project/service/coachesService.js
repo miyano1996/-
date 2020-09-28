@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken'); //token
 const { KEY } = require('../utils/consts.js'); //封装的密钥串
-const { getCoaches, delCoaches, getOne, updateCoaches, addCoach, reg, isExist, login, upLoadAll, updatePassword } = require("../dao/coachesDao");
+const { getCoaches, delCoaches, getOne, updateCoaches, addCoach, reg, isExist, login, upLoadAll, getCoachAll, updatePassword, getEveryCoaches } = require("../dao/coachesDao");
 
 //获取教练
 module.exports.getCoaches = async function (data) {
@@ -21,6 +21,17 @@ module.exports.getCoaches = async function (data) {
         };
     }
 }
+//获取所有教练
+module.exports.getEveryCoaches = async (data) => {
+    const getdata = await getEveryCoaches(data);
+    // console.log('vv',getdata)
+    if (getdata.length > 0) {
+        // 后端返回处理结果给前端
+        return { success: true, msg: "获取教练成功", getdata };
+    } else {
+        return { success: false, msg: '获取教练失败' };
+    }
+}
 //删除教练
 module.exports.delCoaches = async function (data) {
     let msg = await delCoaches(data);
@@ -39,6 +50,8 @@ module.exports.updateCoaches = async function (data) {
 //详细信息
 module.exports.getOne = async (data) => {
     const getdata = await getOne(data);
+    console.log(getdata);
+
     // console.log('vv',getdata)
     if (getdata.length > 0) {
         // 后端返回处理结果给前端
@@ -95,6 +108,15 @@ module.exports.upLoadAll = async data => {
         return { success: true, msg: '修改信息成功', rows: obj }
     }
     return { success: false, msg: '修改信息失败', rows: obj };
+}
+
+//获取所有教练
+module.exports.getCoachAll = async data => {
+    const obj = await getCoachAll(data);
+    if (obj.length > 0) {
+        return { success: true, msg: '获取所有教练成功', rows: obj }
+    }
+    return { success: false, msg: '获取所有教练失败', rows: obj }
 }
 //修改密码
 module.exports.updatePassword = async data => {

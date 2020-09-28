@@ -1,5 +1,5 @@
 
-const { getOne, reg, isExist, login, getStudent, delStudent,upLoadAll,upLat,updatePassword } = require('../dao/studentsDao');
+const { getOne, reg, isExist, login, getStudent, delStudent,upLoadAll,upLat,getStuByText,updatePassword  } = require('../dao/studentsDao');
 
 const jwt = require('jsonwebtoken'); //token
 const { KEY } = require('../utils/consts.js'); //封装的密钥串
@@ -91,5 +91,14 @@ module.exports.upLat = async data =>{
 		return {success:true,msg:'经纬度上传成功',rows:obj}
 	}
 	return {success:false,msg:'经纬度上传失败',rows:obj};
+}
+
+//获取任意字段所有学员
+module.exports.getStuByText = async data =>{
+	const obj = await getStuByText(data);
+	if(obj.length>0){
+		return {success:true,msg:'获取所有学员成功',rows:obj}
+	}
+	return {success:false,msg:'获取所有学员失败',rows:obj}
 }
 
