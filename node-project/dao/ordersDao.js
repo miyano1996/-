@@ -1,7 +1,17 @@
 const { ordersModel } = require('./modules/ordersModel');
 // 添加订单
 module.exports.addOrder = async function (data) {
-    return await ordersModel.create(data);
+    return await ordersModel.create({
+        gym: data.gym,//{_id,name}（场馆） 
+        coaches: data.coaches,//{_id,name}（教练）
+        students: data.students,//{_id,name}（学员）  
+        time: data.time,//（订单生成时间）
+        status: data.status || true,//（订单状态）布尔值  true:已付款
+        delet: data.delet || false,//删除状态,负责店家软删除  true为删除
+        orderPrice: data.orderPrice,//（订单价格
+        className: data.className || "摔跤",
+        payment: data.payment || "0"
+    });
 };
 // 用户结账
 // module.exports.pay = async function (data) {
