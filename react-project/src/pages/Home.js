@@ -136,7 +136,7 @@ export default class Home extends Component {
                                     <Redirect
                                         exact
                                         path="/home"
-                                        to="/home/Coacheslist"
+                                        to={JSON.parse(localStorage.userInfo).role=='admin'?"/home/Gymlist":"/home/onegym"}
                                     ></Redirect>
                                     <Route path="/home/Complaint" component={Complaint}></Route>
                                     <Route

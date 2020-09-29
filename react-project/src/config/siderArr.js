@@ -5,6 +5,18 @@ import { UserOutlined, LaptopOutlined,BankOutlined,SoundOutlined} from "@ant-des
 export const siderArr = [
   //   { key: "/home/system", title: "首页" },
   {
+    farKey: "sub5",
+    icon: <BankOutlined/>,
+    fartitle: "主页",
+    son: [
+      { key: "/home/oneGym", title: "我的场馆"},
+      { key: "/home/addGyms", title: "申请场馆"},
+    ],
+      roles:['gym']//显示权限
+
+    //   roles:['超级管理员']//显示权限
+  },
+  {
     farKey: "sub1",
     icon: <UserOutlined />,
     fartitle: "列表",
@@ -28,6 +40,7 @@ export const siderArr = [
 
     //   roles:['超级管理员']//显示权限
   },
+  
   {
     farKey: "sub4",
     icon:<LaptopOutlined />,
